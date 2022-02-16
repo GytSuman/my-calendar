@@ -1,13 +1,22 @@
 import React from 'react'
 import { getDays } from '../dayUtils'
+import { times } from '../weekUtils';
+import DayHeader from './DayHeader';
+import DayTimeSlot from './DayTimeSlot';
 
 function DayGrid() {
+  const [days, setDays] = React.useState(getDays())
 
-  const day = getDays()
-
-  console.log(day);
+  console.log(days);
   return (
-    <div>DayGrid</div>
+    <div>
+      <DayHeader days={days}/>
+    {times.map(time => (
+      <>
+      <DayTimeSlot key={time} time={time} days={days}></DayTimeSlot>
+      </>
+    ))}
+    </div>
   )
 }
 
