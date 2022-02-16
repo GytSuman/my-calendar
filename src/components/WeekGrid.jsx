@@ -1,5 +1,6 @@
 import React from 'react'
 import { getAllDaysInTheWeek, times } from '../weekUtils'
+import TaskProgress from './TaskProgress';
 import TimeSlot from './TimeSlot'
 import WeekHeader from './WeekHeader';
 
@@ -14,16 +15,20 @@ function WeekGrid() {
   return (
     <div>
       <WeekHeader weekdays={weekdays}/>
-      {times.map(time => (
-      <TimeSlot
-      key={time}
-      time={time}
-      weekdays={weekdays}>
-        <div>Task</div>
-      </TimeSlot>
-    ))}
+      <TaskProgress />
+      {
+        times.map(time => (
+        <>
+        <TimeSlot
+        key={time}
+        time={time}
+        weekdays={weekdays}>
+          <div>Task</div>
+        </TimeSlot>
+        </>
+        ))
+      }
     </div>
-  
   )
 }
 

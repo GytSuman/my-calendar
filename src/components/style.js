@@ -3,6 +3,11 @@ export const slot = {
   cursor: 'pointer',
 };
 
+export const slot2 = {
+  height: 63,
+  cursor: 'pointer',
+};
+
 export const height = {
   height: 100,
 }
@@ -31,3 +36,9 @@ export const timeString = {
 export const row = {
   position: 'relative',
 };
+
+
+//events
+export const eventBorder = {
+  border: '1px solid #00A3BF'
+}
