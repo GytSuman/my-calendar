@@ -14,7 +14,7 @@ function Event(props){
         <div style={{position:'relative'}}
         className="border-4 event-background height-100 event-border p-1 flex-col">
             <div className="flex-row height-100 font-12">
-                <div className='border-2 flex-center black-bg white-color'
+                <div className='border-2 flex-center flex-center2 black-bg white-color'
                 style={{width: '37px',height: '16px'}}>{props.timeFrom}</div>
                 <div style={{height: '16px'}} className='light-color pl-1'>{props.timeTo}</div>
             </div>

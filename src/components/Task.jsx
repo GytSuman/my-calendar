@@ -2,33 +2,18 @@ import React from 'react'
 import { Grid } from '@mui/material'
 import './Event.css'
 import "./header.css"
+import TaskElement from './TaskElement'
 
-import MultiProgress from "react-multi-progress"
-import LinearProgress from '@mui/material/LinearProgress';
-
-function Task(props){
+function Task(){
     return(
-        <Grid item sx={{width:'200px'}} className="height-100">
-            <MultiProgress
-            height={16}  round={false}
-                elements={
-                    [
-                        {
-                            value: 35,
-                            color: "#028859",
-                        },
-                        {
-                            value: 35,
-                            color: "#FFC402",
-                        },
-                        {
-                            value: 35,
-                            color: "#DFE1E6",
-                        }
-                    ]
-                }
-		    />
+        <>
+        <Grid item p={2} sx={{width:'200px'}} className="height-100">
+            <TaskElement number={3} hours={8} green={80} yellow={20} gray={0}/>
         </Grid>
+        <Grid item p={2} sx={{width:'200px'}} className="height-100">
+            <TaskElement number={1} hours={8} green={0} yellow={70} gray={30}/>
+        </Grid>
+        </>
     )
 }
 

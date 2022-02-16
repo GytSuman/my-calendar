@@ -3,7 +3,6 @@ import moment from 'moment'
 import React from 'react'
 import DayTime from './DayTime'
 import "./header.css"
-
 function DayTimeSlot({ time, days }) {
   const formattedTime = moment().set ('hours', time).format ('h a')
   return (

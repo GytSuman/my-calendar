@@ -4,6 +4,7 @@ import React, { useContext, useState, useEffect } from "react";
 import GlobalContext from "../context/GlobalContext";
 import CallIcon from '@mui/icons-material/Call';
 import "./header.css"
+import './Event.css'
 
 export default function Day({ day, rowIdx }) {
   const [dayEvents, setDayEvents] = useState([]);
@@ -27,6 +28,20 @@ export default function Day({ day, rowIdx }) {
       ? "current__day"
       : "";
   }
+
+
+  const Event = (props) =>{
+    return(
+      <div style={{width: '100%',height: '24px'}}
+      className="border-4 event-background2 event-border p-1 font-12 flex-row flex-center"
+      >
+        <div className='border-2 flex-center flex-center2 black-bg white-color font-12' style={{width: '37px',height: '16px'}}>
+          {props.timeFrom}
+        </div>
+        <div className="flex-grow text-elip ">{props.name}</div>
+      </div>
+    )
+  }
   return (
     <div className="border border-gray flex-column">
       <header className="flex-column align-items-center">
@@ -35,13 +50,15 @@ export default function Day({ day, rowIdx }) {
             {day.format("ddd").toUpperCase()}
           </p>
         )}
-        <p
-          className={`text-sm p-1 my-1 text-center  ${getCurrentDayClass()}`}
-        >
-          {day.format("DD")}
-        </p>
       </header>
-      <div className="flex-1 cursor-pointer">
+      <div>
+        <div className={'flex-row flex-space-between p-1 text-sm my-1 ${getCurrentDayClass()}'}>
+          <div style={{paddingLeft:'25px'}}>{day.format("DD")}</div>
+          <div className="themeblue-bg border-2 flex-center flex-center2 font-12 white-color" style={{width: '38px',height:'21px'}}>10+</div>
+        </div>
+        <Event timeFrom="9.00" name="Gavin Copper" />
+      </div>
+      {/* <div className="flex-1 cursor-pointer">
         <div className="p-1 text-gray-600 text-sm rounded bg-blue">9:00 - 10:00
         <div className=" flex justify-content-between align-items-center">
           <p>Task 1</p>
@@ -65,7 +82,7 @@ export default function Day({ day, rowIdx }) {
             {evt.title}
           </div>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 }
