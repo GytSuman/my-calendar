@@ -120,6 +120,7 @@
 }
 
 .event-border2 {
+  border: none;
   border-left: 6px solid #00a3bf;
 }
 

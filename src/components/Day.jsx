@@ -33,12 +33,12 @@ export default function Day({ day, rowIdx }) {
   const Event = (props) =>{
     return(
       <div style={{width: '100%',height: '24px'}}
-      className="border-4 event-background2 event-border p-1 font-12 flex-row flex-center"
+      className="border-4 event-background2 event-border2 p-1 font-12 flex-row flex-center flex-space-between"
       >
         <div className='border-2 flex-center flex-center2 black-bg white-color font-12' style={{width: '37px',height: '16px'}}>
           {props.timeFrom}
         </div>
-        <div className="flex-grow text-elip ">{props.name}</div>
+        <div className="flex-grow text-elip pl-1">{props.name}</div>
       </div>
     )
   }
