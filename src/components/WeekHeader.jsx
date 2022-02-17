@@ -10,7 +10,7 @@ function WeekHeader({ weekdays }) {
       <Grid item xs={11} className='flex'>
       {weekdays.map(week =>
       (
-      <> 
+        <> 
         <Header weekDayName={week.weekDayName} date={week.date} dateStamp={week.dateStamp}/>
         </>
       ))}
