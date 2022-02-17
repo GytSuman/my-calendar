@@ -8,6 +8,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import GlobalContext from '../context/GlobalContext';
 import "./header.css";
+import moment from 'moment';
 
 const types = [ 
   { id: 1, value: "day"},
@@ -15,15 +16,20 @@ const types = [
   { id: 3, value: "month"}
 ]
 
-function CalendarHeader({ type, handleInputChange }) {
+function CalendarHeader({ type, handleInputChange, goToPreviousWeek, goToNextWeek, startDate }) {
   const { monthIndex, setMonthIndex } = React.useContext(GlobalContext);
+
+  const formattedDate = moment (startDate).format ('MMM YYYY');
+
   function handlePrevMonth() {
     console.log("clicked")
     setMonthIndex(monthIndex - 1);
+    goToPreviousWeek();
   }
   function handleNextMonth() {
     console.log("clicked")
     setMonthIndex(monthIndex + 1);
+    goToNextWeek();
   }
   function handleReset() {
     setMonthIndex(
@@ -56,9 +62,7 @@ function CalendarHeader({ type, handleInputChange }) {
         <Grid item className='year'>
         <IconButton onClick={handlePrevMonth}><ArrowBackIosNewIcon/></IconButton>
         <h2 className="ml-4 text-xl text-gray-500 font-bold">
-        {dayjs(new Date(dayjs().year(), monthIndex)).format(
-          "MMMM YYYY"
-        )}
+        {formattedDate}
       </h2>
           <IconButton onClick={handleNextMonth}><ArrowForwardIosIcon/></IconButton>
           </Grid>

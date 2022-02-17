@@ -1,7 +1,5 @@
 import { Grid } from '@mui/material'
 import React from 'react'
-
-import { isTodaysDate } from '../weekUtils'
 import Header from './Header'
 
 function WeekHeader({ weekdays }) {

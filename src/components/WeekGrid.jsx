@@ -1,10 +1,10 @@
 import React from 'react'
-import { getAllDaysInTheWeek, times } from '../weekUtils'
+import { times } from '../weekUtils'
 import TimeSlot from './TimeSlot'
 import WeekHeader from './WeekHeader';
 
-function WeekGrid() {
-  const [weekdays, setWeekdays] = React.useState(getAllDaysInTheWeek());
+function WeekGrid({ weekdays }) {
+  // const [weekdays, setWeekdays] = React.useState(getAllDaysInTheWeek());
   // const { events } = props
 
 

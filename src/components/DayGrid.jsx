@@ -4,8 +4,8 @@ import { times } from '../weekUtils';
 import DayHeader from './DayHeader';
 import DayTimeSlot from './DayTimeSlot';
 
-function DayGrid() {
-  const [days, setDays] = React.useState(getDays())
+function DayGrid({ days }) {
+  
 
   console.log(days);
   return (
