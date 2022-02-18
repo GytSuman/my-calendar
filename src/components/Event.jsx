@@ -18,8 +18,8 @@ function Event(props){
                 style={{width: '37px',height: '16px'}}>{props.timeFrom}</div>
                 <div style={{height: '16px'}} className='light-color pl-1'>{props.timeTo}</div>
             </div>
-            <div className='height-100 font-13 bold-font'>{props.name}</div>
-            <div className='light-color height-100 font-12'>{props.title}</div>
+            <div className='height-100 font-13 bold-font text-elip'>{props.name}</div>
+            <div className='light-color height-100 font-12 text-elip'>{props.title}</div>
             {IconDisplay()}
             {/* {props.type} */}
         </div>

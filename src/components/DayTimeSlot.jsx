@@ -11,10 +11,10 @@ function DayTimeSlot({ time, days }) {
       <Grid item xs={1} sx={{ paddingLeft: "16px", paddingTop: "8px"}}>{formattedTime}</Grid>
       <Grid item xs={11} className='flex'>
       {days && days.map(dayObj => (
-      <>
-      <DayTime key={dayObj.dateStamp} time={time} dateStamp={dayObj.dateStamp} dayName={dayObj.dayName}/>
-      </>
-    ))}
+        <>
+          <DayTime key={dayObj.dateStamp} time={time} dateStamp={dayObj.dateStamp} dayName={dayObj.dayName}/>
+        </>
+      ))}
       </Grid>
     </Grid>
     

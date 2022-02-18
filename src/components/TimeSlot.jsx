@@ -13,7 +13,7 @@ function TimeSlot({ time, weekdays }) {
       <Grid item xs={1} sx={{ paddingLeft: "16px", paddingTop: "8px"}}>
         {formattedTime}
       </Grid>
-      <Grid item xs={11} sx={{height: '63px'}} className='flex'>
+      <Grid item container xs={11} sx={{height: '63px'}} className='flex'>
       {weekdays && weekdays.map(day => (
         <>
         <Time

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Grid } from '@mui/material'
 import { getAllDaysInTheWeek, times } from '../weekUtils'
 import TaskProgress from './TaskProgress';
 import TimeSlot from './TimeSlot'
@@ -13,7 +14,7 @@ function WeekGrid({ weekdays }) {
   // console.log(events)
 
   return (
-    <div>
+    <div style={{maxMidth:'100%',width:'1574px'}}>
       <WeekHeader weekdays={weekdays}/>
       <TaskProgress />
       {

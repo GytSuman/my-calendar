@@ -7,7 +7,7 @@ function WeekHeader({ weekdays }) {
     <>
     <Grid container>
       <Grid item xs={1}></Grid>
-      <Grid item xs={11} className='flex'>
+      <Grid item container xs={11} className='flex'>
       {weekdays.map(week =>
       (
         <> 

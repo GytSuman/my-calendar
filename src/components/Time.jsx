@@ -3,14 +3,15 @@ import React from 'react'
 import { isTodaysDate } from '../weekUtils'
 import { col, slot,slot2, lightHighlighter } from "./style"
 import Event from './Event'
+import EventSmall from './EventSmall'
 
 function Time(props) {
   const { weekDayName, dateStamp } = props
-
+  const row = 12/7
   console.log(weekDayName)
   return (
     <>
-    <Grid container>
+    {/* <Grid container> */}
       {/* <Grid item
         key={dateStamp}
         style={isTodaysDate(dateStamp) ? {...col, ...slot, ...lightHighlighter} : {...col, ...slot}}
@@ -26,10 +27,13 @@ function Time(props) {
       <Grid item
         key={dateStamp}
         style={isTodaysDate(dateStamp) ? {...col, ...slot2, ...lightHighlighter} : {...col, ...slot2}}
-        sx={{ width: "200px"}}>
+        xs={row}
+        //sx={{ width: "200px"}}
+        >
+        {/* <EventSmall timeFrom="9.00" name="Gavin Cooper"/> */}
         <Event type="voice" timeFrom="9.00" timeTo="9.30" name="Gavin Cooper" title="Tenant Q&A" />
       </Grid>
-    </Grid>
+    {/* </Grid> */}
     </>
     
   )
