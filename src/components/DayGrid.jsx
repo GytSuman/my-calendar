@@ -7,6 +7,7 @@ import DayTimeSlot from "./DayTimeSlot";
 import TaskElement from "./TaskElement";
 
 function DayGrid({ days }) {
+<<<<<<< HEAD
 	// console.log(days);
 	return (
 		<div>
@@ -26,6 +27,27 @@ function DayGrid({ days }) {
 			))}
 		</div>
 	);
+=======
+  console.log(days);
+  return (
+    <div>
+      <DayHeader days={days}/>
+      <Grid container direction="row">
+        <Grid item xs={1} sx={{ paddingLeft: "16px", paddingTop: "8px"}}>Task</Grid>
+        <Grid item container xs={11} className="height-100">
+          <Grid item xs={10} p={2} sx={{ width: "80vw"}} className="light-bg">
+            <TaskElement number={3} hours={8} green={80} yellow={20} gray={0}/>
+          </Grid>
+        </Grid>
+      </Grid>
+      {times.map(time => (
+        <>
+        <DayTimeSlot key={time} time={time} days={days}></DayTimeSlot>
+        </>
+      ))}
+    </div>
+  )
+>>>>>>> c64b2f848840cb2f241fda7f4a71270fdfb44eb5
 }
 
 export default DayGrid;

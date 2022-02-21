@@ -11,6 +11,7 @@ import {
 import SearchIcon from "@mui/icons-material/Search";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import "./header.css";
 import moment from "moment";
@@ -41,13 +42,16 @@ function CalendarHeader({
 
 	return (
 		<>
-			<header style={{ padding: "1rem" }}>
+			<header
+			//style={{ padding: "1rem" }}
+			>
 				<div></div>
-				<Grid container spacing={2}>
+				<Grid p={2} container spacing={2} className="flex flex-space-between">
 					<Grid item xs={2}>
 						<TextField
 							size="small"
 							placeholder="Search"
+							fullWidth
 							InputProps={{
 								startAdornment: (
 									<InputAdornment position="start">
@@ -74,12 +78,13 @@ function CalendarHeader({
 						</TextField>
 					</Grid>
 
-					<Grid container item xs={6} spacing={4}>
-						<Grid item className="year">
+					<Grid container item xs={6} spacing={4} className='flex-center'>
+						<Grid item className="year flex flex-space-between" sx={{width: '267px'}}>
 							<IconButton onClick={() => goToPreviousWeek()}>
 								<ArrowBackIosNewIcon />
 							</IconButton>
-							<h2 className="ml-4 text-xl text-gray-500 font-bold">
+							<h2 className="text-xl text-gray-500 font-16 text-elip font-bold flex-center">
+								{/* ml-4 */}
 								{type === "month"
 									? dayjs(new Date(dayjs().year(), currentMonthIdx)).format(
 											"MMMM YYYY"
@@ -87,11 +92,12 @@ function CalendarHeader({
 									: formattedDate}
 							</h2>
 							<IconButton onClick={() => goToNextWeek()}>
-								<ArrowForwardIosIcon />
+								<CalendarTodayIcon sx={{width: '18px',height: '18px',color:'#414241'}}/>
+								<ArrowForwardIosIcon sx={{width: '24px',height: '24px'}} />
 							</IconButton>
 						</Grid>
 					</Grid>
-					<Grid item>
+					<Grid item xs={2}>
 						<div className="filter_button">
 							<IconButton sx={{ color: "#0053CC" }}>
 								<FilterAltIcon />
