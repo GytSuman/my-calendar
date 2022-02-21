@@ -9,8 +9,8 @@ const TaskElement = (props) => {
     return(
         <div className='flex-col'>
         <div className="flex-row flex-space-between font-14 bold-font pb-1" style={{width:'100%'}}>
-            <div>{props.number} Task</div>
-            <div>{props.hours} hrs</div>
+            <div className="text-elip">{props.number} Task</div>
+            <div className="text-elip">{props.hours} hrs</div>
         </div>
         <div style={{width:'100%'}}>
             <MultiProgress

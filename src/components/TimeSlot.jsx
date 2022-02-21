@@ -6,8 +6,6 @@ import { Grid } from "@mui/material";
 
 function TimeSlot({ time, weekdays, events }) {
 	const formattedTime = moment().set("hours", time).format("h a");
-
-<<<<<<< HEAD
 	console.log(weekdays);
 	return (
 		<Grid container direction="row">
@@ -30,28 +28,6 @@ function TimeSlot({ time, weekdays, events }) {
 			</Grid>
 		</Grid>
 	);
-=======
-  console.log(weekdays)
-  return (
-    <Grid container direction="row">
-      <Grid item xs={1} sx={{ paddingLeft: "16px", paddingTop: "8px"}}>
-        {formattedTime}
-      </Grid>
-      <Grid item container xs={11} sx={{height: '63px'}} className='flex'>
-      {weekdays && weekdays.map(day => (
-        <>
-        <Time
-          key={day.dateStamp}
-          dateStamp={day.dateStamp}
-          time={time}
-          weekDayName={day.weekDayName}
-        />
-        </>
-      ))}
-      </Grid>
-    </Grid>
-  )
->>>>>>> c64b2f848840cb2f241fda7f4a71270fdfb44eb5
 }
 
 export default TimeSlot;

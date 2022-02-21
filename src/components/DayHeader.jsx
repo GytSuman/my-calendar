@@ -6,13 +6,13 @@ function DayHeader({ days }) {
 	return (
 		<>
 			<Grid container>
-				<Grid item xs={1}></Grid>
-				<Grid item xs={11} className="flex">
+				<Grid item md={1} xs={2}></Grid>
+				<Grid item md={11} xs={10} className="flex">
 					{days.map((week) => (
 						<>
 							<Grid container>
 								<Grid
-									item
+									item md={10} xs={12}
 									style={{ ...col, ...height }}
 									sx={{ width: "63.5vw" }}
 								>

@@ -4,15 +4,14 @@ import React from "react";
 import DayTime from "./DayTime";
 import "./header.css";
 function DayTimeSlot({ time, days }) {
-<<<<<<< HEAD
 	const formattedTime = moment().set("hours", time).format("h a");
 	return (
 		<>
 			<Grid container direction="row">
-				<Grid item xs={1} sx={{ paddingLeft: "16px", paddingTop: "8px" }}>
+				<Grid item md={1} xs={2} sx={{ paddingLeft: "16px", paddingTop: "8px" }}>
 					{formattedTime}
 				</Grid>
-				<Grid item xs={11} className="flex">
+				<Grid item md={11} xs={10} className="flex">
 					{days &&
 						days.map((dayObj) => (
 							<>
@@ -27,25 +26,7 @@ function DayTimeSlot({ time, days }) {
 				</Grid>
 			</Grid>
 		</>
-	);
-=======
-  const formattedTime = moment().set ('hours', time).format ('h a')
-  return (
-    <>
-    <Grid container direction="row">
-      <Grid item xs={1} sx={{ paddingLeft: "16px", paddingTop: "8px"}}>{formattedTime}</Grid>
-      <Grid item xs={11} className='flex'>
-      {days && days.map(dayObj => (
-        <>
-          <DayTime key={dayObj.dateStamp} time={time} dateStamp={dayObj.dateStamp} dayName={dayObj.dayName}/>
-        </>
-      ))}
-      </Grid>
-    </Grid>
-    
-    </>
-  )
->>>>>>> c64b2f848840cb2f241fda7f4a71270fdfb44eb5
+	)
 }
 
 export default DayTimeSlot;
