@@ -5,6 +5,7 @@ import VideocamIcon from "@mui/icons-material/Videocam";
 import CallIcon from "@mui/icons-material/Call";
 
 function Event(props) {
+	console.log(props);
 	const IconDisplay = () => {
 		if (props.type === "video") return <VideocamIcon className="event-icon" />;
 		else return <CallIcon className="event-icon" />;

@@ -33,7 +33,8 @@ export default function Day({ day, rowIdx, events }) {
 		);
 	};
 
-	const openMonthEventDialog = () => {
+	const openMonthEventDialog = (e) => {
+		e.preventDefault();
 		setOpen(true);
 		console.log("clicked", day);
 	};
@@ -41,7 +42,7 @@ export default function Day({ day, rowIdx, events }) {
 	const onSetOpen = (value) => {
 		setOpen(value);
 	};
-
+	console.log("events in line 45", events);
 	return (
 		<div
 			className="border border-gray flex-column cursor-pointer"
@@ -59,9 +60,16 @@ export default function Day({ day, rowIdx, events }) {
 					<div style={{ paddingLeft: "25px" }}>{day.format("DD")}</div>
 					{/* <div className="themeblue-bg border-2 flex-center flex-center2 font-12 white-color" style={{width: '38px',height:'21px'}}>10+</div> */}
 				</div>
-				{events.length !== 0 && (
-					<Event timeFrom={events[0].startTime} name={events[0].name} />
-				)}
+				{events.length !== 0 &&
+					events.map((eventObj) => (
+						<>
+							<div key={eventObj.id}>
+								{eventObj.isClicked && (
+									<Event timeFrom={eventObj.startTime} name={eventObj.name} />
+								)}
+							</div>
+						</>
+					))}
 			</div>
 			{/* <div className="flex-1 cursor-pointer">
         <div className="p-1 text-gray-600 text-sm rounded bg-blue">9:00 - 10:00

@@ -6,8 +6,6 @@ import Event from "./Event";
 
 function Time(props) {
 	const { weekDayName, dateStamp, events } = props;
-
-	console.log(weekDayName);
 	return (
 		<>
 			<Grid container>
@@ -34,7 +32,20 @@ function Time(props) {
 					sx={{ width: "200px" }}
 					onClick={(event) => console.log("clicked", events)}
 				>
-					{/* <Event type="video" timeFrom="9.00" timeTo="9.30" name="Gavin Cooper" title="Tenant Q&A" /> */}
+					{events.length !== 0 &&
+						events.map((eventsObj) => (
+							<>
+								<div key={eventsObj.id}>
+									<Event
+										type="voice"
+										timeFrom={events.stertTime}
+										timeTo="9.30"
+										name={events.name}
+										title="Tenant Q&A"
+									/>
+								</div>
+							</>
+						))}
 				</Grid>
 			</Grid>
 		</>

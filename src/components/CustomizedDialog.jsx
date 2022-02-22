@@ -60,8 +60,13 @@ export default function CustomizedDialogs({ open, onSetOpen, events }) {
 	};
 
 	const handleSaveButton = (event) => {
-		event.stopPropagation();
-		events.push({ name: name, startTime: time });
+		event.preventDefault();
+		events.push({
+			id: Date.now(),
+			name: name,
+			startTime: time,
+			isClicked: true,
+		});
 		onSetOpen(false);
 	};
 
