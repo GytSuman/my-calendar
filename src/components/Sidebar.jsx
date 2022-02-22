@@ -60,7 +60,7 @@ export default function Sidebar({
 					</header>
 					<div className="grid">
 						{currentMonth[0].map((day, i) => (
-							<div key={i} className="text-center border-sidebar">
+							<div key={i} className="flex-center flex-center2 border-sidebar sidebar-col">
 								{day.format("dd").charAt(0)}
 							</div>
 						))}
@@ -73,7 +73,7 @@ export default function Sidebar({
 											setSmallCalendarMonth(currentMonthIdx);
 											setDaySelected(day);
 										}}
-										className={`padding-y w-full ${getDayClass(day)}`}
+										className={`padding-y w-full flex-center flex-center2 sidebar-col ${getDayClass(day)}`}
 									>
 										<span className="text-sm">{day.format("D")}</span>
 									</div>

@@ -9,7 +9,7 @@ import TaskElement from "./TaskElement";
 function DayGrid({ days }) {
   console.log(days);
   return (
-    <div style={{width:'100%'}}>
+    <div>
       <DayHeader days={days}/>
       <Grid container direction="row">
         <Grid item md={1} xs={2} sx={{ paddingLeft: "16px", paddingTop: "8px"}}>Task</Grid>

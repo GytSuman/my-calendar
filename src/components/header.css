@@ -21,7 +21,9 @@
 }
 
 aside {
-  width: 16rem;
+  width: 250px;
+  background-color: #e8e8e9;
+  /* width: 16rem; */
   padding: 1rem;
 }
 
@@ -41,6 +43,10 @@ aside {
 
 .align-items-center {
   align-items: center;
+}
+
+.align-items-bottom {
+  align-items: flex-end;
 }
 
 .grid {
@@ -75,7 +81,14 @@ aside {
 }
 
 .border-sidebar {
-  border: 1px solid gray;
+  /* border: 1px solid gray; */
+  border-radius: 8px;
+  background-color: white;
+}
+
+.sidebar-col {
+  width: 28px;
+  height: 28px;
 }
 
 .flex-column {

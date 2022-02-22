@@ -45,7 +45,7 @@ function CalendarHeader({
 			<header
 			//style={{ padding: "1rem" }}
 			>
-				<div></div>
+				{/* <div></div> */}
 				<Grid p={2} container spacing={2} className="flex flex-space-between">
 					<Grid item xs={2}>
 						<TextField
@@ -68,6 +68,7 @@ function CalendarHeader({
 							select
 							fullWidth
 							value={type}
+							sx={{border: '1px solid #EEEEEE'}}
 							onChange={handleInputChange}
 						>
 							{types.map((typeObj) => (
@@ -79,7 +80,7 @@ function CalendarHeader({
 					</Grid>
 
 					<Grid container item xs={6} spacing={4} className='flex-center'>
-						<Grid item className="year flex flex-space-between" sx={{width: '267px'}}>
+						<Grid item className="year flex flex-space-between" sx={{width: '300px'}}>
 							<IconButton onClick={() => goToPreviousWeek()}>
 								<ArrowBackIosNewIcon />
 							</IconButton>
