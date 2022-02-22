@@ -7,25 +7,25 @@ import DayTimeSlot from "./DayTimeSlot";
 import TaskElement from "./TaskElement";
 
 function DayGrid({ days }) {
-	// console.log(days);
-	return (
-		<div>
-			<DayHeader days={days} />
-			<Grid container direction="row">
-				<Grid item xs={1} sx={{ paddingLeft: "16px", paddingTop: "8px" }}>
-					Task
-				</Grid>
-				<Grid item xs={9} p={2} className="light-bg height-100">
-					<TaskElement number={3} hours={8} green={80} yellow={20} gray={0} />
-				</Grid>
-			</Grid>
-			{times.map((time) => (
-				<>
-					<DayTimeSlot key={time} time={time} days={days}></DayTimeSlot>
-				</>
-			))}
-		</div>
-	);
+  console.log(days);
+  return (
+    <div>
+      <DayHeader days={days}/>
+      <Grid container direction="row">
+        <Grid item md={1} xs={2} sx={{ paddingLeft: "16px", paddingTop: "8px"}}>Task</Grid>
+        <Grid item container md={11} xs={10} className="height-100">
+          <Grid item md={10} xs={12} p={2} sx={{ width: "80vw"}} className="light-bg">
+            <TaskElement number={3} hours={8} green={80} yellow={20} gray={0}/>
+          </Grid>
+        </Grid>
+      </Grid>
+      {times.map(time => (
+        <>
+        <DayTimeSlot key={time} time={time} days={days}></DayTimeSlot>
+        </>
+      ))}
+    </div>
+  )
 }
 
 export default DayGrid;

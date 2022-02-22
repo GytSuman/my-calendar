@@ -8,10 +8,10 @@ function DayTimeSlot({ time, days }) {
 	return (
 		<>
 			<Grid container direction="row">
-				<Grid item xs={1} sx={{ paddingLeft: "16px", paddingTop: "8px" }}>
+				<Grid item md={1} xs={2} sx={{ paddingLeft: "16px", paddingTop: "8px" }}>
 					{formattedTime}
 				</Grid>
-				<Grid item xs={11} className="flex">
+				<Grid item md={11} xs={10} className="flex">
 					{days &&
 						days.map((dayObj) => (
 							<>
@@ -26,7 +26,7 @@ function DayTimeSlot({ time, days }) {
 				</Grid>
 			</Grid>
 		</>
-	);
+	)
 }
 
 export default DayTimeSlot;

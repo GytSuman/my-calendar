@@ -50,12 +50,12 @@ export default function Day({ day, rowIdx, events }) {
 		>
 			<header className="flex-column align-items-center">
 				{rowIdx === 0 && (
-					<p className="text-sm mt-1">{day.format("ddd").toUpperCase()}</p>
+					<p className="text-sm mt-1 font-12 lightfont-color">{day.format("ddd").toUpperCase()}</p>
 				)}
 			</header>
 			<div>
 				<div
-					className={`flex-row flex-space-between p-1 text-sm my-1 ${getCurrentDayClass()}`}
+					className={`flex-row flex-space-between p-1 text-sm my-1 lightfont-color font-18 ${getCurrentDayClass()}`}
 				>
 					<div style={{ paddingLeft: "25px" }}>{day.format("DD")}</div>
 					{/* <div className="themeblue-bg border-2 flex-center flex-center2 font-12 white-color" style={{width: '38px',height:'21px'}}>10+</div> */}

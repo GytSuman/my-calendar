@@ -20,7 +20,7 @@ function WeekHeader({ weekdays }) {
 				</Grid>
 			</Grid>
 		</>
-	);
+   )
 }
 
 export default WeekHeader;

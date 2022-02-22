@@ -75,6 +75,14 @@
   font-size: 14px;
 }
 
+.font-16 {
+  font-size: 16px;
+}
+
+.font-18 {
+  font-size: 18px;
+}
+
 .bold-font {
   font-weight: 500;
 }
@@ -112,6 +120,10 @@
 
 .light-color {
   color: #707070;
+}
+
+.lightfont-color {
+  color: #414241;
 }
 
 .event-border {

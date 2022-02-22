@@ -8,7 +8,7 @@ function DayTime({ time, dateStamp, dayName }) {
 		<Grid container>
 			<Grid
 				item
-				xs={10}
+				md={10} xs={12}
 				key={dateStamp}
 				style={{ ...col, ...slot2 }}
 				sx={{ width: "80vw" }}

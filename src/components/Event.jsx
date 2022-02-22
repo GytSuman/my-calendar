@@ -29,7 +29,6 @@ function Event(props) {
 			<div className="height-100 font-13 bold-font">{props.name}</div>
 			<div className="light-color height-100 font-12">{props.title}</div>
 			{IconDisplay()}
-			{/* {props.type} */}
 		</div>
 	);
 }
