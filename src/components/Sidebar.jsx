@@ -43,10 +43,11 @@ export default function Sidebar({
 	return (
 		<>
 			<aside>
-				<div className="mt-9">
+				<div className="mt-9 font-12"  style={{color:'#1D2634'}}
+				>
 					<header className="sidebar__header">
 						<IconButton onClick={goToPreviousWeek}>
-							<ArrowBackIosNewIcon />
+							<ArrowBackIosNewIcon sx={{color:'#000000'}}/>
 						</IconButton>
 						<p className="text-gray-500 font-bold">
 							{dayjs(new Date(dayjs().year(), currentMonthIdx)).format(
@@ -55,12 +56,12 @@ export default function Sidebar({
 						</p>
 
 						<IconButton onClick={goToNextWeek}>
-							<ArrowForwardIosIcon />
+							<ArrowForwardIosIcon sx={{color:'#000000'}}/>
 						</IconButton>
 					</header>
 					<div className="grid">
 						{currentMonth[0].map((day, i) => (
-							<div key={i} className="flex-center flex-center2 border-sidebar sidebar-col">
+							<div key={i} className="flex-center flex-center2 border-sidebar sidebar-col"  style={{color:'#DDDDDD'}}>
 								{day.format("dd").charAt(0)}
 							</div>
 						))}

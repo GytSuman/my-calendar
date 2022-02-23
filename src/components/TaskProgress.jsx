@@ -8,7 +8,7 @@ import "./header.css"
 function TaskProgress(props){
     return(
         <Grid container direction="row">
-            <Grid item xs={1} sx={{ paddingLeft: "16px", paddingTop: "8px"}}>Tasks</Grid>
+            <Grid item xs={1} className="text-elip" sx={{ paddingLeft: "16px", paddingTop: "8px"}}>Tasks</Grid>
             <Grid item container xs={11} sx={{height: '68px'}} className='flex light-bg'>
                 <Task/>
             </Grid>

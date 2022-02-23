@@ -11,7 +11,8 @@ function Event(props) {
 	};
 	return (
 		<div
-			style={{ position: "relative" }}
+			
+			style={{ position: "relative"}}
 			className="border-4 event-background height-100 event-border p-1 flex-col"
 		>
 			<div className="flex-row height-100 font-12">
