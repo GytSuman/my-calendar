@@ -4,7 +4,7 @@ import TaskProgress from './TaskProgress';
 import TimeSlot from './TimeSlot'
 import WeekHeader from './WeekHeader';
 
-function WeekGrid({ weekdays,events, addNewEvents }) {
+function WeekGrid({ weekdays,events, addNewEvents , eventAdded , setEventAdded }) {
   return (
     <div style={{width:'100%'}}>
       <WeekHeader weekdays={weekdays}/>
@@ -15,7 +15,10 @@ function WeekGrid({ weekdays,events, addNewEvents }) {
         <TimeSlot
         key={time}
         time={time}
-        weekdays={weekdays}>
+        weekdays={weekdays}
+        eventAdded={eventAdded}
+        setEventAdded={setEventAdded}
+        >
           <div>Task</div>
         </TimeSlot>
         </>

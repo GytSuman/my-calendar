@@ -21,7 +21,7 @@ function App() {
 	const [startDate, setStartDate] = React.useState();
 	const [type, setType] = React.useState("month");
 	const [events, setEvents] = React.useState([]);
-
+	const [eventAdded,setEventAdded] = React.useState([])
 	const addNewEvents = (event) => {
 		event = {
 			...event,
@@ -86,14 +86,14 @@ function App() {
 				currentMonthIdx={currentMonthIdx}
 			/>
 			<div className="app__container">
-				<Sidebar
+				{/* <Sidebar
 					currentMonthIdx={currentMonthIdx}
 					currentMonth={currentMonth}
 					type={type}
 					goToPreviousWeek={goToPreviousWeek}
 					goToNextWeek={goToNextWeek}
 				/>
-				<Divider orientation="vertical" />
+				<Divider orientation="vertical" /> */}
 				{type === "month" && (
 					<MonthGrid currentMonth={currentMonth} events={events} />
 				)}
@@ -104,6 +104,8 @@ function App() {
 						goToNextWeek={goToNextWeek}
 						addNewEvents={addNewEvents}
 						events={events}
+						eventAdded={eventAdded}
+						setEventAdded={setEventAdded}
 					/>
 				)}
 				{type === "day" && <DayGrid days={days} />}

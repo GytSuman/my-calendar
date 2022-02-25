@@ -4,9 +4,8 @@ import Time from "./Time";
 import "./header.css";
 import { Grid } from "@mui/material";
 
-function TimeSlot({ time, weekdays, events }) {
+function TimeSlot({ time, weekdays, events,eventAdded,setEventAdded }) {
 	const formattedTime = moment().set("hours", time).format("h a");
-	console.log(weekdays);
 	return (
 		<Grid container direction="row">
 			<Grid item xs={1} sx={{ paddingLeft: "16px", paddingTop: "8px" }}>
@@ -22,6 +21,8 @@ function TimeSlot({ time, weekdays, events }) {
 								time={time}
 								weekDayName={day.weekDayName}
 								events={events}
+								eventAdded={eventAdded}
+        						setEventAdded={setEventAdded}
 							/>
 						</>
 					))}
