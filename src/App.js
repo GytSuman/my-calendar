@@ -12,6 +12,7 @@ import moment from "moment";
 import { getDays } from "./dayUtils";
 import dayjs from "dayjs";
 import CalendarEventHandler from "./CalendarEventHandler";
+import { v4 as uuidv4 } from "uuid";
 
 function App() {
 	const [currentMonth, setCurrentMonth] = React.useState(getMonthOriginal());
@@ -19,17 +20,20 @@ function App() {
 	const [weekdays, setWeekdays] = React.useState(getAllDaysInTheWeek());
 	const [days, setDays] = React.useState(getDays());
 	const [startDate, setStartDate] = React.useState();
-	const [type, setType] = React.useState("month");
-	const [events, setEvents] = React.useState([]);
+	const [type, setType] = React.useState("week");
+	const [events, setEvents] = React.useState({});
 
 	const addNewEvents = (event) => {
-		event = {
-			...event,
-			id: CalendarEventHandler.generateId(event),
-		};
-		setEvents((previousState) => ({
-			events: CalendarEventHandler.add(previousState.events, event),
-		}));
+		console.log("event", event);
+		try {
+			event = {
+				...event,
+				id: uuidv4(),
+			};
+			setEvents(CalendarEventHandler.add(events, event));
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
 	const goToNextWeek = () => {
@@ -104,6 +108,7 @@ function App() {
 						goToNextWeek={goToNextWeek}
 						addNewEvents={addNewEvents}
 						events={events}
+						startDate={startDate}
 					/>
 				)}
 				{type === "day" && <DayGrid days={days} />}

@@ -3,31 +3,16 @@ import React from "react";
 import Time from "./Time";
 import "./header.css";
 import { Grid } from "@mui/material";
-import CustomizedDialogs from "./CustomizedDialog";
 
-function TimeSlot({ time, weekdays, events }) {
-	const [open, setOpen] = React.useState(false);
+function TimeSlot({ time, weekdays, events, openAddEventModal }) {
 	const formattedTime = moment().set("hours", time).format("h a");
 
-	const openWeekEventDialog = () => {
-		setOpen(true);
-	};
-
-	const onSetOpen = (value) => {
-		setOpen(value);
-	};
 	return (
 		<Grid container direction="row">
 			<Grid item xs={1} sx={{ paddingLeft: "16px", paddingTop: "8px" }}>
 				{formattedTime}
 			</Grid>
-			<Grid
-				item
-				xs={11}
-				sx={{ height: "63px" }}
-				className="flex"
-				onClick={openWeekEventDialog}
-			>
+			<Grid item xs={11} sx={{ height: "63px" }} className="flex">
 				{weekdays &&
 					weekdays.map((day) => (
 						<>
@@ -37,13 +22,11 @@ function TimeSlot({ time, weekdays, events }) {
 								time={time}
 								weekDayName={day.weekDayName}
 								events={events}
+								openAddEventModal={openAddEventModal}
 							/>
 						</>
 					))}
 			</Grid>
-			{open && (
-				<CustomizedDialogs onSetOpen={onSetOpen} open={open} events={events} />
-			)}
 		</Grid>
 	);
 }

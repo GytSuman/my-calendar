@@ -8,8 +8,11 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
-import Typography from "@mui/material/Typography";
-import { TextField } from "@mui/material";
+import { Grid, TextField } from "@mui/material";
+import DateTimePicker from "@mui/lab/DateTimePicker";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import moment from "moment";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 	"& .MuiDialogContent-root": {
@@ -49,45 +52,37 @@ BootstrapDialogTitle.propTypes = {
 	onClose: PropTypes.func.isRequired,
 };
 
-export default function CustomizedDialogs({ open, onSetOpen, events }) {
+export default function CustomizedDialogs({
+	open,
+	onSetOpen,
+	events,
+	state,
+	closeAddEventModal,
+	handleAddEvent,
+	handleCurrentTimeChange,
+}) {
 	const [name, setName] = React.useState("");
-	const [time, setTime] = React.useState("");
 
-	const handleClose = (event) => {
-		event.stopPropagation();
-		console.log("closing dialog");
-		onSetOpen(false);
-	};
-
-	const handleSaveButton = (event) => {
-		event.preventDefault();
-		events.push({
-			id: Date.now(),
-			name: name,
-			startTime: time,
-			isClicked: true,
-		});
-		onSetOpen(false);
+	const handleSaveButton = () => {
+		console.log("modal", name);
+		handleAddEvent(name);
+		setName("");
 	};
 
 	const handleNameChange = (event) => {
 		setName(event.target.value);
 	};
 
-	const handleTimeChange = (event) => {
-		setTime(event.target.value);
-	};
-
 	return (
 		<div style={{ zIndex: 1000 }}>
 			<BootstrapDialog
-				onClose={handleClose}
+				onClose={closeAddEventModal}
 				aria-labelledby="customized-dialog-title"
-				open={open}
+				open={state?.showAddEventModal}
 			>
 				<BootstrapDialogTitle
 					id="customized-dialog-title"
-					onClose={handleClose}
+					onClose={closeAddEventModal}
 				>
 					Event
 				</BootstrapDialogTitle>
@@ -98,20 +93,26 @@ export default function CustomizedDialogs({ open, onSetOpen, events }) {
 						onChange={handleNameChange}
 						value={name}
 					/>
-					<TextField
-						id="time"
-						label="Alarm clock"
-						type="time"
-						InputLabelProps={{
-							shrink: true,
-						}}
-						inputProps={{
-							step: 300, // 5 min
-						}}
-						sx={{ width: 150, m: 2 }}
-						onChange={handleTimeChange}
-						value={time}
-					/>
+					<Grid container sx={{ m: 2 }}>
+						<LocalizationProvider dateAdapter={AdapterDateFns}>
+							<DateTimePicker
+								renderInput={(props) => <TextField {...props} />}
+								label="DateTimePicker"
+								value={moment(state?.eventStart)}
+								onChange={handleCurrentTimeChange}
+								defaultValue={moment(state?.eventStart)}
+								sx={{ m: 1 }}
+							/>
+							<DateTimePicker
+								renderInput={(props) => <TextField {...props} />}
+								label="DateTimePicker"
+								value={moment(state?.eventEnd)}
+								onChange={handleCurrentTimeChange}
+								defaultValue={moment(state?.eventEnd)}
+								sx={{ m: 1 }}
+							/>
+						</LocalizationProvider>
+					</Grid>
 				</DialogContent>
 				<DialogActions>
 					<Button onClick={handleSaveButton}>Save</Button>

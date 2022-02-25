@@ -50,7 +50,9 @@ export default function Day({ day, rowIdx, events }) {
 		>
 			<header className="flex-column align-items-center">
 				{rowIdx === 0 && (
-					<p className="text-sm mt-1 font-12 lightfont-color">{day.format("ddd").toUpperCase()}</p>
+					<p className="text-sm mt-1 font-12 lightfont-color">
+						{day.format("ddd").toUpperCase()}
+					</p>
 				)}
 			</header>
 			<div>
@@ -60,7 +62,7 @@ export default function Day({ day, rowIdx, events }) {
 					<div style={{ paddingLeft: "25px" }}>{day.format("DD")}</div>
 					{/* <div className="themeblue-bg border-2 flex-center flex-center2 font-12 white-color" style={{width: '38px',height:'21px'}}>10+</div> */}
 				</div>
-				{events.length !== 0 &&
+				{/* {events.length !== 0 &&
 					events.map((eventObj) => (
 						<>
 							<div key={eventObj.id}>
@@ -69,7 +71,7 @@ export default function Day({ day, rowIdx, events }) {
 								)}
 							</div>
 						</>
-					))}
+					))} */}
 			</div>
 			{/* <div className="flex-1 cursor-pointer">
         <div className="p-1 text-gray-600 text-sm rounded bg-blue">9:00 - 10:00

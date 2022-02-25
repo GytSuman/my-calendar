@@ -3,11 +3,12 @@ import "./Event.css";
 import "./header.css";
 import VideocamIcon from "@mui/icons-material/Videocam";
 import CallIcon from "@mui/icons-material/Call";
+import moment from "moment";
 
-function Event(props) {
-	console.log(props);
+function Event({ type, event }) {
+	console.log("event", event);
 	const IconDisplay = () => {
-		if (props.type === "video") return <VideocamIcon className="event-icon" />;
+		if (type === "video") return <VideocamIcon className="event-icon" />;
 		else return <CallIcon className="event-icon" />;
 	};
 	return (
@@ -20,14 +21,14 @@ function Event(props) {
 					className="border-2 flex-center flex-center2 black-bg white-color"
 					style={{ width: "37px", height: "16px" }}
 				>
-					{props.timeFrom}
+					{moment(event.startWeek).format("hh:mm a")}
 				</div>
 				<div style={{ height: "16px" }} className="light-color pl-1">
-					{props.timeTo}
+					{moment(event.endWeek).format("hh:mm a")}
 				</div>
 			</div>
-			<div className="height-100 font-13 bold-font">{props.name}</div>
-			<div className="light-color height-100 font-12">{props.title}</div>
+			<div className="height-100 font-13 bold-font">{event.name}</div>
+			<div className="light-color height-100 font-12">{event.title}</div>
 			{IconDisplay()}
 		</div>
 	);
