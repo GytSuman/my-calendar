@@ -1,9 +1,8 @@
 import moment from "moment";
 
 const CalendarEventHandler = (function () {
-	function addEvent(allEvents, newEvent) {
+	function addEvent(allEvents, newEvent, selectedDay) {
 		const time = moment(newEvent.start).hours();
-		console.log("new event", allEvents[time]);
 		const eventWithMeatInfo = {
 			...newEvent,
 			startWeek: moment(newEvent.start).week(),

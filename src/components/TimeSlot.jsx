@@ -14,18 +14,21 @@ function TimeSlot({ time, weekdays, events, openAddEventModal }) {
 			</Grid>
 			<Grid item xs={11} sx={{ height: "63px" }} className="flex">
 				{weekdays &&
-					weekdays.map((day) => (
-						<>
-							<Time
-								key={day.dateStamp}
-								dateStamp={day.dateStamp}
-								time={time}
-								weekDayName={day.weekDayName}
-								events={events}
-								openAddEventModal={openAddEventModal}
-							/>
-						</>
-					))}
+					weekdays.map((day) => {
+						return (
+							<>
+								<Time
+									key={day.dateStamp}
+									// dateStamp={day.dateStamp}
+									time={time}
+									// weekDayName={day.weekDayName}
+									events={events}
+									openAddEventModal={openAddEventModal}
+									day={day}
+								/>
+							</>
+						);
+					})}
 			</Grid>
 		</Grid>
 	);

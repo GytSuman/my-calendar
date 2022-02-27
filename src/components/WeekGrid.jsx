@@ -13,12 +13,19 @@ function WeekGrid({ weekdays, events, addNewEvents }) {
 		showAddEventModal: false,
 		eventStart: null,
 		eventEnd: null,
+		selectedDayCell: null,
 	});
 
-	const openAddEventModal = (dateStamp, time) => {
+	const openAddEventModal = (dateStamp, time, selectedDay) => {
+		if (selectedDay) console.log({ selectedDay });
 		const start = moment(dateStamp).set("hour", time);
 		const end = start.clone().add(1, "hour");
-		setState({ showAddEventModal: true, eventStart: +start, eventEnd: +end });
+		setState({
+			showAddEventModal: true,
+			eventStart: +start,
+			eventEnd: +end,
+			selectedDayCell: selectedDay,
+		});
 	};
 
 	const closeAddEventModal = () => {
@@ -30,7 +37,6 @@ function WeekGrid({ weekdays, events, addNewEvents }) {
 	};
 
 	const handleAddEvent = (name) => {
-		console.log("name", name);
 		addNewEvents({
 			name,
 			eventStart: state.eventStart,
@@ -39,12 +45,12 @@ function WeekGrid({ weekdays, events, addNewEvents }) {
 		setState({ showAddEventModal: false });
 	};
 
-	const currentTime = moment(state?.start).hours();
-	console.log("events", events[currentTime]);
-	console.log("moment", moment(state.startDate).week());
+	const currentTime = moment(state?.eventStart).hours();
+	// console.log("events", events[currentTime]);
+	// console.log("moment", moment(state.startDate).week());
 
 	return (
-		<div style={{ maxWidth: "100%", width: "1227px" }}>
+		<div style={{ maxWidth: "100%", width: "100%" }}>
 			<WeekHeader weekdays={weekdays} />
 			<CustomizedDialogs
 				state={state}
@@ -62,23 +68,8 @@ function WeekGrid({ weekdays, events, addNewEvents }) {
 						time={time}
 						weekdays={weekdays}
 						openAddEventModal={openAddEventModal}
-					>
-						{events[time] &&
-							events[time].map(
-								(event) => (
-									// console.log("line 67", event)
-									<Event type="voice" event={event} />
-								)
-								// event.startWeek <= moment(state.startDate).week() &&
-								// event.endWeek >= moment(state.startDate).week() ? (
-								// 	<Event
-								// 		startDate={state.startDate}
-								// 		key={event.eventEnd + event.eventStart}
-								// 		event={event}
-								// 	/>
-								// ) : null
-							)}
-					</TimeSlot>
+						events={events[time]}
+					></TimeSlot>
 				</>
 			))}
 		</div>

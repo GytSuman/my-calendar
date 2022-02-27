@@ -13,7 +13,6 @@ export const getAllDaysInTheWeek = (currentDate = moment()) => {
 			dateStamp: +momentObj,
 			weekDayName: momentObj.format("ddd"),
 		}));
-	console.log(days);
 
 	return days;
 };

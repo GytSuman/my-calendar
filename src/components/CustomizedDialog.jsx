@@ -64,7 +64,6 @@ export default function CustomizedDialogs({
 	const [name, setName] = React.useState("");
 
 	const handleSaveButton = () => {
-		console.log("modal", name);
 		handleAddEvent(name);
 		setName("");
 	};

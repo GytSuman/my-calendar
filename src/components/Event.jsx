@@ -13,8 +13,7 @@ function Event({ type, event }) {
 	};
 	return (
 		<div
-			
-			style={{ position: "relative"}}
+			style={{ width: "auto", position: "relative" }}
 			className="border-4 event-background height-100 event-border p-1 flex-col"
 		>
 			<div className="flex-row height-100 font-12">
@@ -22,10 +21,10 @@ function Event({ type, event }) {
 					className="border-2 flex-center flex-center2 black-bg white-color"
 					style={{ width: "37px", height: "16px" }}
 				>
-					{moment(event.startWeek).format("hh:mm a")}
+					{moment(event.eventStart).format("hh:mm")}
 				</div>
 				<div style={{ height: "16px" }} className="light-color pl-1">
-					{moment(event.endWeek).format("hh:mm a")}
+					{moment(event.eventEnd).format("hh:mm ")}
 				</div>
 			</div>
 			<div className="height-100 font-13 bold-font">{event.name}</div>
