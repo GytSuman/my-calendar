@@ -13,7 +13,7 @@ export default function Day({ day, rowIdx, events }) {
 			: "";
 	}
 
-	console.log(day.format("ddd").toUpperCase());
+	// console.log(day.format("ddd").toUpperCase());
 
 	const Event = (props) => {
 		console.log(props);

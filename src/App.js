@@ -1,5 +1,5 @@
 import "./App.css";
-import React from "react";
+import React,{useContext} from "react";
 import CalendarHeader from "./components/CalendarHeader";
 import MonthGrid from "./components/MonthGrid";
 import Sidebar from "./components/Sidebar";
@@ -12,8 +12,10 @@ import moment from "moment";
 import { getDays } from "./dayUtils";
 import dayjs from "dayjs";
 import CalendarEventHandler from "./CalendarEventHandler";
+import EventContext from './context/EventContext'
 
 function App() {
+
 	const [currentMonth, setCurrentMonth] = React.useState(getMonthOriginal());
 	const [currentMonthIdx, setCurrentMonthIdx] = React.useState(dayjs().month());
 	const [weekdays, setWeekdays] = React.useState(getAllDaysInTheWeek());
@@ -64,16 +66,18 @@ function App() {
 		}
 	};
 
-	console.log(events);
+	// console.log(events);
 	React.useEffect(() => {
 		setCurrentMonth(getMonth(currentMonthIdx));
 	}, [currentMonthIdx]);
 
-	console.log("currentmonthIdx", currentMonthIdx);
+	// console.log("currentmonthIdx", currentMonthIdx);
 
 	const handleInputChange = (event) => {
 		setType(event.target.value);
 	};
+
+
 
 	return (
 		<div className="App">
@@ -86,14 +90,14 @@ function App() {
 				currentMonthIdx={currentMonthIdx}
 			/>
 			<div className="app__container">
-				{/* <Sidebar
+				<Sidebar
 					currentMonthIdx={currentMonthIdx}
 					currentMonth={currentMonth}
 					type={type}
 					goToPreviousWeek={goToPreviousWeek}
 					goToNextWeek={goToNextWeek}
 				/>
-				<Divider orientation="vertical" /> */}
+				<Divider orientation="vertical" />
 				{type === "month" && (
 					<MonthGrid currentMonth={currentMonth} events={events} />
 				)}
