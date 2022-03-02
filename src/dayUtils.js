@@ -1,6 +1,6 @@
 import moment from "moment";
 import dayjs from "dayjs";
-
+import React, { useEffect } from "react";
 export const getDays = (currentDay = moment()) => {
 	const presentDay = currentDay.clone().startOf("date");
 	const day = Array.from(Array(1))
@@ -16,3 +16,16 @@ export const getDays = (currentDay = moment()) => {
 		}));
 	return day;
 };
+
+export function useEvents(props){
+	const [event,setEvent] = React.useState("")
+	React.useEffect(() => {
+		// if(props==""){
+		// 	setEvent('hello')
+		// }else{
+		// 	setEvent(props)
+		// }
+		setEvent('hello')
+	});
+	return [event,setEvent]
+}

@@ -1,5 +1,5 @@
 import "./App.css";
-import React from "react";
+import React,{useContext} from "react";
 import CalendarHeader from "./components/CalendarHeader";
 import MonthGrid from "./components/MonthGrid";
 import Sidebar from "./components/Sidebar";
@@ -12,17 +12,28 @@ import moment from "moment";
 import { getDays } from "./dayUtils";
 import dayjs from "dayjs";
 import CalendarEventHandler from "./CalendarEventHandler";
+<<<<<<< HEAD
 import { v4 as uuidv4 } from "uuid";
+=======
+import EventContext from './context/EventContext'
+>>>>>>> 118f6ab466775831f82beb4222220e212daa3921
 
 function App() {
+
 	const [currentMonth, setCurrentMonth] = React.useState(getMonthOriginal());
 	const [currentMonthIdx, setCurrentMonthIdx] = React.useState(dayjs().month());
 	const [weekdays, setWeekdays] = React.useState(getAllDaysInTheWeek());
 	const [days, setDays] = React.useState(getDays());
 	const [startDate, setStartDate] = React.useState();
+<<<<<<< HEAD
 	const [type, setType] = React.useState("week");
 	const [events, setEvents] = React.useState({});
 
+=======
+	const [type, setType] = React.useState("month");
+	const [events, setEvents] = React.useState([]);
+	const [eventAdded,setEventAdded] = React.useState([])
+>>>>>>> 118f6ab466775831f82beb4222220e212daa3921
 	const addNewEvents = (event) => {
 		console.log("event", event);
 		try {
@@ -68,16 +79,18 @@ function App() {
 		}
 	};
 
-	console.log(events);
+	// console.log(events);
 	React.useEffect(() => {
 		setCurrentMonth(getMonth(currentMonthIdx));
 	}, [currentMonthIdx]);
 
-	console.log("currentmonthIdx", currentMonthIdx);
+	// console.log("currentmonthIdx", currentMonthIdx);
 
 	const handleInputChange = (event) => {
 		setType(event.target.value);
 	};
+
+
 
 	return (
 		<div className="App">
@@ -108,7 +121,12 @@ function App() {
 						goToNextWeek={goToNextWeek}
 						addNewEvents={addNewEvents}
 						events={events}
+<<<<<<< HEAD
 						startDate={startDate}
+=======
+						eventAdded={eventAdded}
+						setEventAdded={setEventAdded}
+>>>>>>> 118f6ab466775831f82beb4222220e212daa3921
 					/>
 				)}
 				{type === "day" && <DayGrid days={days} />}

@@ -2,12 +2,53 @@ import { Grid } from "@mui/material";
 import React from "react";
 import { col, slot2 } from "./style";
 import Event from "./Event";
+import EventSmall from './EventSmall'
+import CustomizedDialogs from "./CustomizedDialogWeek";
 
 function DayTime({ time, dateStamp, dayName }) {
-	const [eventAdded,setEventAdded] = React.useState(0);
+	//model
+	const [open, setOpen] = React.useState(false);
+	const openMonthEventDialog = () => {
+		setOpen(true);
+		console.log("clicked");
+	};
+
+	const onSetOpen = (value) => {
+		setOpen(value);
+	};
+
+	const [eventAdded,setEventAdded] = React.useState([])
 	const toggle = React.useCallback(() => {
-		setEventAdded(1)
+		openMonthEventDialog()
 	}, []);
+
+	const eventDiv = () =>{
+		if(eventAdded[3]==1){
+			return(
+				<>
+				{eventAdded.length != 0 &&
+					<Event
+						type={eventAdded[0]}
+						name={eventAdded[1]}
+						title={eventAdded[2]}
+						hours={eventAdded[3]}
+						time={time}
+					/>
+				}
+				</>
+			)
+		}else if(eventAdded[3]==0.5){
+			return(
+				<EventSmall name={eventAdded[1]} time={time} />
+			)
+		}
+	}
+
+	React.useEffect(()=>{
+		eventDiv()
+	},[eventAdded])
+
+
 	return (
 		<Grid container>
 			<Grid
@@ -17,17 +58,16 @@ function DayTime({ time, dateStamp, dayName }) {
 				style={{ ...col, ...slot2 }}
 				sx={{ width: "80vw" }}
 				onClick={toggle}
-				// onClick={() => console.log("clicked on day", time)}
 			>
-				{eventAdded ==1 && <Event type="voice" timeFrom="9.00" timeTo="9.30" name="Gavin Cooper" title="Tenant Q&A" />}
-				{/* <Event
-					type="voice"
-					timeFrom="9.00"
-					timeTo="9.30"
-					name="Gavin Cooper"
-					title="Tenant Q&A"
-				/> */}
+				{eventDiv()}	
 			</Grid>
+			{open && (
+				<CustomizedDialogs onSetOpen={onSetOpen} time={time} open={open}
+				getEvents = {eventAdded}
+				setEvents = {setEventAdded}
+				// events={events}
+				/>
+			)}
 		</Grid>
 	);
 }
