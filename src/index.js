@@ -2,13 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import EventContext from './context/EventContext'
+import EventContextWrapper from './context/EventContext'
 
 ReactDOM.render(
   <React.StrictMode>
-    <EventContext>
+    <EventContextWrapper>
       <App />
-    </EventContext>
+    </EventContextWrapper>
   </React.StrictMode>,
   document.getElementById('root')
 )

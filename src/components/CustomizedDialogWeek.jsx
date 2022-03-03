@@ -8,9 +8,9 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
-import Typography from "@mui/material/Typography";
-import { TextField,Select,MenuItem,Radio,RadioGroup,FormControl,FormControlLabel,FormLabel } from "@mui/material";
+import { TextField,Radio,RadioGroup,FormControl,FormControlLabel} from "@mui/material";
 import moment from "moment";
+import { useEvent } from '../context/EventContext'
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 	"& .MuiDialogContent-root": {
@@ -50,11 +50,14 @@ BootstrapDialogTitle.propTypes = {
 	onClose: PropTypes.func.isRequired,
 };
 
-export default function CustomizedDialogs({ open, onSetOpen , time , getEvents , setEvents }) {
+export default function CustomizedDialogs({ open, onSetOpen , dateStamp , time , getEvents , setEvents }) {
 	const [name, setName] = React.useState("");
 	const [title, setTitle] = React.useState("");
-	const [hours, setHours] = React.useState(1);
+	const [timeFrom, setTimeFrom] = React.useState(moment().set("hours", time).format("h a"));
+	const [timeTo, setTimeTo] = React.useState(moment().set("hours", time+1).format("h a"));
 	const [type, setType] = React.useState("voice");
+
+	const event = useEvent()
 
 	const handleClose = (event) => {
 		event.stopPropagation();
@@ -70,8 +73,12 @@ export default function CustomizedDialogs({ open, onSetOpen , time , getEvents ,
 		setTitle(event.target.value);
 	};
 
-	const handleTimeChange = (event) => {
-		setHours(event.target.value);
+	const handleTimeFromChange = (event) => {
+		setTimeFrom(event.target.value);
+	};
+
+	const handleTimeToChange = (event) => {
+		setTimeTo(event.target.value);
 	};
 
 	const handleTypeChange = (event) => {
@@ -79,10 +86,11 @@ export default function CustomizedDialogs({ open, onSetOpen , time , getEvents ,
 	};
 
 	const handleSubmitButton = () => {
-		if((type=='')||(name=='')||(title=='')) console.log('err')
+		if((type==='')||(name==='')||(title==='')||(timeFrom==='')||(timeTo==='')) console.log('err')
 		else{
-			setEvents((state)=>[...state,{type,name,title,hours}])
-			onSetOpen(false);
+			// setEvents((state)=>[ ...state, { dateStamp , type , name , title , timeFrom, timeTo } ])
+			event.setEvent((state)=>[ ...state, { dateStamp , type , name , title , timeFrom, timeTo } ])
+			onSetOpen(false)
 		}
 	}
 
@@ -115,28 +123,33 @@ export default function CustomizedDialogs({ open, onSetOpen , time , getEvents ,
 						value={title}
 					/>
 					<TextField
-						id="time"
-						label="From"
-						disabled
+						id="timeFrom"
+						label="Event From"
+						type="time"
+						value = {timeFrom}
 						InputLabelProps={{
-							shrink: true,
+						shrink: true,
 						}}
 						inputProps={{
-							step: 300, // 5 min
+						step: 300, // 5 min
 						}}
+						onChange={handleTimeFromChange}
 						sx={{ width: 150, m: 2 }}
-						value={moment().set("hours", time).format("h a")}
 					/>
-					<Select
-						label="To"
-						id="time"
-						onChange={handleTimeChange}
-						value={hours}
+					<TextField
+						id="timeTo"
+						label="Event To"
+						type="time"
+						value = {timeTo}
+						InputLabelProps={{
+						shrink: true,
+						}}
+						inputProps={{
+						step: 300, // 5 min
+						}}
+						onChange={handleTimeToChange}
 						sx={{ width: 150, m: 2 }}
-					>
-						<MenuItem value={1}>Hour</MenuItem>
-						<MenuItem value={0.5}>Half Hour</MenuItem>
-					</Select>
+					/>
 					<FormControl>
 						<RadioGroup
 							id='type' name='type'

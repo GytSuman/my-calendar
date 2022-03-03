@@ -1,22 +1,19 @@
-//import Context from "./context";
-import React, { useContext } from 'react'
+import { Context, DispatchContext } from "./context";
+import { useContext,useState } from 'react'
 
-export const Context = React.createContext();
-
-export default function EventContext({children}) {
-    const s = {
-        'name' : 'John',
-        'title' : 'Daily Standup'
-    }
-    const [event,setEvent] = React.useState(s)
-    // console.log(event)
+export default function EventContextWrapper({children}) {
+    const [ event,setEvent ] = useState([])
     return(
-        <Context.Provider value={{event}}>
+        <Context.Provider value={{event,setEvent}}>
             {children}
         </Context.Provider>
     )
 }
 
 export function useEvent(){
-    return useContext(EventContext)
+    return useContext(Context)
+}
+
+export function useEventDispatch() {
+  return useContext(DispatchContext);
 }

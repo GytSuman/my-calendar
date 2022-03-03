@@ -1,64 +1,77 @@
 import { Grid } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import { isTodaysDate } from "../weekUtils";
 import { col, slot, slot2, lightHighlighter } from "./style";
 import Event from "./Event";
 import EventSmall from './EventSmall'
 import CustomizedDialogs from "./CustomizedDialogWeek";
+import moment from 'moment'
+
+import { useEvent } from '../context/EventContext'
 
 function Time(props) {
 	const { weekDayName, dateStamp, events ,time, eventAdded , setEventAdded } = props;
+	
+	const event = useEvent()
 
 	const row = 12/7
 	const [eventAddedArray,setEventAddedArray] = React.useState([])
 	//model
 	const [open, setOpen] = React.useState(false);
 	const openMonthEventDialog = () => {
-		setOpen(true);
-		console.log("clicked");
+		setOpen(true)
+		console.log("clicked",time)
 	};
 
 	const onSetOpen = (value) => {
 		setOpen(value);
 	};
 
-	
 	const toggle = React.useCallback(() => {
 		openMonthEventDialog()
 	}, []);
 
-
 	const eventDiv = () =>{
-		if( eventAddedArray.length !== 0){
-			return(
-				<>
-				{eventAddedArray.length !== 0 && eventAddedArray.map((evendAddedObj)=>{
-					return (
-						<Event
-						type={evendAddedObj.type}
-						name={evendAddedObj.name}
-						title={evendAddedObj.title}
-						hours={evendAddedObj.hours}
-						time={time}
-						/>
-					) 
+		return(
+			<>
+			{
+				event.event.map((x)=>{
+					if((x.dateStamp===dateStamp)&&(x.timeFrom===time)){
+						return(
+							<Event
+								type={x.type}
+								name={x.name}
+								title={x.title}
+								hours={x.hours}
+								timeFrom={x.timeFrom}
+								timeTo={x.timeTo}
+							/>
+						)	
+					}
 				})
-				}
-				</>
-			)
-		}
-		// else if(eventAdded && eventAdded[3]==0.5){
+			}
+			</>
+		)
+		// if( eventAddedArray.length !== 0){
 		// 	return(
-		// 		<EventSmall name={eventAdded[1]} time={time} />
+		// 		<>
+		// 		{eventAddedArray.length !== 0 && eventAddedArray.map((evendAddedObj)=>{
+		// 			return (
+		// 				<Event
+		// 					type={evendAddedObj.type}
+		// 					name={evendAddedObj.name}
+		// 					title={evendAddedObj.title}
+		// 					hours={evendAddedObj.hours}
+		// 					timeFrom={evendAddedObj.timeFrom}
+		// 					timeTo={evendAddedObj.timeTo}
+		// 				/>
+		// 			) 
+		// 		})
+		// 		}
+		// 		</>
 		// 	)
 		// }
 	}
-
-	React.useEffect(()=>{
-		console.log('refreshed')
-		console.log(eventAdded)
-		eventDiv()
-	},[eventAdded])
 
 	return (
 		<>
@@ -71,9 +84,9 @@ function Time(props) {
 				{eventDiv()}
 			</Grid>
 			{open && (
-				<CustomizedDialogs onSetOpen={onSetOpen} time={time} open={open}
-				getEvents = {eventAddedArray}
-				setEvents = {setEventAddedArray}
+				<CustomizedDialogs onSetOpen={onSetOpen} dateStamp={dateStamp} time={time} open={open}
+				// getEvents = {eventAddedArray}
+				// setEvents = {setEventAddedArray}
 				// events={events}
 				/>
 			)}

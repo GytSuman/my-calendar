@@ -13,7 +13,7 @@ export const getAllDaysInTheWeek = (currentDate = moment()) => {
 			dateStamp: +momentObj,
 			weekDayName: momentObj.format("ddd"),
 		}));
-	console.log(days);
+	// console.log(days);
 
 	return days;
 };
@@ -21,6 +21,16 @@ export const getAllDaysInTheWeek = (currentDate = moment()) => {
 export const times = [
 	7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23,
 ];
+
+export const getHoursInDay = () => {
+	const items = [];
+	new Array(24).fill().forEach((acc, index) => {
+	  items.push(moment( {hour: index} ).format('h:mm A'));
+	  items.push(moment({ hour: index, minute: 30 }).format('h:mm A'));
+	})
+	console.log(items)
+	return items;
+} 
 
 export const generateWeekViewCoordinates = (event, startDate) => {
 	const start = moment(event.start);

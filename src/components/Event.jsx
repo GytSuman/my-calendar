@@ -5,7 +5,7 @@ import moment from "moment";
 import VideocamIcon from "@mui/icons-material/Videocam";
 import CallIcon from "@mui/icons-material/Call";
 
-function Event({type,name,title,hours,time}) {
+function Event({type,name,title,timeTo,timeFrom}) {
 	const IconDisplay = () => {
 		if (type === "video") return <VideocamIcon className="event-icon" />;
 		else return <CallIcon className="event-icon" />;
@@ -19,11 +19,11 @@ function Event({type,name,title,hours,time}) {
 				<div
 					className="border-2 flex-center flex-center2 black-bg white-color"
 					style={{ width: "37px", height: "16px" }}
-				>
-					{moment().set("hours", time).format("h a")}
+				>{timeFrom}
+					{/* {moment().set("hours", timeFrom).format("h a")} */}
 				</div>
-				<div style={{ height: "16px" }} className="light-color pl-1">
-					{moment().set("hours", time + hours).format("h a")}
+				<div style={{ height: "16px" }} className="light-color pl-1">{timeTo}
+					{/* {moment().set("hours", timeTo).format("h a")} */}
 				</div>
 			</div>
 			<div className="height-100 font-13 bold-font">{name}</div>

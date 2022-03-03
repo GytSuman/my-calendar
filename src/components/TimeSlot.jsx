@@ -9,7 +9,7 @@ function TimeSlot({ time, weekdays, events,eventAdded,setEventAdded }) {
 	return (
 		<Grid container direction="row">
 			<Grid item xs={1} sx={{ paddingLeft: "16px", paddingTop: "8px" }}>
-				{formattedTime}
+				{/* {formattedTime} */}{time}
 			</Grid>
 			<Grid item xs={11} sx={{ height: "63px" }} className="flex">
 				{weekdays &&
