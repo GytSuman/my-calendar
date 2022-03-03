@@ -10,7 +10,7 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import { TextField,Radio,RadioGroup,FormControl,FormControlLabel} from "@mui/material";
 import moment from "moment";
-import { useEvent } from '../context/EventContext'
+import { useEvent } from '../../../context/EventContext'
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 	"& .MuiDialogContent-root": {
@@ -50,11 +50,11 @@ BootstrapDialogTitle.propTypes = {
 	onClose: PropTypes.func.isRequired,
 };
 
-export default function CustomizedDialogs({ open, onSetOpen , dateStamp , time , getEvents , setEvents }) {
+export default function CustomizedDialogs({ open, onSetOpen , dateStamp , time }) {
 	const [name, setName] = React.useState("");
 	const [title, setTitle] = React.useState("");
-	const [timeFrom, setTimeFrom] = React.useState(moment().set("hours", time).format("h a"));
-	const [timeTo, setTimeTo] = React.useState(moment().set("hours", time+1).format("h a"));
+	const [timeFrom, setTimeFrom] = React.useState(time);
+	const [timeTo, setTimeTo] = React.useState(time);
 	const [type, setType] = React.useState("voice");
 
 	const event = useEvent()
@@ -74,10 +74,12 @@ export default function CustomizedDialogs({ open, onSetOpen , dateStamp , time ,
 	};
 
 	const handleTimeFromChange = (event) => {
+		console.log(event.target.value)
 		setTimeFrom(event.target.value);
 	};
 
 	const handleTimeToChange = (event) => {
+		console.log(event.target.value)
 		setTimeTo(event.target.value);
 	};
 
@@ -88,8 +90,8 @@ export default function CustomizedDialogs({ open, onSetOpen , dateStamp , time ,
 	const handleSubmitButton = () => {
 		if((type==='')||(name==='')||(title==='')||(timeFrom==='')||(timeTo==='')) console.log('err')
 		else{
-			// setEvents((state)=>[ ...state, { dateStamp , type , name , title , timeFrom, timeTo } ])
 			event.setEvent((state)=>[ ...state, { dateStamp , type , name , title , timeFrom, timeTo } ])
+			console.log(event)
 			onSetOpen(false)
 		}
 	}
@@ -126,6 +128,8 @@ export default function CustomizedDialogs({ open, onSetOpen , dateStamp , time ,
 						id="timeFrom"
 						label="Event From"
 						type="time"
+						disabled
+						defaultValue={timeFrom}
 						value = {timeFrom}
 						InputLabelProps={{
 						shrink: true,

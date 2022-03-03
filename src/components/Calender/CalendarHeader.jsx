@@ -1,20 +1,21 @@
-import React from "react";
-import dayjs from "dayjs";
-import Grid from "@mui/material/Grid";
+import React from "react"
+import dayjs from "dayjs"
 import {
 	Divider,
 	IconButton,
 	InputAdornment,
 	MenuItem,
 	TextField,
+	Grid,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
-import "./header.css";
 import moment from "moment";
+
+import "./Calender.scss";
 
 const types = [
 	{ id: 1, value: "day" },
@@ -80,7 +81,7 @@ function CalendarHeader({
 					</Grid>
 
 					<Grid container item xs={6} spacing={4} className='flex-center'>
-						<Grid item className="year flex flex-space-between" sx={{width: '300px'}}>
+						<Grid item className="flex flex-center flex-space-between" sx={{width: '300px'}}>
 							<IconButton onClick={() => goToPreviousWeek()}>
 								<ArrowBackIosNewIcon />
 							</IconButton>

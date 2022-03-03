@@ -1,8 +1,8 @@
 import React from "react";
-import "./header.css";
-import "./Event.css";
 import moment from "moment";
-import CustomizedDialogs from "./CustomizedDialog";
+import CustomizedDialogs from "../Shared/ModelForms/CustomizedDialog";
+
+import './MonthView.scss'
 
 export default function Day({ day, rowIdx, events }) {
 	const [open, setOpen] = React.useState(false);
@@ -13,15 +13,10 @@ export default function Day({ day, rowIdx, events }) {
 			: "";
 	}
 
-	// console.log(day.format("ddd").toUpperCase());
-
 	const Event = (props) => {
 		console.log(props);
 		return (
-			<div
-				style={{ width: "100%", height: "24px" }}
-				className="border-4 event-background2 event-border2 p-1 font-12 flex-row flex-center flex-space-between"
-			>
+			<div className="width-100 col-height border-4 event-background2 event-border2 p-1 font-12 flex-row flex-center flex-space-between">
 				<div
 					className="border-2 flex-center flex-center2 black-bg white-color font-12"
 					style={{ width: "37px", height: "16px" }}

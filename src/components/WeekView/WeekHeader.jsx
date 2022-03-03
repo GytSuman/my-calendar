@@ -1,7 +1,7 @@
 import { Grid } from "@mui/material";
 import React from "react";
-import Header from "./Header";
-
+import Header from "../Shared/Header/Header";
+import './WeekView.scss'
 function WeekHeader({ weekdays }) {
 	return (
 		<>
@@ -13,6 +13,7 @@ function WeekHeader({ weekdays }) {
 							<Header
 								weekDayName={week.weekDayName}
 								date={week.date}
+								type="week"
 								dateStamp={week.dateStamp}
 							/>
 						</>

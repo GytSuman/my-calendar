@@ -1,9 +1,11 @@
 import { Grid } from "@mui/material";
 import React from "react";
-import { col, slot2 } from "./style";
-import Event from "./Event";
-import EventSmall from './EventSmall'
-import CustomizedDialogs from "./CustomizedDialogWeek";
+import { col, slot2 } from "../style";
+import Event from "../Shared/Events/Event";
+import EventSmall from '../Shared/Events/EventSmall'
+import CustomizedDialogs from "../Shared/ModelForms/CustomizedDialogWeek";
+
+import './DayView.scss'
 
 function DayTime({ time, dateStamp, dayName }) {
 	//model

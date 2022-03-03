@@ -1,18 +1,20 @@
-import "./App.css";
-import React,{useContext} from "react";
-import CalendarHeader from "./components/CalendarHeader";
-import MonthGrid from "./components/MonthGrid";
-import Sidebar from "./components/Sidebar";
+import React from "react";
 import { getMonth, getMonthOriginal } from "./util";
 import { Divider } from "@mui/material";
-import WeekGrid from "./components/WeekGrid";
-import DayGrid from "./components/DayGrid";
 import { getAllDaysInTheWeek } from "./weekUtils";
 import moment from "moment";
 import { getDays } from "./dayUtils";
 import dayjs from "dayjs";
 import CalendarEventHandler from "./CalendarEventHandler";
-import EventContext from './context/EventContext'
+
+import CalendarHeader from "./components/Calender/CalendarHeader";
+import MonthGrid from "./components/MonthView/MonthGrid";
+import Sidebar from "./components/CalenderSmall/Sidebar";
+import WeekGrid from "./components/WeekView/WeekGrid";
+import DayGrid from "./components/DayView/DayGrid";
+
+import "./styles/styles.scss"
+import "./App.css";
 
 function App() {
 
@@ -90,13 +92,15 @@ function App() {
 				currentMonthIdx={currentMonthIdx}
 			/>
 			<div className="app__container">
-				<Sidebar
-					currentMonthIdx={currentMonthIdx}
-					currentMonth={currentMonth}
-					type={type}
-					goToPreviousWeek={goToPreviousWeek}
-					goToNextWeek={goToNextWeek}
-				/>
+				<aside>
+					<Sidebar
+						currentMonthIdx={currentMonthIdx}
+						currentMonth={currentMonth}
+						type={type}
+						goToPreviousWeek={goToPreviousWeek}
+						goToNextWeek={goToNextWeek}
+					/>
+				</aside>
 				<Divider orientation="vertical" />
 				{type === "month" && (
 					<MonthGrid currentMonth={currentMonth} events={events} />

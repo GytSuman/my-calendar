@@ -1,21 +1,22 @@
 import moment from "moment";
 import React from "react";
-import Time from "./Time";
-import "./header.css";
+import DayColumn from "../Shared/DayColumn";
 import { Grid } from "@mui/material";
 
+import './WeekView.scss'
+
 function TimeSlot({ time, weekdays, events,eventAdded,setEventAdded }) {
-	const formattedTime = moment().set("hours", time).format("h a");
+	const formattedTime = moment(time, "HH:mm").format("h:mm A")
 	return (
 		<Grid container direction="row">
-			<Grid item xs={1} sx={{ paddingLeft: "16px", paddingTop: "8px" }}>
-				{/* {formattedTime} */}{time}
+			<Grid item xs={1} className="flex-center flex-center2">
+				{formattedTime}
 			</Grid>
-			<Grid item xs={11} sx={{ height: "63px" }} className="flex">
+			<Grid item xs={11} className="flex">
 				{weekdays &&
 					weekdays.map((day) => (
 						<>
-							<Time
+							<DayColumn
 								key={day.dateStamp}
 								dateStamp={day.dateStamp}
 								time={time}

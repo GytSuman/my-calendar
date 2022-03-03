@@ -30,6 +30,13 @@
   color: #61dafb;
 }
 
+aside {
+  min-width: 250px;
+  height: 100%;
+  padding: 12px;
+  background-color: #e8e8e9;
+}
+
 
 @keyframes App-logo-spin {
   from {

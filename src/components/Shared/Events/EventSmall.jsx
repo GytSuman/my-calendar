@@ -1,7 +1,7 @@
 import React from 'react'
-import './Event.css'
-import "./header.css"
-import moment from "moment";
+import moment from "moment"
+
+import './Events.scss'
 
 function EventSmall({time,name}){
     return(

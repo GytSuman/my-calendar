@@ -1,9 +1,8 @@
 import React from "react";
-import "./Event.css";
-import "./header.css";
-import moment from "moment";
 import VideocamIcon from "@mui/icons-material/Videocam";
 import CallIcon from "@mui/icons-material/Call";
+import moment from 'moment'
+import './Events.scss'
 
 function Event({type,name,title,timeTo,timeFrom}) {
 	const IconDisplay = () => {
@@ -22,8 +21,8 @@ function Event({type,name,title,timeTo,timeFrom}) {
 				>{timeFrom}
 					{/* {moment().set("hours", timeFrom).format("h a")} */}
 				</div>
-				<div style={{ height: "16px" }} className="light-color pl-1">{timeTo}
-					{/* {moment().set("hours", timeTo).format("h a")} */}
+				<div style={{ height: "16px" }} className="light-color pl-1">
+					{timeTo}
 				</div>
 			</div>
 			<div className="height-100 font-13 bold-font">{name}</div>

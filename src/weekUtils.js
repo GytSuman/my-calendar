@@ -13,8 +13,6 @@ export const getAllDaysInTheWeek = (currentDate = moment()) => {
 			dateStamp: +momentObj,
 			weekDayName: momentObj.format("ddd"),
 		}));
-	// console.log(days);
-
 	return days;
 };
 
@@ -82,6 +80,8 @@ export const generateWeekViewCoordinates = (event, startDate) => {
 		width: width + "%",
 	};
 };
+
+export const weekDaysArray = [ 'Sunday' , 'Monday' , 'Tuesday' , 'Wednesday' , 'Thursday' , 'Friday' , 'Saturday' ]
 
 export const isTodaysDate = (dateStamp) => {
 	const today = moment();

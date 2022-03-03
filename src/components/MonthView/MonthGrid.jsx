@@ -1,10 +1,8 @@
-import React,{useContext} from "react";
+import React from "react";
 import Day from "./Day";
-import "./header.css";
+import './MonthView.scss'
 
 export default function MonthGrid({ currentMonth, events }) {
-
-	// console.log("currentMonth",currentMonth)
 	return (
 		<div className="flex-1 grid">
 			{currentMonth &&
