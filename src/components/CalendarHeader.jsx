@@ -11,7 +11,7 @@ import {
 import SearchIcon from "@mui/icons-material/Search";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import "./header.css";
 import moment from "moment";
@@ -30,7 +30,7 @@ function CalendarHeader({
 	startDate,
 	currentMonthIdx,
 }) {
-	const formattedDate = moment(startDate).format("MMMM YYYY");
+	const formattedDate = dayjs(startDate).format("MMMM YYYY");
 
 	// function handleReset() {
 	//   setMonthIndex(
@@ -68,7 +68,7 @@ function CalendarHeader({
 							select
 							fullWidth
 							value={type}
-							sx={{border: '1px solid #EEEEEE'}}
+							sx={{ border: "1px solid #EEEEEE" }}
 							onChange={handleInputChange}
 						>
 							{types.map((typeObj) => (
@@ -79,8 +79,12 @@ function CalendarHeader({
 						</TextField>
 					</Grid>
 
-					<Grid container item xs={6} spacing={4} className='flex-center'>
-						<Grid item className="year flex flex-space-between" sx={{width: '300px'}}>
+					<Grid container item xs={6} spacing={4} className="flex-center">
+						<Grid
+							item
+							className="year flex flex-space-between"
+							sx={{ width: "300px" }}
+						>
 							<IconButton onClick={() => goToPreviousWeek()}>
 								<ArrowBackIosNewIcon />
 							</IconButton>
@@ -93,8 +97,10 @@ function CalendarHeader({
 									: formattedDate}
 							</h2>
 							<IconButton onClick={() => goToNextWeek()}>
-								<CalendarTodayIcon sx={{width: '18px',height: '18px',color:'#414241'}}/>
-								<ArrowForwardIosIcon sx={{width: '24px',height: '24px'}} />
+								<CalendarTodayIcon
+									sx={{ width: "18px", height: "18px", color: "#414241" }}
+								/>
+								<ArrowForwardIosIcon sx={{ width: "24px", height: "24px" }} />
 							</IconButton>
 						</Grid>
 					</Grid>

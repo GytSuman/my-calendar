@@ -3,12 +3,13 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import EventContext from "./context/EventContext";
+import CalendarContext from "./context/CalendarContext";
 
 ReactDOM.render(
 	<React.StrictMode>
-		<EventContext>
+		<CalendarContext>
 			<App />
-		</EventContext>
+		</CalendarContext>
 	</React.StrictMode>,
 	document.getElementById("root")
 );

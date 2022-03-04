@@ -9,7 +9,7 @@ export default function EventContext({ children }) {
 		title: "Daily Standup",
 	};
 	const [event, setEvent] = React.useState(s);
-	// console.log(event)
+
 	return <Context.Provider value={{ event }}>{children}</Context.Provider>;
 }
 

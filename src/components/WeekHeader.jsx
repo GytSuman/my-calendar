@@ -2,7 +2,7 @@ import { Grid } from "@mui/material";
 import React from "react";
 import Header from "./Header";
 
-function WeekHeader({ weekdays }) {
+function WeekHeader({ weekdays, startDate, currentMonthIdx }) {
 	return (
 		<>
 			<Grid container>
@@ -14,13 +14,16 @@ function WeekHeader({ weekdays }) {
 								weekDayName={week.weekDayName}
 								date={week.date}
 								dateStamp={week.dateStamp}
+								startDate={startDate}
+								currentMonthIdx={currentMonthIdx}
+								week={week}
 							/>
 						</>
 					))}
 				</Grid>
 			</Grid>
 		</>
-   )
+	);
 }
 
 export default WeekHeader;

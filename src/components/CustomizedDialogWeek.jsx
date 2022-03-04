@@ -9,7 +9,16 @@ import DialogActions from "@mui/material/DialogActions";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import Typography from "@mui/material/Typography";
-import { TextField,Select,MenuItem,Radio,RadioGroup,FormControl,FormControlLabel,FormLabel } from "@mui/material";
+import {
+	TextField,
+	Select,
+	MenuItem,
+	Radio,
+	RadioGroup,
+	FormControl,
+	FormControlLabel,
+	FormLabel,
+} from "@mui/material";
 import moment from "moment";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -50,7 +59,13 @@ BootstrapDialogTitle.propTypes = {
 	onClose: PropTypes.func.isRequired,
 };
 
-export default function CustomizedDialogs({ open, onSetOpen , time , getEvents , setEvents }) {
+export default function CustomizedDialogs({
+	open,
+	onSetOpen,
+	time,
+	getEvents,
+	setEvents,
+}) {
 	const [name, setName] = React.useState("");
 	const [title, setTitle] = React.useState("");
 	const [hours, setHours] = React.useState(1);
@@ -79,12 +94,12 @@ export default function CustomizedDialogs({ open, onSetOpen , time , getEvents ,
 	};
 
 	const handleSubmitButton = () => {
-		if((type=='')||(name=='')||(title=='')) console.log('err')
-		else{
-			setEvents((state)=>[...state,{type,name,title,hours}])
+		if (type === "" || name === "" || title === "") console.log("err");
+		else {
+			setEvents((state) => [...state, { type, name, title, hours }]);
 			onSetOpen(false);
 		}
-	}
+	};
 
 	return (
 		<div style={{ zIndex: 1000 }}>
@@ -139,12 +154,21 @@ export default function CustomizedDialogs({ open, onSetOpen , time , getEvents ,
 					</Select>
 					<FormControl>
 						<RadioGroup
-							id='type' name='type'
+							id="type"
+							name="type"
 							value={type}
 							onChange={handleTypeChange}
 						>
-							<FormControlLabel value="voice" control={<Radio />} label="voice" />
-							<FormControlLabel value="video" control={<Radio />} label="video" />
+							<FormControlLabel
+								value="voice"
+								control={<Radio />}
+								label="voice"
+							/>
+							<FormControlLabel
+								value="video"
+								control={<Radio />}
+								label="video"
+							/>
 						</RadioGroup>
 					</FormControl>
 				</DialogContent>

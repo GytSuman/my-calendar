@@ -3,9 +3,12 @@ import React from "react";
 import Time from "./Time";
 import "./header.css";
 import { Grid } from "@mui/material";
+import dayjs from "dayjs";
 
 function TimeSlot({ time, weekdays, events, openAddEventModal }) {
 	const formattedTime = moment().set("hours", time).format("h a");
+
+	// console.log(dayjs("03/01/2022 8:00 AM").format("h"));
 
 	return (
 		<Grid container direction="row">
@@ -18,7 +21,7 @@ function TimeSlot({ time, weekdays, events, openAddEventModal }) {
 						return (
 							<>
 								<Time
-									key={day.dateStamp}
+									key={day.id}
 									// dateStamp={day.dateStamp}
 									time={time}
 									// weekDayName={day.weekDayName}

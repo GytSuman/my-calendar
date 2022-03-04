@@ -5,7 +5,7 @@ import MonthGrid from "./components/MonthGrid";
 import Sidebar from "./components/Sidebar";
 import { getMonth, getMonthOriginal } from "./util";
 import { Divider } from "@mui/material";
-import WeekGrid from "./components/WeekGrid";
+import WeekGrid from "./components/week/WeekGrid";
 import DayGrid from "./components/DayGrid";
 import { getAllDaysInTheWeek } from "./weekUtils";
 import moment from "moment";
@@ -13,15 +13,24 @@ import { getDays } from "./dayUtils";
 import dayjs from "dayjs";
 import CalendarEventHandler from "./CalendarEventHandler";
 import { v4 as uuidv4 } from "uuid";
+import { useCalendar } from "./context/CalendarContext";
 
 function App() {
-	const [currentMonth, setCurrentMonth] = React.useState(getMonthOriginal());
-	const [currentMonthIdx, setCurrentMonthIdx] = React.useState(dayjs().month());
-	const [weekdays, setWeekdays] = React.useState(getAllDaysInTheWeek());
-	const [days, setDays] = React.useState(getDays());
-	const [startDate, setStartDate] = React.useState();
-	const [type, setType] = React.useState("week");
 	const [events, setEvents] = React.useState({});
+	const {
+		type,
+		setType,
+		currentMonth,
+		setCurrentMonth,
+		currentMonthIdx,
+		setCurrentMonthIdx,
+		weekdays,
+		setWeekdays,
+		days,
+		setDays,
+		startDate,
+		setStartDate,
+	} = useCalendar();
 
 	const addNewEvents = (event) => {
 		console.log("event", event);
@@ -68,12 +77,9 @@ function App() {
 		}
 	};
 
-	// console.log(events);
 	React.useEffect(() => {
 		setCurrentMonth(getMonth(currentMonthIdx));
-	}, [currentMonthIdx]);
-
-	// console.log("currentmonthIdx", currentMonthIdx);
+	}, [currentMonthIdx, setCurrentMonth]);
 
 	const handleInputChange = (event) => {
 		setType(event.target.value);
@@ -109,6 +115,7 @@ function App() {
 						addNewEvents={addNewEvents}
 						events={events}
 						startDate={startDate}
+						currentMonthIdx={currentMonthIdx}
 					/>
 				)}
 				{type === "day" && <DayGrid days={days} />}

@@ -1,24 +1,36 @@
+import dayjs from "dayjs";
 import moment from "moment";
 import React from "react";
-import { times } from "../weekUtils";
-import CustomizedDialogs from "./CustomizedDialog";
-import Event from "./Event";
-import TaskProgress from "./TaskProgress";
-import TimeSlot from "./TimeSlot";
-import WeekHeader from "./WeekHeader";
+import { useCalendar } from "../../context/CalendarContext";
+import { times } from "../../weekUtils";
+import CustomizedDialogs from "../CustomizedDialog";
+import Event from "../Event";
+import TaskProgress from "../TaskProgress";
+import TimeSlot from "../TimeSlot";
+import WeekHeader from "../WeekHeader";
 
-function WeekGrid({ weekdays, events, addNewEvents }) {
+function WeekGrid({
+	weekdays,
+	events,
+	addNewEvents,
+	startDate,
+	currentMonthIdx,
+}) {
 	const [state, setState] = React.useState({
-		startDate: +moment(),
+		startDate: +dayjs(),
 		showAddEventModal: false,
 		eventStart: null,
 		eventEnd: null,
 		selectedDayCell: null,
 	});
 
+	const { allEvents } = useCalendar();
+
+	console.log(allEvents);
+
 	const openAddEventModal = (dateStamp, time, selectedDay) => {
 		if (selectedDay) console.log({ selectedDay });
-		const start = moment(dateStamp).set("hour", time);
+		const start = dayjs(dateStamp).set("hour", time);
 		const end = start.clone().add(1, "hour");
 		setState({
 			showAddEventModal: true,
@@ -45,13 +57,13 @@ function WeekGrid({ weekdays, events, addNewEvents }) {
 		setState({ showAddEventModal: false });
 	};
 
-	const currentTime = moment(state?.eventStart).hours();
-	// console.log("events", events[currentTime]);
-	// console.log("moment", moment(state.startDate).week());
-
 	return (
 		<div style={{ maxWidth: "100%", width: "100%" }}>
-			<WeekHeader weekdays={weekdays} />
+			<WeekHeader
+				weekdays={weekdays}
+				startDate={startDate}
+				currentMonthIdx={currentMonthIdx}
+			/>
 			<CustomizedDialogs
 				state={state}
 				closeAddEventModal={closeAddEventModal}

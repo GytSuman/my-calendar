@@ -12,7 +12,9 @@ import { Grid, TextField } from "@mui/material";
 import DateTimePicker from "@mui/lab/DateTimePicker";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
-import moment from "moment";
+import dayjs from "dayjs";
+import { useCalendar } from "../context/CalendarContext";
+import { v4 as uuidv4 } from "uuid";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 	"& .MuiDialogContent-root": {
@@ -56,32 +58,56 @@ export default function CustomizedDialogs({
 	open,
 	onSetOpen,
 	events,
-	state,
+	// state,
 	closeAddEventModal,
 	handleAddEvent,
-	handleCurrentTimeChange,
 }) {
 	const [name, setName] = React.useState("");
+	const { state, dispatch } = useCalendar();
+	const [timeValues, setTimeValues] = React.useState({
+		startTime: dayjs(state.eventStart).format("MM/DD/YYYY h:mm A"),
+		endTime: dayjs(state?.eventEnd).format("MM/DD/YYYY h:mm A"),
+	});
+	const [startTime, setStartTime] = React.useState(
+		dayjs(state.eventStart).format("MM/DD/YYYY h:mm A")
+	);
+	const { allEvents, setAllEvents } = useCalendar();
 
 	const handleSaveButton = () => {
-		handleAddEvent(name);
+		// handleAddEvent(name);
+		dispatch({
+			type: "ADD_EVENTS",
+			payload: {
+				id: uuidv4(),
+				name,
+				startTime: state.startTime,
+				endTime: state.endTime,
+				dateStamp: state.dateStamp,
+				gridId: state.selectedGridTime,
+			},
+		});
+		setAllEvents();
 		setName("");
 	};
 
+	const handleCurrentTimeChange = () => {};
 	const handleNameChange = (event) => {
 		setName(event.target.value);
 	};
+	console.log("time values", state?.startTime);
+	console.log("state from reducer", state?.showEventDialog);
 
 	return (
 		<div style={{ zIndex: 1000 }}>
 			<BootstrapDialog
 				onClose={closeAddEventModal}
 				aria-labelledby="customized-dialog-title"
-				open={state?.showAddEventModal}
+				open={state?.showEventDialog}
 			>
 				<BootstrapDialogTitle
 					id="customized-dialog-title"
-					onClose={closeAddEventModal}
+					// onClose={closeAddEventModal}
+					onClose={() => dispatch({ type: "CLOSE_EVENT_DIALOG" })}
 				>
 					Event
 				</BootstrapDialogTitle>
@@ -89,6 +115,7 @@ export default function CustomizedDialogs({
 					<TextField
 						fullWidth
 						size="small"
+						placeholder="Name"
 						onChange={handleNameChange}
 						value={name}
 					/>
@@ -97,17 +124,15 @@ export default function CustomizedDialogs({
 							<DateTimePicker
 								renderInput={(props) => <TextField {...props} />}
 								label="DateTimePicker"
-								value={moment(state?.eventStart)}
+								value={state.startTime}
 								onChange={handleCurrentTimeChange}
-								defaultValue={moment(state?.eventStart)}
 								sx={{ m: 1 }}
 							/>
 							<DateTimePicker
 								renderInput={(props) => <TextField {...props} />}
 								label="DateTimePicker"
-								value={moment(state?.eventEnd)}
+								value={state.endTime}
 								onChange={handleCurrentTimeChange}
-								defaultValue={moment(state?.eventEnd)}
 								sx={{ m: 1 }}
 							/>
 						</LocalizationProvider>

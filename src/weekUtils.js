@@ -1,17 +1,22 @@
+import dayjs from "dayjs";
 import moment from "moment";
+import { v4 as uuidv4 } from "uuid";
 
-export const getAllDaysInTheWeek = (currentDate = moment()) => {
+export const getAllDaysInTheWeek = (currentDate = dayjs()) => {
 	const weekStart = currentDate.clone().startOf("week");
 
 	const days = Array.from(Array(7))
 		.map((day, index) => index)
 		.map((day) =>
-			moment(weekStart).add(day, "days").set("minutes", 0).set("seconds", 0)
+			dayjs(weekStart).add(day, "days").set("minutes", 0).set("seconds", 0)
 		)
-		.map((momentObj) => ({
-			date: momentObj.date(),
-			dateStamp: +momentObj,
-			weekDayName: momentObj.format("ddd"),
+		.map((dayObj) => ({
+			id: uuidv4(),
+			date: dayObj.date(),
+			dateStamp: +dayObj,
+			weekDayName: dayObj.format("ddd"),
+			monthName: dayObj.format("MMMM"),
+			time: dayObj.format("hh"),
 		}));
 
 	return days;
