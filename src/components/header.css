@@ -4,66 +4,12 @@
   box-sizing: border-box;
 }
 
-.filter_button {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  font-size: 16px;
-  font-weight: 600;
-  color: #0053cc;
-}
 
-.year {
-  display: flex;
-  align-items: center;
-}
 
-aside {
-  min-width: 250px;
-  height: 100%;
-  padding: 12px;
-  background-color: #e8e8e9;
-  /* width: 16rem; */
-  /* padding: 1rem; */
-}
 
-/* @media only screen and (max-width: 425px) {
-    aside {
-      display: none;
-    }
-  } */
 
-.sidebar__header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
 
-.flex {
-  display: flex;
-}
 
-.justify-content-between {
-  justify-content: space-between;
-}
-
-.align-items-center {
-  align-items: center;
-}
-
-.align-items-bottom {
-  align-items: flex-end;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(7, minmax(0, 1fr));
-  grid-template-rows: repeat(6, minmax(0, 1fr));
-}
-
-.flex-1 {
-  flex: 1 1 0%;
-}
 
 .padding-y {
   padding: 0.5rem 0;
@@ -73,11 +19,7 @@ aside {
   width: 100%;
 }
 
-.nowDay {
-  color: white;
-  border-radius: 9999px;
-  background-color: rgb(59 130 246);
-}
+
 
 .slcDay {
   border-radius: 9999px;
@@ -92,19 +34,7 @@ aside {
   background-color: white;
 }
 
-.sidebar-col {
-  width: 28px;
-  height: 28px;
-}
 
-.flex-column {
-  display: flex;
-  flex-direction: column;
-}
-
-.border-gray {
-  border: 1px solid #dddddd;
-}
 
 .align-items-center {
   align-items: center;
@@ -114,9 +44,7 @@ aside {
   margin-top: 0.5rem;
 }
 
-.text-center {
-  text-align: center;
-}
+
 
 .p-1 {
   padding: 0.5rem;

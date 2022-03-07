@@ -1,0 +1,123 @@
+.lh-1{
+    font-size:24px;
+    font-weight:500;
+    color: $fontColor;
+}
+
+.h-1{
+    font-size:22px;
+    font-weight:500;
+    color: $fontColor;
+}
+.h-2{
+    font-size:20px;
+    font-weight:500;
+    color: $fontColor;
+}
+.h-3{
+    font-size:18px;
+    font-weight:500;
+    color: $fontColor;
+}
+.h-4{
+    font-size:16px;
+    font-weight:500;
+    color: $fontColor;
+}
+.h-5{
+    font-size:14px;
+    font-weight:500;
+    color: $fontColor;
+}
+.h-6{
+    font-size:12px;
+    font-weight:500;
+    color: $fontColor;
+}
+
+.para-1{
+    font-size:20px;
+    font-weight:400;
+    color: $fontColor;
+}
+.para-2{
+    font-size:18px;
+    font-weight:400;
+    color: $fontColor;
+}
+.para-3{
+    font-size:16px;
+    font-weight:400;
+    color: $fontColor;
+}
+.para-4{
+    font-size:14px;
+    font-weight:400;
+    color: $fontColor;
+}
+.para-5{
+    font-size:12px;
+    font-weight:400;
+    color: $fontColor;
+}
+.para-6{
+    font-size:10px;
+    font-weight:400;
+    color: $fontColor;
+}
+
+.dark{
+    color: $darkFontColor;
+}
+
+.light{
+    color:$lightFontColor;
+}
+
+/* Fonts */
+.font-12 {
+    font-size: 12px;
+}
+
+.font-13 {
+    font-size: 13px;
+}
+
+.font-14 {
+    font-size: 14px;
+}
+
+.font-16 {
+    font-size: 16px;
+}
+
+.font-18 {
+    font-size: 18px;
+}
+
+.bold-font {
+    font-weight: 500;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-elip {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis !important;
+}
+
+//color
+.white-color {
+    color: white;
+}
+
+.light-color {
+    color: #707070;
+}
+
+.lightfont-color {
+    color: #414241;
+}

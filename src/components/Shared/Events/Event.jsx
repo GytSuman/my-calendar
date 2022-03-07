@@ -1,13 +1,10 @@
 import React from "react";
-import "./Event.css";
-import "./header.css";
-import moment from "moment";
 import VideocamIcon from "@mui/icons-material/Videocam";
 import CallIcon from "@mui/icons-material/Call";
+import './Events.scss'
 import dayjs from "dayjs";
 
-function Event({ type, event }) {
-	console.log("event in EventJSx", event);
+function Event({type,name,title,timeTo,timeFrom, event}) {
 	const IconDisplay = () => {
 		if (type === "video") return <VideocamIcon className="event-icon" />;
 		else return <CallIcon className="event-icon" />;

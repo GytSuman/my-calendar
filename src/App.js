@@ -14,6 +14,14 @@ import dayjs from "dayjs";
 import CalendarEventHandler from "./CalendarEventHandler";
 import { v4 as uuidv4 } from "uuid";
 import { useCalendar } from "./context/CalendarContext";
+import CalendarHeader from "./components/Calender/CalendarHeader";
+import MonthGrid from "./components/MonthView/MonthGrid";
+import Sidebar from "./components/CalenderSmall/Sidebar";
+import WeekGrid from "./components/WeekView/WeekGrid";
+import DayGrid from "./components/DayView/DayGrid";
+
+import "./styles/styles.scss"
+import "./App.css";
 
 function App() {
 	const [events, setEvents] = React.useState({});
@@ -96,13 +104,15 @@ function App() {
 				currentMonthIdx={currentMonthIdx}
 			/>
 			<div className="app__container">
-				<Sidebar
-					currentMonthIdx={currentMonthIdx}
-					currentMonth={currentMonth}
-					type={type}
-					goToPreviousWeek={goToPreviousWeek}
-					goToNextWeek={goToNextWeek}
-				/>
+				<aside>
+					<Sidebar
+						currentMonthIdx={currentMonthIdx}
+						currentMonth={currentMonth}
+						type={type}
+						goToPreviousWeek={goToPreviousWeek}
+						goToNextWeek={goToNextWeek}
+					/>
+				</aside>
 				<Divider orientation="vertical" />
 				{type === "month" && (
 					<MonthGrid currentMonth={currentMonth} events={events} />

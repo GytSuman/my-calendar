@@ -1,0 +1,11 @@
+@import './variables/variables.scss';
+
+
+@import './mui-overwrite/mui-overwrite.scss';
+@import './style-guide/type.scss';
+@import './common/flex.scss';
+@import './common/common.scss';
+
+body{
+    font-family: 'Poppins';
+}

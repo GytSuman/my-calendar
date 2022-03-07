@@ -20,6 +20,7 @@ import {
 	FormLabel,
 } from "@mui/material";
 import moment from "moment";
+import { useEvent } from '../../../context/EventContext'
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 	"& .MuiDialogContent-root": {
@@ -68,8 +69,11 @@ export default function CustomizedDialogs({
 }) {
 	const [name, setName] = React.useState("");
 	const [title, setTitle] = React.useState("");
-	const [hours, setHours] = React.useState(1);
+	const [timeFrom, setTimeFrom] = React.useState(time);
+	const [timeTo, setTimeTo] = React.useState(time);
 	const [type, setType] = React.useState("voice");
+
+	const event = useEvent()
 
 	const handleClose = (event) => {
 		event.stopPropagation();
@@ -85,8 +89,14 @@ export default function CustomizedDialogs({
 		setTitle(event.target.value);
 	};
 
-	const handleTimeChange = (event) => {
-		setHours(event.target.value);
+	const handleTimeFromChange = (event) => {
+		console.log(event.target.value)
+		setTimeFrom(event.target.value);
+	};
+
+	const handleTimeToChange = (event) => {
+		console.log(event.target.value)
+		setTimeTo(event.target.value);
 	};
 
 	const handleTypeChange = (event) => {
@@ -130,28 +140,35 @@ export default function CustomizedDialogs({
 						value={title}
 					/>
 					<TextField
-						id="time"
-						label="From"
+						id="timeFrom"
+						label="Event From"
+						type="time"
 						disabled
+						defaultValue={timeFrom}
+						value = {timeFrom}
 						InputLabelProps={{
-							shrink: true,
+						shrink: true,
 						}}
 						inputProps={{
-							step: 300, // 5 min
+						step: 300, // 5 min
 						}}
+						onChange={handleTimeFromChange}
 						sx={{ width: 150, m: 2 }}
-						value={moment().set("hours", time).format("h a")}
 					/>
-					<Select
-						label="To"
-						id="time"
-						onChange={handleTimeChange}
-						value={hours}
+					<TextField
+						id="timeTo"
+						label="Event To"
+						type="time"
+						value = {timeTo}
+						InputLabelProps={{
+						shrink: true,
+						}}
+						inputProps={{
+						step: 300, // 5 min
+						}}
+						onChange={handleTimeToChange}
 						sx={{ width: 150, m: 2 }}
-					>
-						<MenuItem value={1}>Hour</MenuItem>
-						<MenuItem value={0.5}>Half Hour</MenuItem>
-					</Select>
+					/>
 					<FormControl>
 						<RadioGroup
 							id="type"

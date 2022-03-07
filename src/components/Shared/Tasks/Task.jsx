@@ -1,7 +1,5 @@
 import React from 'react'
 import { Grid } from '@mui/material'
-import './Event.css'
-import "./header.css"
 import TaskElement from './TaskElement'
 
 function Task(){

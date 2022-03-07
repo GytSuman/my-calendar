@@ -1,9 +1,9 @@
 import moment from "moment";
 import React from "react";
-import Time from "./Time";
-import "./header.css";
+import DayColumn from "../Shared/DayColumn";
 import { Grid } from "@mui/material";
 import dayjs from "dayjs";
+import './WeekView.scss'
 
 function TimeSlot({ time, weekdays, events, openAddEventModal }) {
 	const formattedTime = moment().set("hours", time).format("h a");
@@ -12,10 +12,10 @@ function TimeSlot({ time, weekdays, events, openAddEventModal }) {
 
 	return (
 		<Grid container direction="row">
-			<Grid item xs={1} sx={{ paddingLeft: "16px", paddingTop: "8px" }}>
+			<Grid item xs={1} className="flex-center flex-center2">
 				{formattedTime}
 			</Grid>
-			<Grid item xs={11} sx={{ height: "63px" }} className="flex">
+			<Grid item xs={11} className="flex">
 				{weekdays &&
 					weekdays.map((day) => {
 						return (

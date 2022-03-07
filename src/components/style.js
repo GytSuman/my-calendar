@@ -1,23 +1,5 @@
-export const slot = {
-	height: 40,
-	cursor: "pointer",
-};
-
-export const slot2 = {
-	height: 63,
-	cursor: "pointer",
-};
-
-export const height = {
-	height: 100,
-};
-
 export const lightHighlighter = {
 	backgroundColor: "rgba(0,0,0,0.04)",
-};
-
-export const col = {
-	border: "#e0e0e0 1px solid",
 };
 
 export const timeCol = {

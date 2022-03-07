@@ -1,8 +1,4 @@
 import React from 'react'
-import { Grid } from '@mui/material'
-import './Event.css'
-import "./header.css"
-
 import MultiProgress from "react-multi-progress"
 
 const TaskElement = (props) => {

@@ -1,5 +1,6 @@
 import { Grid } from "@mui/material";
 import React from "react";
+import './WeekView.scss'
 import Header from "./Header";
 
 function WeekHeader({ weekdays, startDate, currentMonthIdx }) {
@@ -13,6 +14,7 @@ function WeekHeader({ weekdays, startDate, currentMonthIdx }) {
 							<Header
 								weekDayName={week.weekDayName}
 								date={week.date}
+								type="week"
 								dateStamp={week.dateStamp}
 								startDate={startDate}
 								currentMonthIdx={currentMonthIdx}

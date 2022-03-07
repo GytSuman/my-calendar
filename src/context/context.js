@@ -1,5 +1,4 @@
-import React from "react";
+import {createContext} from "react"
 
-const Context = React.createContext();
-
-export default Context;
+export const Context = createContext(null)
+export const DispatchContext = createContext(null)
