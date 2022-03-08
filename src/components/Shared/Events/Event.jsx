@@ -1,10 +1,10 @@
 import React from "react";
 import VideocamIcon from "@mui/icons-material/Videocam";
 import CallIcon from "@mui/icons-material/Call";
-import './Events.scss'
+import "./Events.scss";
 import dayjs from "dayjs";
 
-function Event({type,name,title,timeTo,timeFrom, event}) {
+function Event({ type, name, title, timeTo, timeFrom, event }) {
 	const IconDisplay = () => {
 		if (type === "video") return <VideocamIcon className="event-icon" />;
 		else return <CallIcon className="event-icon" />;
@@ -12,7 +12,7 @@ function Event({type,name,title,timeTo,timeFrom, event}) {
 	return (
 		<div
 			style={{ width: "auto", position: "relative" }}
-			className="border-4 event-background height-100 event-border p-1 flex-col"
+			className="border-4 event-background event-border p-1 flex-col"
 		>
 			<div className="flex-row height-100 font-12">
 				<div
@@ -33,3 +33,5 @@ function Event({type,name,title,timeTo,timeFrom, event}) {
 }
 
 export default Event;
+
+//[{}, {}, {}, {}] ===>> [[{}, {}, {}], [{}, {}, {}], [{}, {}, {}]]

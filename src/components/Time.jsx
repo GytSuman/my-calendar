@@ -2,8 +2,7 @@ import { Grid } from "@mui/material";
 import React from "react";
 import { isTodaysDate } from "../weekUtils";
 import { col, slot, slot2, lightHighlighter } from "./style";
-import Event from "./Event";
-import moment from "moment";
+import Event from "../components/shared/Events/Event";
 import { useCalendar } from "../context/CalendarContext";
 import dayjs from "dayjs";
 
@@ -39,12 +38,9 @@ function Time(props) {
 			<Grid
 				item
 				key={day.dateStamp}
-				style={
-					isTodaysDate(day.dateStamp)
-						? { ...col, ...slot2, ...lightHighlighter }
-						: { ...col, ...slot2 }
-				}
+				style={isTodaysDate(day.dateStamp) ? { ...lightHighlighter } : {}}
 				xs={row}
+				className="slot col height-100 flex-row"
 				onClick={() => {
 					// setSelectedEventDay(day);
 					console.log("clicked at grid", time);

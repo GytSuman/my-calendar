@@ -21,9 +21,6 @@ export const initialState = {
 };
 
 export default function CalendarContext({ children }) {
-	const [allEvents, setAllEvents] = React.useState([
-		{ name: "john", title: "web developer" },
-	]);
 	const [currentMonth, setCurrentMonth] = React.useState(getMonthOriginal());
 	const [currentMonthIdx, setCurrentMonthIdx] = React.useState(dayjs().month());
 	const [weekdays, setWeekdays] = React.useState(getAllDaysInTheWeek());
@@ -35,8 +32,6 @@ export default function CalendarContext({ children }) {
 	return (
 		<Calendar.Provider
 			value={{
-				allEvents,
-				setAllEvents,
 				currentMonth,
 				setCurrentMonth,
 				currentMonthIdx,

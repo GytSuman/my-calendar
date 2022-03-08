@@ -1,15 +1,18 @@
 import { Grid } from "@mui/material";
 import React from "react";
 import { col, slot2 } from "../style";
-import Event from "../Shared/Events/Event";
-import EventSmall from '../Shared/Events/EventSmall'
-import CustomizedDialogs from "../Shared/ModelForms/CustomizedDialogWeek";
+import Event from "../shared/Events/Event";
+import EventSmall from "../shared/Events/EventSmall";
+import CustomizedDialogs from "../shared/ModelForms/CustomizedDialogWeek";
 
-import './DayView.scss'
+import "./DayView.scss";
+import { useCalendar } from "../../context/CalendarContext";
+import dayjs from "dayjs";
 
-function DayTime({ time, dateStamp, dayName }) {
+function DayTime({ time, dateStamp, dayName, dayObj }) {
 	//model
 	const [open, setOpen] = React.useState(false);
+	const { state, dispatch } = useCalendar();
 	const openMonthEventDialog = () => {
 		setOpen(true);
 		console.log("clicked");
@@ -19,37 +22,29 @@ function DayTime({ time, dateStamp, dayName }) {
 		setOpen(value);
 	};
 
-	const [eventAdded,setEventAdded] = React.useState([])
+	const [eventAdded, setEventAdded] = React.useState([]);
 	const toggle = React.useCallback(() => {
-		openMonthEventDialog()
+		openMonthEventDialog();
 	}, []);
 
-	const eventDiv = () =>{
-		if(eventAdded[3]==1){
-			return(
-				<>
-				{eventAdded.length != 0 &&
-					<Event
-						type={eventAdded[0]}
-						name={eventAdded[1]}
-						title={eventAdded[2]}
-						hours={eventAdded[3]}
-						time={time}
-					/>
-				}
-				</>
-			)
-		}else if(eventAdded[3]==0.5){
-			return(
-				<EventSmall name={eventAdded[1]} time={time} />
-			)
-		}
-	}
-
-	React.useEffect(()=>{
-		eventDiv()
-	},[eventAdded])
-
+	const selectedEventDay = () => {
+		return (
+			<>
+				{state.allEvents.map((event) => (
+					<>
+						{event.dateStamp === dayObj.dateStamp &&
+							parseInt(dayjs(event.startTime).format("h")) ===
+								parseInt(time) && (
+								<Event type="voice" event={event} key={event.id} />
+							)}
+					</>
+				))}
+			</>
+		);
+	};
+	console.log("state all events", state.allEvents);
+	console.log("dayObj", dayObj);
+	React.useEffect(() => {}, []);
 
 	return (
 		<Grid container>
@@ -57,17 +52,29 @@ function DayTime({ time, dateStamp, dayName }) {
 				item
 				xs={12}
 				key={dateStamp}
-				style={{ ...col, ...slot2 }}
+				className="col slot"
 				sx={{ width: "80vw" }}
-				onClick={toggle}
+				onClick={() => {
+					dispatch({
+						type: "OPEN_EVENT_DIALOG",
+						payload: {
+							dateStamp: dayObj.dateStamp,
+							time: time,
+							id: dayObj.id,
+						},
+					});
+				}}
 			>
-				{eventDiv()}	
+				{selectedEventDay()}
 			</Grid>
 			{open && (
-				<CustomizedDialogs onSetOpen={onSetOpen} time={time} open={open}
-				getEvents = {eventAdded}
-				setEvents = {setEventAdded}
-				// events={events}
+				<CustomizedDialogs
+					onSetOpen={onSetOpen}
+					time={time}
+					open={open}
+					getEvents={eventAdded}
+					setEvents={setEventAdded}
+					// events={events}
 				/>
 			)}
 		</Grid>

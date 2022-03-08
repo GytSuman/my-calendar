@@ -34,11 +34,12 @@ export const getMonthOriginal = (month = moment().month()) => {
 };
 
 export const hours = (times) => {
-	let hrs = []
-	for(let i = 0;i<=times.length;i++) {
-		hrs.push(moment({ hours : times[i] ,minutes : 0}).format('HH:mm'))
-		hrs.push(moment({ hours : times[i] ,minutes : 30}).format('HH:mm'))
+	console.log("time", times);
+	let hrs = [];
+	for (let i = 0; i <= times.length; i++) {
+		hrs.push(moment({ hours: times[i], minutes: 0 }).format("hh:mm"));
+		hrs.push(moment({ hours: times[i], minutes: 30 }).format("hh:mm"));
 	}
-	console.log(hrs)
-	return hrs
-}
+	console.log(hrs);
+	return hrs;
+};

@@ -1,12 +1,7 @@
 import "./App.css";
 import React, { useContext } from "react";
-import CalendarHeader from "./components/CalendarHeader";
-import MonthGrid from "./components/MonthGrid";
-import Sidebar from "./components/Sidebar";
 import { getMonth, getMonthOriginal } from "./util";
 import { Divider } from "@mui/material";
-import WeekGrid from "./components/week/WeekGrid";
-import DayGrid from "./components/DayGrid";
 import { getAllDaysInTheWeek } from "./weekUtils";
 import moment from "moment";
 import { getDays } from "./dayUtils";
@@ -14,14 +9,15 @@ import dayjs from "dayjs";
 import CalendarEventHandler from "./CalendarEventHandler";
 import { v4 as uuidv4 } from "uuid";
 import { useCalendar } from "./context/CalendarContext";
-import CalendarHeader from "./components/Calender/CalendarHeader";
 import MonthGrid from "./components/MonthView/MonthGrid";
 import Sidebar from "./components/CalenderSmall/Sidebar";
-import WeekGrid from "./components/WeekView/WeekGrid";
+// import WeekGrid from "./components/WeekView/WeekGrid";
 import DayGrid from "./components/DayView/DayGrid";
 
-import "./styles/styles.scss"
+import "./styles/styles.scss";
 import "./App.css";
+import CalendarHeader from "./components/Calender/CalendarHeader";
+import WeekGrid from "./components/week/WeekGrid";
 
 function App() {
 	const [events, setEvents] = React.useState({});

@@ -20,12 +20,8 @@
     "react-dom": "^17.0.2",
     "react-multi-progress": "^1.1.4",
     "react-scripts": "5.0.0",
-<<<<<<< HEAD
-    "uuid": "^8.3.2",
-=======
     "sass": "^1.49.9",
     "sass-loader": "^12.6.0",
->>>>>>> 6a0997210238af838251d4da3f3ca06d379ad077
     "web-vitals": "^2.1.4"
   },
   "scripts": {

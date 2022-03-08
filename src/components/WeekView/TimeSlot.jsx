@@ -1,19 +1,16 @@
 import moment from "moment";
 import React from "react";
-import DayColumn from "../Shared/DayColumn";
+import DayColumn from "../shared/DayColumn";
 import { Grid } from "@mui/material";
 import dayjs from "dayjs";
-import './WeekView.scss'
+import "./WeekView.scss";
+import Time from "../Time";
 
 function TimeSlot({ time, weekdays, events, openAddEventModal }) {
-	const formattedTime = moment().set("hours", time).format("h a");
-
-	// console.log(dayjs("03/01/2022 8:00 AM").format("h"));
-
 	return (
 		<Grid container direction="row">
 			<Grid item xs={1} className="flex-center flex-center2">
-				{formattedTime}
+				{time}
 			</Grid>
 			<Grid item xs={11} className="flex">
 				{weekdays &&

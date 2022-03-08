@@ -20,7 +20,7 @@ import {
 	FormLabel,
 } from "@mui/material";
 import moment from "moment";
-import { useEvent } from '../../../context/EventContext'
+import { useEvent } from "../../../context/EventContext";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 	"& .MuiDialogContent-root": {
@@ -73,7 +73,7 @@ export default function CustomizedDialogs({
 	const [timeTo, setTimeTo] = React.useState(time);
 	const [type, setType] = React.useState("voice");
 
-	const event = useEvent()
+	const event = useEvent();
 
 	const handleClose = (event) => {
 		event.stopPropagation();
@@ -90,12 +90,12 @@ export default function CustomizedDialogs({
 	};
 
 	const handleTimeFromChange = (event) => {
-		console.log(event.target.value)
+		console.log(event.target.value);
 		setTimeFrom(event.target.value);
 	};
 
 	const handleTimeToChange = (event) => {
-		console.log(event.target.value)
+		console.log(event.target.value);
 		setTimeTo(event.target.value);
 	};
 
@@ -106,7 +106,7 @@ export default function CustomizedDialogs({
 	const handleSubmitButton = () => {
 		if (type === "" || name === "" || title === "") console.log("err");
 		else {
-			setEvents((state) => [...state, { type, name, title, hours }]);
+			setEvents((state) => [...state, { type, name, title }]);
 			onSetOpen(false);
 		}
 	};
@@ -145,12 +145,12 @@ export default function CustomizedDialogs({
 						type="time"
 						disabled
 						defaultValue={timeFrom}
-						value = {timeFrom}
+						value={timeFrom}
 						InputLabelProps={{
-						shrink: true,
+							shrink: true,
 						}}
 						inputProps={{
-						step: 300, // 5 min
+							step: 300, // 5 min
 						}}
 						onChange={handleTimeFromChange}
 						sx={{ width: 150, m: 2 }}
@@ -159,12 +159,12 @@ export default function CustomizedDialogs({
 						id="timeTo"
 						label="Event To"
 						type="time"
-						value = {timeTo}
+						value={timeTo}
 						InputLabelProps={{
-						shrink: true,
+							shrink: true,
 						}}
 						inputProps={{
-						step: 300, // 5 min
+							step: 300, // 5 min
 						}}
 						onChange={handleTimeToChange}
 						sx={{ width: 150, m: 2 }}
