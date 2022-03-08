@@ -12,7 +12,7 @@ function DayHeader({ days }) {
 			<Grid container>
 				<Grid item sm={2} xs={2} md={1}></Grid>
 				<Grid item sm={10} xs={10} md={11} className="flex">
-				{days.map((week) => (
+					{days.map((week) => (
 						<>
 							<Header
 								weekDayName={week.weekDayName}
@@ -21,8 +21,8 @@ function DayHeader({ days }) {
 								dateStamp={week.dateStamp}
 							/>
 						</>
-				))
-				}	
+					))
+					}
 				</Grid>
 				{/* // <Grid item sm={2} xs={2} md={1}></Grid>
 				// <Grid item sm={10} xs={10} md={11} className="flex">

@@ -8,7 +8,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
-import { TextField,Radio,RadioGroup,FormControl,FormControlLabel} from "@mui/material";
+import { TextField, Radio, RadioGroup, FormControl, FormControlLabel } from "@mui/material";
 import moment from "moment";
 import { useEvent } from '../../../context/EventContext'
 
@@ -50,7 +50,7 @@ BootstrapDialogTitle.propTypes = {
 	onClose: PropTypes.func.isRequired,
 };
 
-export default function CustomizedDialogs({ open, onSetOpen , dateStamp , time }) {
+export default function CustomizedDialogs({ open, onSetOpen, dateStamp, time }) {
 	const [name, setName] = React.useState("");
 	const [title, setTitle] = React.useState("");
 	const [timeFrom, setTimeFrom] = React.useState(time);
@@ -88,9 +88,9 @@ export default function CustomizedDialogs({ open, onSetOpen , dateStamp , time }
 	};
 
 	const handleSubmitButton = () => {
-		if((type==='')||(name==='')||(title==='')||(timeFrom==='')||(timeTo==='')) console.log('err')
-		else{
-			event.setEvent((state)=>[ ...state, { dateStamp , type , name , title , timeFrom, timeTo } ])
+		if ((type === '') || (name === '') || (title === '') || (timeFrom === '') || (timeTo === '')) console.log('err')
+		else {
+			event.setEvent((state) => [...state, { dateStamp, type, name, title, timeFrom, timeTo }])
 			console.log(event)
 			onSetOpen(false)
 		}
@@ -128,14 +128,13 @@ export default function CustomizedDialogs({ open, onSetOpen , dateStamp , time }
 						id="timeFrom"
 						label="Event From"
 						type="time"
-						disabled
 						defaultValue={timeFrom}
-						value = {timeFrom}
+						value={timeFrom}
 						InputLabelProps={{
-						shrink: true,
+							shrink: true,
 						}}
 						inputProps={{
-						step: 300, // 5 min
+							step: 300, // 5 min
 						}}
 						onChange={handleTimeFromChange}
 						sx={{ width: 150, m: 2 }}
@@ -144,12 +143,12 @@ export default function CustomizedDialogs({ open, onSetOpen , dateStamp , time }
 						id="timeTo"
 						label="Event To"
 						type="time"
-						value = {timeTo}
+						value={timeTo}
 						InputLabelProps={{
-						shrink: true,
+							shrink: true,
 						}}
 						inputProps={{
-						step: 300, // 5 min
+							step: 300, // 5 min
 						}}
 						onChange={handleTimeToChange}
 						sx={{ width: 150, m: 2 }}
