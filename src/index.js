@@ -1,14 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import EventContextWrapper from './context/EventContext'
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import EventContext from "./context/EventContext";
+import CalendarContext from "./context/CalendarContext";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <EventContextWrapper>
-      <App />
-    </EventContextWrapper>
-  </React.StrictMode>,
-  document.getElementById('root')
-)
+	<React.StrictMode>
+		<CalendarContext>
+			<App />
+		</CalendarContext>
+	</React.StrictMode>,
+	document.getElementById("root")
+);

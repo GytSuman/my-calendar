@@ -1,4 +1,5 @@
-import React from "react";
+import "./App.css";
+import React, { useContext } from "react";
 import { getMonth, getMonthOriginal } from "./util";
 import { Divider } from "@mui/material";
 import { getAllDaysInTheWeek } from "./weekUtils";
@@ -6,34 +7,46 @@ import moment from "moment";
 import { getDays } from "./dayUtils";
 import dayjs from "dayjs";
 import CalendarEventHandler from "./CalendarEventHandler";
-
-import CalendarHeader from "./components/Calender/CalendarHeader";
+import { v4 as uuidv4 } from "uuid";
+import { useCalendar } from "./context/CalendarContext";
 import MonthGrid from "./components/MonthView/MonthGrid";
 import Sidebar from "./components/CalenderSmall/Sidebar";
-import WeekGrid from "./components/WeekView/WeekGrid";
+// import WeekGrid from "./components/WeekView/WeekGrid";
 import DayGrid from "./components/DayView/DayGrid";
 
-import "./styles/styles.scss"
+import "./styles/styles.scss";
 import "./App.css";
+import CalendarHeader from "./components/Calender/CalendarHeader";
+import WeekGrid from "./components/week/WeekGrid";
 
 function App() {
+	const [events, setEvents] = React.useState({});
+	const {
+		type,
+		setType,
+		currentMonth,
+		setCurrentMonth,
+		currentMonthIdx,
+		setCurrentMonthIdx,
+		weekdays,
+		setWeekdays,
+		days,
+		setDays,
+		startDate,
+		setStartDate,
+	} = useCalendar();
 
-	const [currentMonth, setCurrentMonth] = React.useState(getMonthOriginal());
-	const [currentMonthIdx, setCurrentMonthIdx] = React.useState(dayjs().month());
-	const [weekdays, setWeekdays] = React.useState(getAllDaysInTheWeek());
-	const [days, setDays] = React.useState(getDays());
-	const [startDate, setStartDate] = React.useState();
-	const [type, setType] = React.useState("month");
-	const [events, setEvents] = React.useState([]);
-	const [eventAdded,setEventAdded] = React.useState([])
 	const addNewEvents = (event) => {
-		event = {
-			...event,
-			id: CalendarEventHandler.generateId(event),
-		};
-		setEvents((previousState) => ({
-			events: CalendarEventHandler.add(previousState.events, event),
-		}));
+		console.log("event", event);
+		try {
+			event = {
+				...event,
+				id: uuidv4(),
+			};
+			setEvents(CalendarEventHandler.add(events, event));
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
 	const goToNextWeek = () => {
@@ -68,18 +81,13 @@ function App() {
 		}
 	};
 
-	// console.log(events);
 	React.useEffect(() => {
 		setCurrentMonth(getMonth(currentMonthIdx));
-	}, [currentMonthIdx]);
-
-	// console.log("currentmonthIdx", currentMonthIdx);
+	}, [currentMonthIdx, setCurrentMonth]);
 
 	const handleInputChange = (event) => {
 		setType(event.target.value);
 	};
-
-
 
 	return (
 		<div className="App">
@@ -112,8 +120,8 @@ function App() {
 						goToNextWeek={goToNextWeek}
 						addNewEvents={addNewEvents}
 						events={events}
-						eventAdded={eventAdded}
-						setEventAdded={setEventAdded}
+						startDate={startDate}
+						currentMonthIdx={currentMonthIdx}
 					/>
 				)}
 				{type === "day" && <DayGrid days={days} />}

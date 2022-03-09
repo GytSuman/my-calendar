@@ -1,14 +1,14 @@
 import { Grid } from "@mui/material";
 import React from "react";
 import { isTodaysDate } from "../../weekUtils";
-import { lightHighlighter } from "../style";
-import Event from '../Shared/Events/Event'
-import EventSmall from '../Shared/Events/EventSmall'
-import CustomizedDialogs from "../Shared/ModelForms/CustomizedDialogWeek";
+import { col, slot, slot2, lightHighlighter } from "../style";
+import Event from "../shared/Events/Event";
+import EventSmall from "../shared/Events/EventSmall";
+import CustomizedDialogs from "../shared/ModelForms/CustomizedDialogWeek";
 
-import moment from 'moment'
+import moment from "moment";
 
-import { useEvent } from '../../context/EventContext'
+import { useEvent } from "../../context/EventContext";
 
 function DayColumn(props) {
 	const { dateStamp, time, type } = props;
@@ -32,7 +32,7 @@ function DayColumn(props) {
 	};
 
 	const toggle = React.useCallback(() => {
-		openMonthEventDialog()
+		openMonthEventDialog();
 	}, []);
 
 	const eventDiv = () => {
@@ -55,12 +55,13 @@ function DayColumn(props) {
 					})
 				}
 			</>
-		)
-	}
+		);
+	};
 
 	return (
 		<>
-			<Grid item
+			<Grid
+				item
 				key={dateStamp}
 				style={isTodaysDate(dateStamp) ? { ...lightHighlighter } : {}}
 				className="slot col height-100"
@@ -70,10 +71,15 @@ function DayColumn(props) {
 				{eventDiv()}
 			</Grid>
 			{open && (
-				<CustomizedDialogs onSetOpen={onSetOpen} dateStamp={dateStamp} time={time} open={open} />
+				<CustomizedDialogs
+					onSetOpen={onSetOpen}
+					dateStamp={dateStamp}
+					time={time}
+					open={open}
+				/>
 			)}
 		</>
-	)
+	);
 }
 
 export default DayColumn;

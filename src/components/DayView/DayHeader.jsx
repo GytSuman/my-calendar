@@ -2,9 +2,9 @@ import { Grid } from "@mui/material";
 import React from "react";
 import { col, height } from "../style";
 
-import Header from "../Shared/Header/Header";
+import Header from "../shared/Header/Header";
 
-import './DayView.scss'
+import "./DayView.scss";
 
 function DayHeader({ days }) {
 	return (
@@ -21,8 +21,7 @@ function DayHeader({ days }) {
 								dateStamp={week.dateStamp}
 							/>
 						</>
-					))
-					}
+					))}
 				</Grid>
 				{/* // <Grid item sm={2} xs={2} md={1}></Grid>
 				// <Grid item sm={10} xs={10} md={11} className="flex">

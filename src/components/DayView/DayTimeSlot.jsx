@@ -1,9 +1,10 @@
 import { Grid } from "@mui/material";
 import moment from "moment";
 import React from "react";
-import DayColumn from '../Shared/DayColumn'
+import DayColumn from "../shared/DayColumn";
+import DayTime from "./DayTime";
 
-import './DayView.scss'
+import "./DayView.scss";
 
 function DayTimeSlot({ time, days }) {
 	const formattedTime = moment().set("hours", time).format("h a");
@@ -11,16 +12,18 @@ function DayTimeSlot({ time, days }) {
 		<>
 			<Grid container direction="row">
 				<Grid item md={1} sm={2} xs={2} className="flex-center flex-center2">
-					{/* {formattedTime}*/}{time}
+					{/* {formattedTime}*/}
+					{time}
 				</Grid>
 				<Grid item md={11} sm={10} xs={10} className="flex">
 					{days &&
 						days.map((dayObj) => (
 							<>
-								<DayColumn
+								<DayTime
 									key={dayObj.dateStamp}
 									time={time}
 									type="day"
+									dayObj={dayObj}
 									dateStamp={dayObj.dateStamp}
 									dayName={dayObj.dayName}
 								/>
@@ -29,7 +32,7 @@ function DayTimeSlot({ time, days }) {
 				</Grid>
 			</Grid>
 		</>
-	)
+	);
 }
 
 export default DayTimeSlot;

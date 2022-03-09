@@ -8,9 +8,19 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
-import { TextField, Radio, RadioGroup, FormControl, FormControlLabel } from "@mui/material";
+import Typography from "@mui/material/Typography";
+import {
+	TextField,
+	Select,
+	MenuItem,
+	Radio,
+	RadioGroup,
+	FormControl,
+	FormControlLabel,
+	FormLabel,
+} from "@mui/material";
 import moment from "moment";
-import { useEvent } from '../../../context/EventContext'
+import { useEvent } from "../../../context/EventContext";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 	"& .MuiDialogContent-root": {
@@ -50,14 +60,20 @@ BootstrapDialogTitle.propTypes = {
 	onClose: PropTypes.func.isRequired,
 };
 
-export default function CustomizedDialogs({ open, onSetOpen, dateStamp, time }) {
+export default function CustomizedDialogs({
+	open,
+	onSetOpen,
+	time,
+	getEvents,
+	setEvents,
+}) {
 	const [name, setName] = React.useState("");
 	const [title, setTitle] = React.useState("");
 	const [timeFrom, setTimeFrom] = React.useState(time);
 	const [timeTo, setTimeTo] = React.useState(time);
 	const [type, setType] = React.useState("voice");
 
-	const event = useEvent()
+	const event = useEvent();
 
 	const handleClose = (event) => {
 		event.stopPropagation();
@@ -74,12 +90,12 @@ export default function CustomizedDialogs({ open, onSetOpen, dateStamp, time }) 
 	};
 
 	const handleTimeFromChange = (event) => {
-		console.log(event.target.value)
+		console.log(event.target.value);
 		setTimeFrom(event.target.value);
 	};
 
 	const handleTimeToChange = (event) => {
-		console.log(event.target.value)
+		console.log(event.target.value);
 		setTimeTo(event.target.value);
 	};
 
@@ -94,7 +110,7 @@ export default function CustomizedDialogs({ open, onSetOpen, dateStamp, time }) 
 			console.log(event)
 			onSetOpen(false)
 		}
-	}
+	};
 
 	return (
 		<div style={{ zIndex: 1000 }}>
@@ -155,12 +171,21 @@ export default function CustomizedDialogs({ open, onSetOpen, dateStamp, time }) 
 					/>
 					<FormControl>
 						<RadioGroup
-							id='type' name='type'
+							id="type"
+							name="type"
 							value={type}
 							onChange={handleTypeChange}
 						>
-							<FormControlLabel value="voice" control={<Radio />} label="voice" />
-							<FormControlLabel value="video" control={<Radio />} label="video" />
+							<FormControlLabel
+								value="voice"
+								control={<Radio />}
+								label="voice"
+							/>
+							<FormControlLabel
+								value="video"
+								control={<Radio />}
+								label="video"
+							/>
 						</RadioGroup>
 					</FormControl>
 				</DialogContent>

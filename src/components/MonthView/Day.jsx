@@ -1,13 +1,15 @@
 import React from "react";
 import moment from "moment";
-import CustomizedDialogs from "../Shared/ModelForms/CustomizedDialogWeek";
-import dayjs from 'dayjs'
-import { useEvent } from '../../context/EventContext'
-
-import './MonthView.scss'
+import CustomizedDialogs from "../shared/ModelForms/CustomizedDialog";
+import VideocamIcon from "@mui/icons-material/Videocam";
+import CallIcon from "@mui/icons-material/Call";
+import "./MonthView.scss";
+import { useCalendar } from "../../context/CalendarContext";
+import dayjs from "dayjs";
 
 export default function Day({ day, rowIdx, events }) {
 	const [open, setOpen] = React.useState(false);
+	const { state, dispatch } = useCalendar();
 
 	function getCurrentDayClass() {
 		return day.format("DD-MM-YY") === moment().format("DD-MM-YY")
@@ -15,21 +17,25 @@ export default function Day({ day, rowIdx, events }) {
 			: "";
 	}
 
-	const Event = (props) => {
+	const Event = ({ type, eventObj }) => {
 		return (
-			<div className="width-100 col-height border-4 event-background2 event-border2 p-1 font-12 flex-row flex-center flex-space-between">
+			<div
+				className="width-100 col-height border-4 event-background2 event-border2 p-1 font-12 flex-row flex-center flex-space-between"
+				style={{ position: "relative" }}
+			>
 				<div
 					className="border-2 flex-center flex-center2 black-bg white-color font-12"
 					style={{ width: "37px", height: "16px" }}
 				>
-					{props.timeFrom}
+					{dayjs(eventObj.startTime).format("hh:mm")}
 				</div>
-				<div className="flex-grow text-elip pl-1">{props.name}</div>
+				<div className="flex-grow text-elip pl-1">{eventObj.name}</div>
 			</div>
 		);
 	};
 
-	const openMonthEventDialog = () => {
+	const openMonthEventDialog = (e) => {
+		e.preventDefault();
 		setOpen(true);
 		console.log("clicked", day);
 	};
@@ -37,10 +43,7 @@ export default function Day({ day, rowIdx, events }) {
 	const onSetOpen = (value) => {
 		setOpen(value);
 	};
-
-
-	const { event } = useEvent()
-
+	console.log("events in line 45", events);
 	return (
 		<div
 			className="border border-gray flex-column cursor-pointer"
@@ -48,7 +51,9 @@ export default function Day({ day, rowIdx, events }) {
 		>
 			<header className="flex-column align-items-center">
 				{rowIdx === 0 && (
-					<p className="text-sm mt-1 font-12 lightfont-color">{day.format("ddd").toUpperCase()}</p>
+					<p className="text-sm mt-1 font-12 lightfont-color">
+						{day.format("ddd").toUpperCase()}
+					</p>
 				)}
 			</header>
 			<div>
@@ -58,15 +63,17 @@ export default function Day({ day, rowIdx, events }) {
 					<div style={{ paddingLeft: "25px" }}>{day.format("DD")}</div>
 					{/* <div className="themeblue-bg border-2 flex-center flex-center2 font-12 white-color" style={{width: '38px',height:'21px'}}>10+</div> */}
 				</div>
-				{
-					event.map((x) => {
-						if (day.format("DD MM YYYY") === dayjs(x.dateStamp).format("DD MM YYYY")) {
-							return (
-								<Event timeFrom={x.timeFrom} name={x.name} />
-							)
-						}
-					})
-				}
+				{state.allEvents.length !== 0 &&
+					state.allEvents.map((eventObj) => (
+						<>
+							<div key={eventObj.id}>
+								{parseInt(dayjs(eventObj.dateStamp).format("DD")) ===
+									parseInt(day.format("DD")) && (
+										<Event type="voice" eventObj={eventObj} key={eventObj.id} />
+									)}
+							</div>
+						</>
+					))}
 			</div>
 			{open && (
 				<CustomizedDialogs onSetOpen={onSetOpen} dateStamp={day} open={open} events={events} />
