@@ -13,18 +13,18 @@ import { useEvent } from "../../context/EventContext";
 function DayColumn(props) {
 	const { dateStamp, time, type } = props;
 
-	const event = useEvent();
+	const { event } = useEvent()
 
 	function row() {
-		if (type === "week") return 12 / 7;
-		else return 12;
+		if (type === 'week') return 12 / 7
+		else return 12
 	}
 	//model
 	const [open, setOpen] = React.useState(false);
 	const openMonthEventDialog = () => {
-		setOpen(true);
-		console.log("clicked", time);
-		console.log(moment());
+		setOpen(true)
+		console.log("clicked", time)
+		console.log(event)
 	};
 
 	const onSetOpen = (value) => {
@@ -38,20 +38,22 @@ function DayColumn(props) {
 	const eventDiv = () => {
 		return (
 			<>
-				{event.event.map((x) => {
-					if (x.dateStamp === dateStamp && x.timeFrom === time) {
-						return (
-							<Event
-								type={x.type}
-								name={x.name}
-								title={x.title}
-								hours={x.hours}
-								timeFrom={x.timeFrom}
-								timeTo={x.timeTo}
-							/>
-						);
-					}
-				})}
+				{
+					event.map((x) => {
+						if ((x.dateStamp === dateStamp) && (x.timeFrom === time)) {
+							return (
+								<Event
+									type={x.type}
+									name={x.name}
+									title={x.title}
+									hours={x.hours}
+									timeFrom={x.timeFrom}
+									timeTo={x.timeTo}
+								/>
+							)
+						}
+					})
+				}
 			</>
 		);
 	};

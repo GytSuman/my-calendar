@@ -6,7 +6,7 @@
 
 .app__container {
   display: flex;
-  flex: 1 1 0%;
+  /* flex: 1 1 0%; */
 }
 
 @media (prefers-reduced-motion: no-preference) {

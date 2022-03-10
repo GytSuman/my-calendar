@@ -13,6 +13,7 @@ export const getAllDaysInTheWeek = (currentDate = dayjs()) => {
 		.map((dayObj) => ({
 			id: uuidv4(),
 			date: dayObj.date(),
+			day : dayObj.format("DD MM YYYY"),
 			dateStamp: +dayObj,
 			weekDayName: dayObj.format("ddd"),
 			monthName: dayObj.format("MMMM"),

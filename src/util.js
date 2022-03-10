@@ -40,7 +40,6 @@ export const hours = (times) => {
 		hrs.push(moment({ hours: times[i], minutes: 0 }).format("hh:mm"));
 		hrs.push(moment({ hours: times[i], minutes: 30 }).format("hh:mm"));
 	}
-	console.log(hrs);
 	return hrs;
 };
 
@@ -56,4 +55,24 @@ export const generateWeekView = (slot, dayObj) => {
 	const height = slot.minHeight / 60;
 	let minimumHeight = test * height;
 	return minimumHeight;
+};
+export const getCount = (dateStamp, state) => {
+	let count = 0;
+	state.allEvents.map((eventObj) => {
+		if (dayjs(eventObj?.dateStamp).format("DD MM YYYY") === dateStamp) count++;
+	});
+	return count;
+};
+
+export const getCountTimeslot = (day, time, state) => {
+	let count = 0;
+	state.allEvents.map((eventObj) => {
+		if (
+			dayjs(eventObj?.startTime).format("hh:mm") ===
+				dayjs().hour(time).minute(0).format("hh:mm") &&
+			dayjs(eventObj?.startTime).format("DD MM YYYY") == day.day
+		)
+			count++;
+	});
+	return count;
 };

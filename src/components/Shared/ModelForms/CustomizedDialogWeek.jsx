@@ -104,10 +104,11 @@ export default function CustomizedDialogs({
 	};
 
 	const handleSubmitButton = () => {
-		if (type === "" || name === "" || title === "") console.log("err");
+		if ((type === '') || (name === '') || (title === '') || (timeFrom === '') || (timeTo === '')) console.log('err')
 		else {
-			setEvents((state) => [...state, { type, name, title }]);
-			onSetOpen(false);
+			event.setEvent((state) => [...state, { dateStamp, type, name, title, timeFrom, timeTo }])
+			console.log(event)
+			onSetOpen(false)
 		}
 	};
 
@@ -143,7 +144,6 @@ export default function CustomizedDialogs({
 						id="timeFrom"
 						label="Event From"
 						type="time"
-						disabled
 						defaultValue={timeFrom}
 						value={timeFrom}
 						InputLabelProps={{
