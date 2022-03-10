@@ -5,18 +5,12 @@ import { col, slot, slot2, lightHighlighter } from "./style";
 import Event from "../components/shared/Events/Event";
 import { useCalendar } from "../context/CalendarContext";
 import dayjs from "dayjs";
+import moment from 'moment'
+import { getCountTimeslot } from '../util'
 
 function Time(props) {
 	const { day, events, openAddEventModal, time } = props;
 	const { state, dispatch } = useCalendar();
-
-	React.useEffect(() => {}, []);
-	const row = 12 / 7;
-
-	// console.log("time: ", time);
-	const dummy = state.allEvents.map((event) =>
-		console.log(parseInt(dayjs(event.startTime).format("h")) === parseInt(time))
-	);
 
 	const selectedEventDay = () => {
 		return (
@@ -25,22 +19,43 @@ function Time(props) {
 					<>
 						{event.dateStamp === day.dateStamp &&
 							parseInt(dayjs(event.startTime).format("h")) ===
-								parseInt(time) && (
-								<Event type="voice" event={event} key={event.id} />
+							parseInt(time) && (
+								<Event type="voice" eventWidth={eventWidth} event={event} key={event.id} />
 							)}
 					</>
 				))}
 			</>
 		);
 	};
+
+	const [gridWrap, setGridWrap] = React.useState({})
+	const [eventWidth, setEventWidth] = React.useState(95)
+	React.useEffect(() => {
+		if (getCountTimeslot(day, time, state) > 2) {
+			setGridWrap({
+				flexWrap: 'wrap'
+			})
+			setEventWidth(39)
+		}
+		else {
+			setGridWrap({
+				flexWrap: 'nowrap'
+			})
+			setEventWidth(95)
+		}
+	}, [state.allEvents]);
+
 	return (
 		<>
 			<Grid
 				item
 				key={day.dateStamp}
-				style={isTodaysDate(day.dateStamp) ? { ...lightHighlighter } : {}}
-				xs={row}
-				className="slot col height-100 flex-row"
+				// style={{ isTodaysDate(day.dateStamp) ? {...lightHighlighter} : { }},{gridWrap}}
+				style={gridWrap}
+				sx={{
+					width: 1 / 7,
+				}}
+				className="slot col height-100 flex-row timeslot"
 				onClick={() => {
 					// setSelectedEventDay(day);
 					console.log("clicked at grid", time);
@@ -51,7 +66,9 @@ function Time(props) {
 					});
 				}}
 			>
-				{selectedEventDay()}
+				{
+					selectedEventDay()
+				}
 			</Grid>
 		</>
 	);

@@ -9,8 +9,8 @@ import Time from "../Time";
 function TimeSlot({ time, weekdays, events, openAddEventModal }) {
 	return (
 		<Grid container direction="row">
-			<Grid item xs={1} className="flex-center flex-center2">
-				{time}
+			<Grid item xs={1} className="flex-center2">
+				{dayjs().hour(time).minute(0).format('h:mm A')}
 			</Grid>
 			<Grid item xs={11} className="flex">
 				{weekdays &&

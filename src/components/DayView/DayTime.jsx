@@ -9,7 +9,7 @@ import "./DayView.scss";
 import { useCalendar } from "../../context/CalendarContext";
 import dayjs from "dayjs";
 
-function DayTime({ time, dateStamp, dayName, dayObj }) {
+function DayTime({ time, dateStamp, dayObj }) {
 	//model
 	const [open, setOpen] = React.useState(false);
 	const { state, dispatch } = useCalendar();
@@ -22,11 +22,6 @@ function DayTime({ time, dateStamp, dayName, dayObj }) {
 		setOpen(value);
 	};
 
-	const [eventAdded, setEventAdded] = React.useState([]);
-	const toggle = React.useCallback(() => {
-		openMonthEventDialog();
-	}, []);
-
 	const selectedEventDay = () => {
 		return (
 			<>
@@ -34,17 +29,15 @@ function DayTime({ time, dateStamp, dayName, dayObj }) {
 					<>
 						{event.dateStamp === dayObj.dateStamp &&
 							parseInt(dayjs(event.startTime).format("h")) ===
-								parseInt(time) && (
-								<Event type="voice" event={event} key={event.id} />
-							)}
+							parseInt(time) && (
+								<Event type="voice" eventWidth={95} event={event} key={event.id} />
+							)
+						}
 					</>
 				))}
 			</>
 		);
 	};
-	console.log("state all events", state.allEvents);
-	console.log("dayObj", dayObj);
-	React.useEffect(() => {}, []);
 
 	return (
 		<Grid container>
@@ -52,8 +45,7 @@ function DayTime({ time, dateStamp, dayName, dayObj }) {
 				item
 				xs={12}
 				key={dateStamp}
-				className="col slot"
-				sx={{ width: "80vw" }}
+				className="col slot flex-row"
 				onClick={() => {
 					dispatch({
 						type: "OPEN_EVENT_DIALOG",
@@ -72,9 +64,6 @@ function DayTime({ time, dateStamp, dayName, dayObj }) {
 					onSetOpen={onSetOpen}
 					time={time}
 					open={open}
-					getEvents={eventAdded}
-					setEvents={setEventAdded}
-					// events={events}
 				/>
 			)}
 		</Grid>

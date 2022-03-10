@@ -81,7 +81,7 @@ function CalendarHeader({
 					</Grid>
 
 					<Grid container item xs={6} spacing={4} className='flex-center'>
-						<Grid item className="flex flex-center flex-space-between" sx={{width: '300px'}}>
+						<Grid item className="flex flex-center flex-space-between" sx={{ width: '300px' }}>
 							<IconButton onClick={() => goToPreviousWeek()}>
 								<ArrowBackIosNewIcon />
 							</IconButton>
@@ -89,8 +89,8 @@ function CalendarHeader({
 								{/* ml-4 */}
 								{type === "month"
 									? dayjs(new Date(dayjs().year(), currentMonthIdx)).format(
-											"MMMM YYYY"
-									  )
+										"MMMM YYYY"
+									)
 									: formattedDate}
 							</h2>
 							<IconButton onClick={() => goToNextWeek()}>

@@ -40,7 +40,7 @@ export default function Sidebar({
 					{currentMonth[0].map((day, i) => (
 						<div
 							key={i}
-							className="flex-center flex-center2 border-sidebar sidebar-col"
+							className="flex-center flex-center2 border-sidebar border-sidebar sidebar-col"
 							style={{ color: "#DDDDDD" }}
 						>
 							{day.format("dd").charAt(0)}

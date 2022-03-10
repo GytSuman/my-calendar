@@ -81,7 +81,7 @@ export default function CustomizedDialogs() {
 		setName("");
 	};
 
-	const handleCurrentTimeChange = () => {};
+	const handleCurrentTimeChange = () => { };
 	const handleNameChange = (event) => {
 		setName(event.target.value);
 	};

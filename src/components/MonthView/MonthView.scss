@@ -5,9 +5,22 @@
 .grid {
     display: grid;
     grid-template-columns: repeat(7, minmax(0, 1fr));
-    grid-template-rows: repeat(6, minmax(0, 1fr));
+    grid-template-rows: repeat(5, minmax(0, 1fr));
 }
 
-.col-height{
+.event-height {
     min-height: 24px;
-}  
+}
+
+.col-height {
+    min-height: '150px';
+}
+
+.col-height-header {
+    height: '250px';
+}
+
+.current__day {
+    background-color: rgb(59 130 246);
+    color: black;
+}
