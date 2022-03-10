@@ -57,16 +57,9 @@ BootstrapDialogTitle.propTypes = {
 export default function CustomizedDialogs() {
 	const [name, setName] = React.useState("");
 	const { state, dispatch } = useCalendar();
-	const [timeValues, setTimeValues] = React.useState({
-		startTime: dayjs(state.eventStart).format("MM/DD/YYYY h:mm A"),
-		endTime: dayjs(state?.eventEnd).format("MM/DD/YYYY h:mm A"),
-	});
-	const [startTime, setStartTime] = React.useState(
-		dayjs(state.eventStart).format("MM/DD/YYYY h:mm A")
-	);
+	const [startTime, setStartTime] = React.useState(state.startTime);
 
 	const handleSaveButton = () => {
-		// handleAddEvent(name);
 		dispatch({
 			type: "ADD_EVENTS",
 			payload: {
@@ -81,11 +74,16 @@ export default function CustomizedDialogs() {
 		setName("");
 	};
 
-	const handleCurrentTimeChange = () => {};
+	const handleStartTimeChange = (event) => {
+		setStartTime(event.target.value);
+		// state.endTime = event.target.value;
+	};
+
+	const handleEndTimeChange = () => {};
 	const handleNameChange = (event) => {
 		setName(event.target.value);
 	};
-	console.log("time values", state.startTime);
+	console.log("time values", startTime);
 	console.log("state from reducer", state.showEventDialog);
 
 	return (
@@ -110,20 +108,26 @@ export default function CustomizedDialogs() {
 						onChange={handleNameChange}
 						value={name}
 					/>
+
 					<Grid container sx={{ m: 2 }}>
 						<LocalizationProvider dateAdapter={AdapterDateFns}>
 							<DateTimePicker
 								renderInput={(props) => <TextField {...props} />}
 								label="DateTimePicker"
-								value={state.startTime}
-								onChange={handleCurrentTimeChange}
+								value={state?.startTime}
+								onChange={(date) =>
+									dispatch({
+										type: "CUSTOMISE_START_TIME",
+										payload: date,
+									})
+								}
 								sx={{ m: 1 }}
 							/>
 							<DateTimePicker
 								renderInput={(props) => <TextField {...props} />}
 								label="DateTimePicker"
-								value={state.endTime}
-								onChange={handleCurrentTimeChange}
+								value={state?.endTime}
+								onChange={handleEndTimeChange}
 								sx={{ m: 1 }}
 							/>
 						</LocalizationProvider>

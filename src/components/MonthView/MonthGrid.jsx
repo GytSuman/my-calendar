@@ -1,10 +1,12 @@
 import React from "react";
+import CustomizedDialogs from "../shared/ModelForms/CustomizedDialog";
 import Day from "./Day";
-import './MonthView.scss'
+import "./MonthView.scss";
 
 export default function MonthGrid({ currentMonth, events }) {
 	return (
 		<div className="flex-1 grid">
+			{/* <CustomizedDialogs /> */}
 			{currentMonth &&
 				currentMonth.map((row, i) => (
 					<React.Fragment key={i}>

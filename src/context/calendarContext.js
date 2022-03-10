@@ -12,6 +12,7 @@ export const initialState = {
 	selectedGridTime: null,
 	dateStamp: null,
 	showEventDialog: false,
+	showMonthGridEventDialog: false,
 	startDate: +dayjs(),
 	eventStart: null,
 	eventEnd: null,

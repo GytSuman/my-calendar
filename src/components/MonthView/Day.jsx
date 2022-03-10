@@ -6,6 +6,7 @@ import CallIcon from "@mui/icons-material/Call";
 import "./MonthView.scss";
 import { useCalendar } from "../../context/CalendarContext";
 import dayjs from "dayjs";
+import CustomizedMonthGridDialogs from "../shared/ModelForms/CustomizedMonthGridDialog";
 
 export default function Day({ day, rowIdx, events }) {
 	const [open, setOpen] = React.useState(false);
@@ -47,7 +48,7 @@ export default function Day({ day, rowIdx, events }) {
 	return (
 		<div
 			className="border border-gray flex-column cursor-pointer"
-			onClick={openMonthEventDialog}
+			onClick={() => dispatch({ type: "OPEN_MONTH_GRID_EVENT_DIALOG" })}
 		>
 			<header className="flex-column align-items-center">
 				{rowIdx === 0 && (
@@ -56,6 +57,7 @@ export default function Day({ day, rowIdx, events }) {
 					</p>
 				)}
 			</header>
+			<CustomizedMonthGridDialogs />
 			<div>
 				<div
 					className={`flex-row flex-space-between p-1 text-sm my-1 lightfont-color font-18 ${getCurrentDayClass()}`}
@@ -67,42 +69,16 @@ export default function Day({ day, rowIdx, events }) {
 					state.allEvents.map((eventObj) => (
 						<>
 							<div key={eventObj.id}>
-								{parseInt(dayjs(eventObj.dateStamp).format("DD")) ===
-									parseInt(day.format("DD")) && (
+								{dayjs(eventObj.dateStamp).format("DD:MM") ===
+									day.format("DD:MM") && (
 									<Event type="voice" eventObj={eventObj} key={eventObj.id} />
 								)}
 							</div>
 						</>
 					))}
 			</div>
-			{/* <div className="flex-1 cursor-pointer">
-        <div className="p-1 text-gray-600 text-sm rounded bg-blue">9:00 - 10:00
-        <div className=" flex justify-content-between align-items-center">
-          <p>Task 1</p>
-          <IconButton><CallIcon/></IconButton>
-        </div>
-        </div>
-      </div>
-      <div
-        className="flex-1 cursor-pointer"
-        onClick={() => {
-          setDaySelected(day);
-          setShowEventModal(true);
-        }}
-      >
-        {dayEvents.map((evt, idx) => (
-          <div
-            key={idx}
-            onClick={() => setSelectedEvent(evt)}
-            className={`bg-${evt.label}-200 p-1 mr-3 text-gray-600 text-sm rounded mb-1 truncate`}
-          >
-            {evt.title}
-          </div>
-        ))}
-      </div> */}
-			{open && (
-				<CustomizedDialogs onSetOpen={onSetOpen} open={open} events={events} />
-			)}
+
+			<CustomizedDialogs />
 		</div>
 	);
 }

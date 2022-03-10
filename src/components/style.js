@@ -1,3 +1,5 @@
+import { height } from "@mui/system";
+
 export const lightHighlighter = {
 	backgroundColor: "rgba(0,0,0,0.04)",
 };
@@ -22,4 +24,9 @@ export const row = {
 //events
 export const eventBorder = {
 	border: "1px solid #00A3BF",
+};
+
+export const slot = {
+	minHeight: 80,
+	cursor: "pointer",
 };

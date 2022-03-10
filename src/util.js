@@ -43,3 +43,17 @@ export const hours = (times) => {
 	console.log(hrs);
 	return hrs;
 };
+
+export const generateWeekView = (slot, dayObj) => {
+	console.log("slot", dayObj);
+	const startTime = dayjs(dayObj.startTime);
+	const endTime = dayjs(dayObj.endTime);
+	const differenceInMinutes = endTime.diff(startTime, "hours");
+	const hours = parseInt(differenceInMinutes / 60);
+	const totalMinutes = dayjs().minute(differenceInMinutes).$m;
+	const test = totalMinutes * 60;
+	console.log("total minutes", test);
+	const height = slot.minHeight / 60;
+	let minimumHeight = test * height;
+	return minimumHeight;
+};

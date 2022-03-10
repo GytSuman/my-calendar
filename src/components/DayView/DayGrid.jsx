@@ -9,12 +9,14 @@ import { times } from "../../weekUtils";
 import { hours } from "../../util";
 
 import "./DayView.scss";
+import CustomizedDialogs from "../shared/ModelForms/CustomizedDialog";
 
 function DayGrid({ days }) {
 	const hoursArray = hours(times);
 	return (
 		<div className="width-100">
 			<DayHeader days={days} />
+			<CustomizedDialogs />
 			<Grid container direction="row">
 				<Grid
 					item

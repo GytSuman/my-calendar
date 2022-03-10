@@ -1,10 +1,7 @@
-import moment from "moment";
 import React from "react";
-import DayColumn from "../shared/DayColumn";
 import { Grid } from "@mui/material";
-import dayjs from "dayjs";
 import "./WeekView.scss";
-import Time from "../Time";
+import Time from "./Time";
 
 function TimeSlot({ time, weekdays, events, openAddEventModal }) {
 	return (
@@ -17,15 +14,7 @@ function TimeSlot({ time, weekdays, events, openAddEventModal }) {
 					weekdays.map((day) => {
 						return (
 							<>
-								<Time
-									key={day.id}
-									// dateStamp={day.dateStamp}
-									time={time}
-									// weekDayName={day.weekDayName}
-									events={events}
-									openAddEventModal={openAddEventModal}
-									day={day}
-								/>
+								<Time key={day.id} time={time} day={day} />
 							</>
 						);
 					})}

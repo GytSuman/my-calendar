@@ -17,7 +17,8 @@ import DayGrid from "./components/DayView/DayGrid";
 import "./styles/styles.scss";
 import "./App.css";
 import CalendarHeader from "./components/Calender/CalendarHeader";
-import WeekGrid from "./components/week/WeekGrid";
+import WeekGrid from "./components/WeekView/WeekGrid";
+// import WeekGrid from "./components/week/WeekGrid";
 
 function App() {
 	const [events, setEvents] = React.useState({});

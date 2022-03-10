@@ -32,7 +32,36 @@ export const CalendarReducer = (state, action) => {
 				allEvents: [...state.allEvents, action.payload],
 				showEventDialog: false,
 			};
+		case "CUSTOMISE_START_TIME":
+			const newStartTime = convertToTime(action.payload);
+			console.log("start time", action.payload);
+			return {
+				startTime: newStartTime,
+			};
+
+		case "DELETE_SELECTED_EVENT":
+			console.log("to be deleted event", action.payload);
+			return {};
+
+		case "OPEN_MONTH_GRID_EVENT_DIALOG":
+			return {
+				...state,
+				showMonthGridEventDialog: true,
+			};
+
+		case "CLOSE_MONTH_GRID_EVENT_DIALOG":
+			return {
+				...state,
+				showMonthGridEventDialog: false,
+			};
 		default:
 			return state;
 	}
+};
+
+export const convertToTime = (date) => {
+	let newDate = new Date(date);
+	let hours = ("0" + newDate.getHours()).slice(-2);
+	let minutes = ("0" + newDate.getMinutes()).slice(-2);
+	return [hours, minutes].join(":");
 };

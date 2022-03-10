@@ -64,10 +64,14 @@
   }
 
 .slot{
-    min-height:40px;
+    min-height:80px;
     cursor: pointer;
 }
 
 .col{
     border: #e0e0e0 1px solid;
+}
+
+.cursor-pointer {
+    cursor: pointer;
 }
