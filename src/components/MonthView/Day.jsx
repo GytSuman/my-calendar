@@ -5,7 +5,7 @@ import VideocamIcon from "@mui/icons-material/Videocam";
 import CallIcon from "@mui/icons-material/Call";
 import { isTodaysDate } from "../../weekUtils";
 import "./MonthView.scss";
-import { useCalendar } from "../../context/CalendarContext";
+import { useCalendar } from "../../context/calendarContext";
 import dayjs from "dayjs";
 import CustomizedMonthGridDialogs from "../shared/ModelForms/CustomizedMonthGridDialog";
 import { getCount } from "../../util";
@@ -36,7 +36,7 @@ export default function Day({ day, rowIdx, events }) {
 			</div>
 		);
 	};
-
+	// console.log(day)
 	const openMonthEventDialog = (e) => {
 		e.preventDefault();
 		setOpen(true);
@@ -58,11 +58,18 @@ export default function Day({ day, rowIdx, events }) {
 		setNEvents((x) => getCount(day.format("DD MM YYYY"), state));
 	}, [state.allEvents]);
 
+	const handleMonthGridEventDialog = (event) => {
+		event.stopPropagation()
+		dispatch({
+			type: "OPEN_MONTH_GRID_EVENT_DIALOG"
+		})
+	}
+
 	return (
 		<div
 			className={`border border-gray flex-column cursor-pointer`}
 			style={{ minHeight: "150px" }}
-			onClick={() => dispatch({ type: "OPEN_MONTH_GRID_EVENT_DIALOG" })}
+			onClick={handleMonthGridEventDialog}
 		>
 			<header className="flex-column align-items-center">
 				{rowIdx === 0 && (
@@ -71,7 +78,6 @@ export default function Day({ day, rowIdx, events }) {
 					</p>
 				)}
 			</header>
-			<CustomizedMonthGridDialogs />
 			<div>
 				<div
 					className={`flex-row flex-space-between p-1 text-sm my-1 lightfont-color font-18 ${getCurrentDayClass()}`}
@@ -89,8 +95,8 @@ export default function Day({ day, rowIdx, events }) {
 				<div
 					style={{ height: "100px", marginTop: "20px", overflowY: "hidden" }}
 				>
-					{state.allEvents.length !== 0 &&
-						state.allEvents.map((eventObj) => (
+					{state?.allEvents?.length !== 0 &&
+						state?.allEvents?.map((eventObj) => (
 							<>
 								<div key={eventObj.id}>
 									{/* {parseInt(dayjs(eventObj.dateStamp).format("DD MM YYYY")) ===
@@ -100,21 +106,21 @@ export default function Day({ day, rowIdx, events }) {
 								} */}
 									{dayjs(eventObj.dateStamp).format("DD MM YYYY") ===
 										day.format("DD MM YYYY") && (
-										<>
-											<Event
-												type="voice"
-												eventObj={eventObj}
-												key={eventObj.id}
-											/>
-										</>
-									)}
+											<>
+												<Event
+													type="voice"
+													eventObj={eventObj}
+													key={eventObj.id}
+												/>
+											</>
+										)}
 								</div>
 							</>
 						))}
 				</div>
 			</div>
 
-			<CustomizedDialogs />
+			{/* <CustomizedDialogs /> */}
 		</div>
 	);
 }

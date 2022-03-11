@@ -8,7 +8,7 @@ import { getDays } from "./dayUtils";
 import dayjs from "dayjs";
 import CalendarEventHandler from "./CalendarEventHandler";
 import { v4 as uuidv4 } from "uuid";
-import { useCalendar } from "./context/CalendarContext";
+import { useCalendar } from "./context/calendarContext";
 import MonthGrid from "./components/MonthView/MonthGrid";
 import Sidebar from "./components/CalenderSmall/Sidebar";
 // import WeekGrid from "./components/WeekView/WeekGrid";

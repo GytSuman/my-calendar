@@ -6,7 +6,7 @@ import EventSmall from "../shared/Events/EventSmall";
 import CustomizedDialogs from "../shared/ModelForms/CustomizedDialogWeek";
 
 import "./DayView.scss";
-import { useCalendar } from "../../context/CalendarContext";
+import { useCalendar } from "../../context/calendarContext";
 import dayjs from "dayjs";
 
 function DayTime({ time, dateStamp, dayObj }) {

@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import EventContext from "./context/EventContext";
-import CalendarContext from "./context/CalendarContext";
+import CalendarContext from "./context/calendarContext";
 
 ReactDOM.render(
 	<React.StrictMode>

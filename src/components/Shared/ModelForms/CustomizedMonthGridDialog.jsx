@@ -15,7 +15,7 @@ import {
 	FormControl,
 	FormControlLabel,
 } from "@mui/material";
-import { useCalendar } from "../../../context/CalendarContext";
+import { useCalendar } from "../../../context/calendarContext";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 	"& .MuiDialogContent-root": {
@@ -58,8 +58,8 @@ BootstrapDialogTitle.propTypes = {
 export default function CustomizedMonthGridDialogs() {
 	const [name, setName] = React.useState("");
 	const [title, setTitle] = React.useState("");
-	const [timeFrom, setTimeFrom] = React.useState("");
-	const [timeTo, setTimeTo] = React.useState("");
+	const [timeFrom, setTimeFrom] = React.useState("06:10");
+	const [timeTo, setTimeTo] = React.useState("10:10");
 	const [type, setType] = React.useState("voice");
 
 	const { state, dispatch } = useCalendar();

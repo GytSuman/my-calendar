@@ -13,7 +13,7 @@ import DateTimePicker from "@mui/lab/DateTimePicker";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import dayjs from "dayjs";
-import { useCalendar } from "../../../context/CalendarContext";
+import { useCalendar } from "../../../context/calendarContext";
 import { v4 as uuidv4 } from "uuid";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -57,7 +57,8 @@ BootstrapDialogTitle.propTypes = {
 export default function CustomizedDialogs() {
 	const [name, setName] = React.useState("");
 	const { state, dispatch } = useCalendar();
-	const [startTime, setStartTime] = React.useState(state.startTime);
+	const [startTime, setStartTime] = React.useState(state.startTime.$d);
+	const [endTime, setEndTime] = React.useState(state.startTime.$d);
 
 	const handleSaveButton = () => {
 		dispatch({
@@ -79,7 +80,7 @@ export default function CustomizedDialogs() {
 		// state.endTime = event.target.value;
 	};
 
-	const handleEndTimeChange = () => {};
+	const handleEndTimeChange = () => { };
 	const handleNameChange = (event) => {
 		setName(event.target.value);
 	};
@@ -114,7 +115,7 @@ export default function CustomizedDialogs() {
 							<DateTimePicker
 								renderInput={(props) => <TextField {...props} />}
 								label="DateTimePicker"
-								value={state?.startTime}
+								value={startTime}
 								onChange={(date) =>
 									dispatch({
 										type: "CUSTOMISE_START_TIME",
@@ -126,7 +127,7 @@ export default function CustomizedDialogs() {
 							<DateTimePicker
 								renderInput={(props) => <TextField {...props} />}
 								label="DateTimePicker"
-								value={state?.endTime}
+								value={endTime}
 								onChange={handleEndTimeChange}
 								sx={{ m: 1 }}
 							/>

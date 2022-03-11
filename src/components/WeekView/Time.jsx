@@ -3,7 +3,7 @@ import React from "react";
 import { generateWeekViewCoordinates, isTodaysDate } from "../../weekUtils";
 import { slot, lightHighlighter } from "../style";
 import Event from "../shared/Events/Event";
-import { useCalendar } from "../../context/CalendarContext";
+import { useCalendar } from "../../context/calendarContext";
 import dayjs from "dayjs";
 import { generateWeekView } from "../../util";
 
@@ -11,7 +11,7 @@ function Time(props) {
 	const { day, time } = props;
 	const { state, dispatch } = useCalendar();
 
-	React.useEffect(() => {}, []);
+	React.useEffect(() => { }, []);
 	const row = 12 / 7;
 
 	// console.log("time: ", time);
@@ -23,7 +23,7 @@ function Time(props) {
 						<>
 							{event.dateStamp === day.dateStamp &&
 								parseInt(dayjs(event.startTime).format("h")) ===
-									parseInt(time) && (
+								parseInt(time) && (
 									<Event type="voice" event={event} key={event.id} />
 								)}
 						</>

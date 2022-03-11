@@ -3,7 +3,7 @@ import VideocamIcon from "@mui/icons-material/Videocam";
 import CallIcon from "@mui/icons-material/Call";
 import "./Events.scss";
 import dayjs from "dayjs";
-import { useCalendar } from "../../../context/CalendarContext";
+import { useCalendar } from "../../../context/calendarContext";
 
 function Event({ type, event, eventWidth }) {
 	const IconDisplay = () => {
@@ -19,9 +19,9 @@ function Event({ type, event, eventWidth }) {
 		<div
 			style={{ ...eventConStyle }}
 			className="border-4 event-background event-border p-1 flex-col"
-			// onClick={() =>
-			// 	dispatch({ type: "DELETE_SELECTED_EVENT", payload: state.allEvents })
-			// }
+		// onClick={() =>
+		// 	dispatch({ type: "DELETE_SELECTED_EVENT", payload: state.allEvents })
+		// }
 		>
 			<div className="flex-row height-100 font-12" style={{ flexWrap: "wrap" }}>
 				<div

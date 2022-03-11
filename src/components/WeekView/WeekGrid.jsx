@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
 import moment from "moment";
 import React from "react";
-import { useCalendar } from "../../context/CalendarContext";
+import { useCalendar } from "../../context/calendarContext";
 import { hours } from "../../util";
 import { times } from "../../weekUtils";
 // import CustomizedDialogs from "../CustomizedDialog";
