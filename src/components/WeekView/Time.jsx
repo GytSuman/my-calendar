@@ -5,7 +5,7 @@ import { slot, lightHighlighter } from "../style";
 import Event from "../shared/Events/Event";
 import { useCalendar } from "../../context/CalendarContext";
 import dayjs from "dayjs";
-import { generateWeekView } from "../../util";
+import { generateWeekView, getCountTimeslot } from "../../util";
 
 function Time(props) {
 	const { day, time } = props;
@@ -24,7 +24,12 @@ function Time(props) {
 							{event.dateStamp === day.dateStamp &&
 								parseInt(dayjs(event.startTime).format("h")) ===
 									parseInt(time) && (
-									<Event type="voice" event={event} key={event.id} />
+									<Event
+										type="voice"
+										event={event}
+										key={event.id}
+										eventWidth={eventWidth}
+									/>
 								)}
 						</>
 					))}
@@ -32,17 +37,34 @@ function Time(props) {
 		);
 	};
 
+	const [gridWrap, setGridWrap] = React.useState({});
+	const [eventWidth, setEventWidth] = React.useState(95);
+	React.useEffect(() => {
+		if (getCountTimeslot(day, time, state) > 2) {
+			setGridWrap({
+				flexWrap: "wrap",
+			});
+			setEventWidth(39);
+		} else {
+			setGridWrap({
+				flexWrap: "nowrap",
+			});
+			setEventWidth(95);
+		}
+	}, [day, state, state.allEvents, time]);
+
 	return (
 		<>
 			<Grid
 				item
 				key={day.dateStamp}
 				style={
-					isTodaysDate(day.dateStamp) ? { ...slot, ...lightHighlighter } : {}
+					// isTodaysDate(day.dateStamp) ? { ...slot, ...lightHighlighter } : {}
+					gridWrap
 				}
 				xs={row}
 				// sx={{ flexWrap: "wrap" }}
-				className="col height-100 flex-row"
+				className="col slot flex-row"
 				onClick={() => {
 					console.log("clicked at grid", time);
 					dispatch({

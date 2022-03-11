@@ -57,7 +57,8 @@ BootstrapDialogTitle.propTypes = {
 export default function CustomizedDialogs() {
 	const [name, setName] = React.useState("");
 	const { state, dispatch } = useCalendar();
-	const [startTime, setStartTime] = React.useState(state.startTime);
+	const [startTime, setStartTime] = React.useState(state?.startTime);
+	const [endTime, setEndTime] = React.useState(state?.endTime);
 
 	const handleSaveButton = () => {
 		dispatch({
@@ -83,6 +84,11 @@ export default function CustomizedDialogs() {
 	const handleNameChange = (event) => {
 		setName(event.target.value);
 	};
+
+	React.useEffect(() => {
+		setStartTime(state?.startTime);
+		setEndTime(state?.endTime);
+	}, [state?.endTime, state?.startTime]);
 	console.log("time values", startTime);
 	console.log("state from reducer", state.showEventDialog);
 
@@ -91,7 +97,7 @@ export default function CustomizedDialogs() {
 			<BootstrapDialog
 				onClose={() => dispatch({ type: "CLOSE_EVENT_DIALOG" })}
 				aria-labelledby="customized-dialog-title"
-				open={state.showEventDialog}
+				open={state?.showEventDialog}
 			>
 				<BootstrapDialogTitle
 					id="customized-dialog-title"
@@ -114,7 +120,7 @@ export default function CustomizedDialogs() {
 							<DateTimePicker
 								renderInput={(props) => <TextField {...props} />}
 								label="DateTimePicker"
-								value={state?.startTime}
+								value={startTime}
 								onChange={(date) =>
 									dispatch({
 										type: "CUSTOMISE_START_TIME",
@@ -126,7 +132,7 @@ export default function CustomizedDialogs() {
 							<DateTimePicker
 								renderInput={(props) => <TextField {...props} />}
 								label="DateTimePicker"
-								value={state?.endTime}
+								value={endTime}
 								onChange={handleEndTimeChange}
 								sx={{ m: 1 }}
 							/>

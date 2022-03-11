@@ -66,7 +66,7 @@ export const getCount = (dateStamp, state) => {
 
 export const getCountTimeslot = (day, time, state) => {
 	let count = 0;
-	state.allEvents.map((eventObj) => {
+	state?.allEvents?.map((eventObj) => {
 		if (
 			dayjs(eventObj?.startTime).format("hh:mm") ===
 				dayjs().hour(time).minute(0).format("hh:mm") &&
