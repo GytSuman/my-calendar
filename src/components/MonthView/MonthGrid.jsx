@@ -1,5 +1,6 @@
 import React from "react";
 import CustomizedDialogs from "../shared/ModelForms/CustomizedDialog";
+import CustomizedMonthGridDialogs from "../shared/ModelForms/CustomizedMonthGridDialog";
 import Day from "./Day";
 import "./MonthView.scss";
 
@@ -15,6 +16,7 @@ export default function MonthGrid({ currentMonth, events }) {
 						))}
 					</React.Fragment>
 				))}
+			<CustomizedDialogs />
 		</div>
 	);
 }

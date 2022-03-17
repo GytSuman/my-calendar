@@ -39,8 +39,11 @@ function Time(props) {
 
 	const [gridWrap, setGridWrap] = React.useState({});
 	const [eventWidth, setEventWidth] = React.useState(95);
+
 	React.useEffect(() => {
+		console.log("get time slot value", getCountTimeslot(day, time, state));
 		if (getCountTimeslot(day, time, state) > 2) {
+			console.log("hdhjjk");
 			setGridWrap({
 				flexWrap: "wrap",
 			});
@@ -63,7 +66,7 @@ function Time(props) {
 					gridWrap
 				}
 				xs={row}
-				// sx={{ flexWrap: "wrap" }}
+				sx={isTodaysDate(day.dateStamp) ? { ...slot, ...lightHighlighter } : {}}
 				className="col slot flex-row"
 				onClick={() => {
 					console.log("clicked at grid", time);

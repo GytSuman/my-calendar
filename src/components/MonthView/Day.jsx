@@ -1,9 +1,5 @@
 import React from "react";
 import moment from "moment";
-import CustomizedDialogs from "../shared/ModelForms/CustomizedDialog";
-import VideocamIcon from "@mui/icons-material/Videocam";
-import CallIcon from "@mui/icons-material/Call";
-import { isTodaysDate } from "../../weekUtils";
 import "./MonthView.scss";
 import { useCalendar } from "../../context/CalendarContext";
 import dayjs from "dayjs";
@@ -11,7 +7,6 @@ import CustomizedMonthGridDialogs from "../shared/ModelForms/CustomizedMonthGrid
 import { getCount } from "../../util";
 
 export default function Day({ day, rowIdx, events }) {
-	const [open, setOpen] = React.useState(false);
 	const { state, dispatch } = useCalendar();
 
 	function getCurrentDayClass() {
@@ -37,16 +32,6 @@ export default function Day({ day, rowIdx, events }) {
 		);
 	};
 
-	const openMonthEventDialog = (e) => {
-		e.preventDefault();
-		setOpen(true);
-		console.log("clicked", parseInt(day.format("DD MM YYYYY")));
-	};
-
-	const onSetOpen = (value) => {
-		setOpen(value);
-	};
-
 	const getHeight = () => {
 		if (rowIdx === 0) return false;
 		else return true;
@@ -56,13 +41,20 @@ export default function Day({ day, rowIdx, events }) {
 
 	React.useEffect(() => {
 		setNEvents((x) => getCount(day.format("DD MM YYYY"), state));
-	}, [state.allEvents]);
+	}, [day, state, state.allEvents]);
+
+	console.log("month grid day", day);
 
 	return (
 		<div
 			className={`border border-gray flex-column cursor-pointer`}
 			style={{ minHeight: "150px" }}
-			onClick={() => dispatch({ type: "OPEN_MONTH_GRID_EVENT_DIALOG" })}
+			onClick={() =>
+				dispatch({
+					type: "OPEN_EVENT_DIALOG",
+					payload: { dateStamp: day, time: "9:00 AM", id: day.id },
+				})
+			}
 		>
 			<header className="flex-column align-items-center">
 				{rowIdx === 0 && (
@@ -71,7 +63,7 @@ export default function Day({ day, rowIdx, events }) {
 					</p>
 				)}
 			</header>
-			<CustomizedMonthGridDialogs />
+			{/* <CustomizedMonthGridDialogs /> */}
 			<div>
 				<div
 					className={`flex-row flex-space-between p-1 text-sm my-1 lightfont-color font-18 ${getCurrentDayClass()}`}
@@ -114,7 +106,7 @@ export default function Day({ day, rowIdx, events }) {
 				</div>
 			</div>
 
-			<CustomizedDialogs />
+			{/* <CustomizedDialogs /> */}
 		</div>
 	);
 }

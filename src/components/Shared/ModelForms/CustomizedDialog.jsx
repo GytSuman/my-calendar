@@ -66,8 +66,8 @@ export default function CustomizedDialogs() {
 			payload: {
 				id: uuidv4(),
 				name,
-				startTime: state.startTime,
-				endTime: state.endTime,
+				startTime: startTime,
+				endTime: endTime,
 				dateStamp: state.dateStamp,
 				gridId: state.selectedGridTime,
 			},
@@ -75,12 +75,13 @@ export default function CustomizedDialogs() {
 		setName("");
 	};
 
-	const handleStartTimeChange = (event) => {
-		setStartTime(event.target.value);
-		// state.endTime = event.target.value;
+	const handleStartTimeChange = (newValue) => {
+		setStartTime(newValue);
 	};
 
-	const handleEndTimeChange = () => {};
+	const handleEndTimeChange = (newValue) => {
+		setEndTime(newValue);
+	};
 	const handleNameChange = (event) => {
 		setName(event.target.value);
 	};
@@ -90,7 +91,7 @@ export default function CustomizedDialogs() {
 		setEndTime(state?.endTime);
 	}, [state?.endTime, state?.startTime]);
 	console.log("time values", startTime);
-	console.log("state from reducer", state.showEventDialog);
+	console.log("state from reducer", state?.showEventDialog);
 
 	return (
 		<div style={{ zIndex: 1000 }}>
@@ -121,12 +122,7 @@ export default function CustomizedDialogs() {
 								renderInput={(props) => <TextField {...props} />}
 								label="DateTimePicker"
 								value={startTime}
-								onChange={(date) =>
-									dispatch({
-										type: "CUSTOMISE_START_TIME",
-										payload: date,
-									})
-								}
+								onChange={handleStartTimeChange}
 								sx={{ m: 1 }}
 							/>
 							<DateTimePicker
