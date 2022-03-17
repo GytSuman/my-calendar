@@ -3,7 +3,6 @@ import { Grid } from "@mui/material";
 import dayjs from 'dayjs'
 import "./WeekView.scss";
 import Time from "./Time";
-import dayjs from "dayjs";
 
 function TimeSlot({ time, weekdays, events, openAddEventModal }) {
 	return (

@@ -5,14 +5,14 @@ import "./Events.scss";
 import dayjs from "dayjs";
 import { useCalendar } from "../../../context/calendarContext";
 
-function Event({ type, event, eventWidth }) {
+function Event({ type, event }) {
 	const IconDisplay = () => {
 		if (type === "video") return <VideocamIcon className="event-icon" />;
 		else return <CallIcon className="event-icon" />;
 	};
 	const eventConStyle = {
-		width: eventWidth + "%",
-		height: 60 + "px",
+		width: "95%",
+		height: "68px",
 		position: "relative",
 	};
 	return (

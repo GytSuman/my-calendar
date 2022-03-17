@@ -63,9 +63,31 @@
     border: 1px solid #dddddd;
 }
 
-.slot{
-    min-height:80px;
+.slot {
+    height: 80px;
     cursor: pointer;
+    position: relative;
+}
+
+.slot1 {
+    height: 80px;
+    cursor: pointer;
+    position: relative;
+}
+
+.slot1>span {
+    z-index: 3;
+    background-color: blue;
+    color: white;
+    border-radius: 2px;
+}
+
+.slot1>div {
+    display: none;
+}
+
+.slot1>div:nth-child(-n+2) {
+    display: flex;
 }
 
 .col {

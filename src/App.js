@@ -16,6 +16,7 @@ import DayGrid from "./components/DayView/DayGrid";
 
 import "./styles/styles.scss";
 import "./App.css";
+
 import CalendarHeader from "./components/Calender/CalendarHeader";
 import WeekGrid from "./components/WeekView/WeekGrid";
 // import WeekGrid from "./components/week/WeekGrid";
@@ -101,7 +102,7 @@ function App() {
 				currentMonthIdx={currentMonthIdx}
 			/>
 			<div className="app__container">
-				<aside>
+				{/* <aside>
 					<Sidebar
 						currentMonthIdx={currentMonthIdx}
 						currentMonth={currentMonth}
@@ -110,7 +111,7 @@ function App() {
 						goToNextWeek={goToNextWeek}
 					/>
 				</aside>
-				<Divider orientation="vertical" />
+				<Divider orientation="vertical" /> */}
 				{type === "month" && (
 					<MonthGrid currentMonth={currentMonth} events={events} />
 				)}

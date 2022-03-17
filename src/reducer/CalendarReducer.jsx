@@ -13,11 +13,11 @@ export const CalendarReducer = (state, action) => {
 			return {
 				...state,
 				showEventDialog: true,
+				dateStamp: dateStamp,
 				eventStart: +start,
 				eventEnd: +end,
 				startTime: dayjs(+start).format("MM/DD/YYYY h:mm A"),
 				endTime: dayjs(+end).format("MM/DD/YYYY h:mm A"),
-				dateStamp: dateStamp,
 				selectedGridTime: action.payload.time,
 			};
 		case "CLOSE_EVENT_DIALOG":
@@ -31,6 +31,7 @@ export const CalendarReducer = (state, action) => {
 				...state,
 				allEvents: [...state.allEvents, action.payload],
 				showEventDialog: false,
+				showMonthGridEventDialog: false,
 			};
 		case "CUSTOMISE_START_TIME":
 			const newStartTime = convertToTime(action.payload);
@@ -44,9 +45,11 @@ export const CalendarReducer = (state, action) => {
 			return {};
 
 		case "OPEN_MONTH_GRID_EVENT_DIALOG":
+			console.log('selected date:', action.date)
 			return {
 				...state,
 				showMonthGridEventDialog: true,
+				selectedDate: action.date
 			};
 
 		case "CLOSE_MONTH_GRID_EVENT_DIALOG":
@@ -54,6 +57,11 @@ export const CalendarReducer = (state, action) => {
 				...state,
 				showMonthGridEventDialog: false,
 			};
+
+		case "OPEN_HIDDEN_EVENT":
+			return {
+
+			}
 		default:
 			return state;
 	}

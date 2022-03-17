@@ -1,5 +1,6 @@
 import * as React from "react";
 import PropTypes from "prop-types";
+import { Grid } from "@mui/material";
 import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
 import Dialog from "@mui/material/Dialog";
@@ -8,6 +9,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
+import dayjs from 'dayjs'
 import {
 	TextField,
 	Radio,
@@ -16,6 +18,12 @@ import {
 	FormControlLabel,
 } from "@mui/material";
 import { useCalendar } from "../../../context/calendarContext";
+import { v4 as uuidv4 } from "uuid";
+
+import DateTimePicker from "@mui/lab/DateTimePicker";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 	"& .MuiDialogContent-root": {
@@ -56,30 +64,17 @@ BootstrapDialogTitle.propTypes = {
 };
 
 export default function CustomizedMonthGridDialogs() {
+	const { state, dispatch } = useCalendar();
 	const [name, setName] = React.useState("");
-	const [title, setTitle] = React.useState("");
-	const [timeFrom, setTimeFrom] = React.useState("06:10");
-	const [timeTo, setTimeTo] = React.useState("10:10");
+	const [startTime, setStartTime] = React.useState(dayjs(state?.selectedDate).format('YYYY-MM-DD'));
+	const [endTime, setEndTime] = React.useState("");
 	const [type, setType] = React.useState("voice");
 
-	const { state, dispatch } = useCalendar();
+	console.log("Reducer :", dayjs(state?.selectedDate).format('YYYY-MM-DD'))
+	console.log("state :", startTime)
 
 	const handleNameChange = (event) => {
 		setName(event.target.value);
-	};
-
-	const handleTitleChange = (event) => {
-		setTitle(event.target.value);
-	};
-
-	const handleTimeFromChange = (event) => {
-		console.log(event.target.value);
-		setTimeFrom(event.target.value);
-	};
-
-	const handleTimeToChange = (event) => {
-		console.log(event.target.value);
-		setTimeTo(event.target.value);
 	};
 
 	const handleTypeChange = (event) => {
@@ -87,12 +82,17 @@ export default function CustomizedMonthGridDialogs() {
 	};
 
 	const handleSubmitButton = () => {
-		if (type === "" || name === "" || title === "") console.log("err");
-		else {
-		}
+		dispatch({
+			type: "ADD_EVENTS",
+			payload: {
+				id: uuidv4(),
+				name,
+				startTime: startTime,
+				endTime: endTime,
+				dateStamp: state.dateStamp,
+			},
+		});
 	};
-
-	console.log("show month grid event dialog", state.showMonthGridEventDialog);
 
 	return (
 		<div style={{ zIndex: 1000 }}>
@@ -116,13 +116,36 @@ export default function CustomizedMonthGridDialogs() {
 						value={name}
 					/>
 					<TextField
-						label="title"
-						fullWidth
-						size="small"
-						onChange={handleTitleChange}
-						value={title}
+						id="timeFrom"
+						label="Event From"
+						type="Date"
+						value={startTime}
+						InputLabelProps={{
+							shrink: true,
+						}}
+						onChange={(e) => console.log(e.target.value, setStartTime(e.target.value))}
+						sx={{ width: 150, m: 2 }}
 					/>
-					<TextField
+					{/* <Grid container sx={{ m: 2 }}>
+						<LocalizationProvider dateAdapter={AdapterDateFns}>
+							<DateTimePicker
+								renderInput={(props) => <TextField {...props} />}
+								label="DateTimePicker"
+								value={startTime}
+								defaultValue={state?.selectedDate}
+								onChange={() => setStartTime(startTime)}
+								sx={{ m: 1 }}
+							/>
+							<DateTimePicker
+								renderInput={(props) => <TextField {...props} />}
+								label="DateTimePicker"
+								minDateTime={state?.selectedDate?.$d}
+								onChange={(e) => setEndTime(e)}
+								sx={{ m: 1 }}
+							/>
+						</LocalizationProvider>
+					</Grid> */}
+					{/* <TextField
 						id="timeFrom"
 						label="Event From"
 						type="time"
@@ -169,7 +192,7 @@ export default function CustomizedMonthGridDialogs() {
 								label="video"
 							/>
 						</RadioGroup>
-					</FormControl>
+					</FormControl> */}
 				</DialogContent>
 				<DialogActions>
 					<Button onClick={handleSubmitButton}>Save</Button>

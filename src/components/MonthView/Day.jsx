@@ -61,7 +61,8 @@ export default function Day({ day, rowIdx, events }) {
 	const handleMonthGridEventDialog = (event) => {
 		event.stopPropagation()
 		dispatch({
-			type: "OPEN_MONTH_GRID_EVENT_DIALOG"
+			type: "OPEN_MONTH_GRID_EVENT_DIALOG",
+			date: day
 		})
 	}
 
@@ -98,23 +99,18 @@ export default function Day({ day, rowIdx, events }) {
 					{state?.allEvents?.length !== 0 &&
 						state?.allEvents?.map((eventObj) => (
 							<>
-								<div key={eventObj.id}>
-									{/* {parseInt(dayjs(eventObj.dateStamp).format("DD MM YYYY")) ===
-									parseInt(day.format("DD MM YYYY")) && (
-										<Event type="voice" eventObj={eventObj} key={eventObj.id} />
+								{
+									dayjs(eventObj.dateStamp).format("DD MM YYYY") ===
+									day.format("DD MM YYYY") && (
+										<>
+											<Event
+												key={eventObj.id}
+												type="voice"
+												eventObj={eventObj}
+											/>
+										</>
 									)
-								} */}
-									{dayjs(eventObj.dateStamp).format("DD MM YYYY") ===
-										day.format("DD MM YYYY") && (
-											<>
-												<Event
-													type="voice"
-													eventObj={eventObj}
-													key={eventObj.id}
-												/>
-											</>
-										)}
-								</div>
+								}
 							</>
 						))}
 				</div>
