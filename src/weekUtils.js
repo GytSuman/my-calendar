@@ -13,7 +13,7 @@ export const getAllDaysInTheWeek = (currentDate = dayjs()) => {
 		.map((dayObj) => ({
 			id: uuidv4(),
 			date: dayObj.date(),
-			day : dayObj.format("DD MM YYYY"),
+			day: dayObj.format("DD MM YYYY"),
 			dateStamp: +dayObj,
 			weekDayName: dayObj.format("ddd"),
 			monthName: dayObj.format("MMMM"),
@@ -29,12 +29,12 @@ export const times = [
 export const getHoursInDay = () => {
 	const items = [];
 	new Array(24).fill().forEach((acc, index) => {
-	  items.push(moment( {hour: index} ).format('h:mm A'));
-	  items.push(moment({ hour: index, minute: 30 }).format('h:mm A'));
-	})
-	console.log(items)
+		items.push(moment({ hour: index }).format("h:mm A"));
+		items.push(moment({ hour: index, minute: 30 }).format("h:mm A"));
+	});
+	console.log(items);
 	return items;
-} 
+};
 
 export const generateWeekViewCoordinates = (event, startDate) => {
 	const start = moment(event.start);
@@ -87,7 +87,15 @@ export const generateWeekViewCoordinates = (event, startDate) => {
 	};
 };
 
-export const weekDaysArray = [ 'Sunday' , 'Monday' , 'Tuesday' , 'Wednesday' , 'Thursday' , 'Friday' , 'Saturday' ]
+export const weekDaysArray = [
+	"Sunday",
+	"Monday",
+	"Tuesday",
+	"Wednesday",
+	"Thursday",
+	"Friday",
+	"Saturday",
+];
 
 export const isTodaysDate = (dateStamp) => {
 	const today = moment();
