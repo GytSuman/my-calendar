@@ -1,22 +1,29 @@
 import dayjs from "dayjs";
 import moment from "moment";
+import { v4 as uuidv4 } from "uuid";
 
-export function getMonth(month = dayjs().month()) {
-	month = Math.floor(month);
-	// console.log(month);
-	const year = dayjs().year();
-	// console.log(year);
-	const firstDayOfTheMonth = dayjs(new Date(year, month, 1)).day();
-	// console.log(firstDayOfTheMonth);
-	let currentMonthCount = 0 - firstDayOfTheMonth;
-	const daysMatrix = new Array(5).fill([]).map(() => {
-		return new Array(7).fill(null).map(() => {
-			currentMonthCount++;
-			return dayjs(new Date(year, month, currentMonthCount));
-		});
-	});
-	// console.log(daysMatrix);
-	return daysMatrix;
+export function getMonth(month = dayjs()) {
+	const startMonth = month.clone().startOf("month");
+	const monthDay = Array.from(Array(31))
+		.map((day, index) => index)
+		.map((day) =>
+			dayjs(startMonth)
+				.add(month, "month")
+				.set("date", 0)
+				.set("minutes", 0)
+				.set("seconds", 0)
+		)
+		.map((monthObj) => ({
+			id: uuidv4(),
+			date: monthObj.date(),
+			day: monthObj.format("DD MM YYYY"),
+			dateStamp: +monthObj,
+			monthName: monthObj.format("MMMM"),
+			time: monthObj.format("hh"),
+			weekDayName: monthObj.format("ddd"),
+		}));
+
+	return monthDay;
 }
 
 export const getMonthOriginal = (month = moment().month()) => {

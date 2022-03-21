@@ -4,7 +4,7 @@ import dayjs from 'dayjs'
 import "./WeekView.scss";
 import Time from "./Time";
 
-function TimeSlot({ time, weekdays, events, openAddEventModal }) {
+function TimeSlot({ time, weekdays }) {
 	return (
 		<Grid container direction="row">
 			<Grid item xs={1} className="flex-center2">

@@ -1,17 +1,13 @@
 import React from "react";
 import moment from "moment";
-import CustomizedDialogs from "../shared/ModelForms/CustomizedDialog";
-import VideocamIcon from "@mui/icons-material/Videocam";
-import CallIcon from "@mui/icons-material/Call";
-import { isTodaysDate } from "../../weekUtils";
 import "./MonthView.scss";
 import { useCalendar } from "../../context/calendarContext";
 import dayjs from "dayjs";
 import CustomizedMonthGridDialogs from "../shared/ModelForms/CustomizedMonthGridDialog";
 import { getCount } from "../../util";
+import Event from "../shared/Events/Event";
 
 export default function Day({ day, rowIdx, events }) {
-	const [open, setOpen] = React.useState(false);
 	const { state, dispatch } = useCalendar();
 
 	function getCurrentDayClass() {
@@ -20,7 +16,7 @@ export default function Day({ day, rowIdx, events }) {
 			: "";
 	}
 
-	const Event = ({ eventObj }) => {
+	const EventMonth = ({ eventObj }) => {
 		return (
 			<div
 				style={{ marginBottom: "2px" }}
@@ -30,21 +26,11 @@ export default function Day({ day, rowIdx, events }) {
 					className="border-2 flex-center flex-center2 black-bg white-color font-12"
 					style={{ width: "37px", height: "16px" }}
 				>
-					{dayjs(eventObj.startTime).format("hh:mm")}
+					{dayjs(eventObj?.startTime).format("hh:mm")}
 				</div>
-				<div className="flex-grow text-elip pl-1">{eventObj.name}</div>
+				<div className="flex-grow text-elip pl-1">{eventObj?.name}</div>
 			</div>
 		);
-	};
-	// console.log(day)
-	const openMonthEventDialog = (e) => {
-		e.preventDefault();
-		setOpen(true);
-		console.log("clicked", parseInt(day.format("DD MM YYYYY")));
-	};
-
-	const onSetOpen = (value) => {
-		setOpen(value);
 	};
 
 	const getHeight = () => {
@@ -56,7 +42,9 @@ export default function Day({ day, rowIdx, events }) {
 
 	React.useEffect(() => {
 		setNEvents((x) => getCount(day.format("DD MM YYYY"), state));
-	}, [state.allEvents]);
+	}, [day, state, state.allEvents]);
+
+	// console.log("month grid day", day);
 
 	const handleMonthGridEventDialog = (event) => {
 		event.stopPropagation()
@@ -65,12 +53,26 @@ export default function Day({ day, rowIdx, events }) {
 			date: day
 		})
 	}
-
+	const [openAllEvents, setOpenAllEvents] = React.useState(false)
+	const currEvents = (events) => {
+		let arr = []
+		events.map((event) => {
+			let currDate = day.format('DD/MM/YYYY')
+			let eventDate = dayjs(event.dateStamp).format('DD/MM/YYYY')
+			if (currDate === eventDate) arr.push(event)
+		})
+		return arr
+	}
 	return (
 		<div
 			className={`border border-gray flex-column cursor-pointer`}
 			style={{ minHeight: "150px" }}
-			onClick={handleMonthGridEventDialog}
+			onClick={() =>
+				dispatch({
+					type: "OPEN_EVENT_DIALOG",
+					payload: { dateStamp: day, time: "9:00 AM", id: day.id },
+				})
+			}
 		>
 			<header className="flex-column align-items-center">
 				{rowIdx === 0 && (
@@ -87,9 +89,30 @@ export default function Day({ day, rowIdx, events }) {
 					{nEvents > 3 && (
 						<div
 							className="themeblue-bg border-2 flex-center flex-center2 font-12 white-color"
-							style={{ width: "38px", height: "21px" }}
+							style={{ width: "38px", height: "21px", position: 'relative' }}
+							onClick={(event) => {
+								event.stopPropagation()
+								console.log(currEvents(state.allEvents))
+								setOpenAllEvents(!openAllEvents)
+							}}
 						>
 							+{nEvents - 3}
+							<div
+								className={openAllEvents ? "view-all-events-open flex-center" : "view-all-events-close"}
+							>
+								<div>
+									{
+										state.allEvents &&
+										currEvents(state.allEvents).map((event) => (
+											<Event
+												type="voice"
+												event={event}
+											/>
+										)
+										)
+									}
+								</div>
+							</div>
 						</div>
 					)}
 				</div>
@@ -103,7 +126,7 @@ export default function Day({ day, rowIdx, events }) {
 									dayjs(eventObj.dateStamp).format("DD MM YYYY") ===
 									day.format("DD MM YYYY") && (
 										<>
-											<Event
+											<EventMonth
 												key={eventObj.id}
 												type="voice"
 												eventObj={eventObj}
@@ -115,8 +138,6 @@ export default function Day({ day, rowIdx, events }) {
 						))}
 				</div>
 			</div>
-
-			{/* <CustomizedDialogs /> */}
-		</div>
+		</div >
 	);
 }

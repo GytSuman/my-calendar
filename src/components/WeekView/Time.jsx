@@ -18,7 +18,7 @@ function Time(props) {
 		let arr = []
 		events.map((event) => {
 			let currDate = dayjs(day.dateStamp).hour(time).format('DD/MM/YYYY HH:mm')
-			let eventDate = event?.dateStamp.format('DD/MM/YYYY HH:mm')
+			let eventDate = dayjs(event.dateStamp).format('DD/MM/YYYY HH:mm')
 			if (currDate === eventDate) arr.push(event)
 		})
 		return arr
@@ -28,20 +28,7 @@ function Time(props) {
 	const selectedEventDay = () => {
 		return (
 			<>
-				{/* {
-					state.allEvents &&
-					currEvents(state.allEvents).map((i, event) => (
-						<>
-							{
-								<Event
-									type="voice"
-									event={event}
-									key={event.id}
-								/>
-							}
-						</>
-					))
-				} */}
+
 				{state.allEvents &&
 					state.allEvents.map((event) => (
 						<>
@@ -101,6 +88,7 @@ function Time(props) {
 				xs={row}
 				sx={isTodaysDate(day.dateStamp) ? { ...lightHighlighter } : {}}
 				className="col slot1 flex-row"
+				style={{ gap: '5px' }}
 				onClick={() => {
 					console.log("clicked at grid", dayjs(day.dateStamp).hour(time));
 					dispatch({
@@ -113,8 +101,10 @@ function Time(props) {
 				{getCountTimeslot(day, time, state) > 2 &&
 					<span
 						className='height-100 flex-center'
+						style={{ position: 'absolute', right: '0', height: '20px', width: '20px', borderRadius: '5px', boxShadow: 'lightgray 1px 1px 2px' }}
 						onClick={(event) => {
 							event.stopPropagation()
+							console.log(currEvents(state.allEvents))
 							setOpenAllEvents(!openAllEvents)
 						}}
 					>

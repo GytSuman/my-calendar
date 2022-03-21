@@ -2,23 +2,26 @@
     position: absolute;
     z-index: 9;
     left: 100%;
-    min-width: 100px;
+    min-width: 120px;
     top: 0%;
     min-height: 80px;
     background-color: white;
     padding: 12px;
+    padding-right: 16px;
     color: black;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     position: absolute;
     border-radius: 16px;
     display: flex;
     animation: 1s ease-out 0s 1 slideInFromLeft;
+    justify-content: center;
 }
 
 .view-all-events-open>div {
-    width: 80%;
+    width: 100%;
     display: flex;
     flex-direction: column;
+    gap: 5px;
 }
 
 @keyframes slideInFromLeft {

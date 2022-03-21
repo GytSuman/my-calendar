@@ -27,7 +27,8 @@ function DayTime({ time, dateStamp, dayObj }) {
 			<>
 				{state.allEvents.map((event) => (
 					<>
-						{event.dateStamp === dayObj.dateStamp &&
+						{
+							dayjs(event.dateStamp).format('YYY MM DD') === dayjs(dayObj.dateStamp).format('YYY MM DD') &&
 							parseInt(dayjs(event.startTime).format("h")) ===
 							parseInt(time) && (
 								<Event type="voice" eventWidth={95} event={event} key={event.id} />
@@ -46,6 +47,7 @@ function DayTime({ time, dateStamp, dayObj }) {
 				xs={12}
 				key={dateStamp}
 				className="col slot flex-row"
+				style={{ gap: '5px' }}
 				onClick={() => {
 					dispatch({
 						type: "OPEN_EVENT_DIALOG",

@@ -5,44 +5,71 @@ import "./Events.scss";
 import dayjs from "dayjs";
 import { useCalendar } from "../../../context/calendarContext";
 
-function Event({ type, event }) {
+function Event({ type, event, eventWidth }) {
+	const [eventHeight, setEventHeight] = React.useState(68);
 	const IconDisplay = () => {
 		if (type === "video") return <VideocamIcon className="event-icon" />;
 		else return <CallIcon className="event-icon" />;
 	};
+
+	const getHeight = (startTime, endTime) => {
+		const start = startTime;
+		const end = endTime;
+		const hoursAndMinutesArrayOne = start.split(":");
+		const hoursAndMinutesArrayTwo = end.split(":");
+		const minutesOne =
+			parseInt(hoursAndMinutesArrayOne[0]) * 60 +
+			parseInt(hoursAndMinutesArrayOne[1]);
+		const minutesTwo =
+			parseInt(hoursAndMinutesArrayTwo[0]) * 60 +
+			parseInt(hoursAndMinutesArrayTwo[1]);
+
+		const diffrence = minutesTwo - minutesOne;
+		setEventHeight((eventHeight / 60) * diffrence);
+	};
+
+	React.useEffect(() => {
+		getHeight(
+			dayjs(event?.startTime).format("hh:mm"),
+			dayjs(event?.endTime).format("hh:mm ")
+		);
+	}, [event?.endTime, event?.startTime]);
+
 	const eventConStyle = {
-		width: "95%",
-		height: "68px",
+		// width: eventWidth + "%",
+		zIndex: '2',
+		padding: '0',
+		width: '100%',
+		height: eventHeight + "px",
+		height: '80px',
 		position: "relative",
 	};
+
 	return (
 		<div
+			className="border-4 event-background event-border m-1 flex-col"
 			style={{ ...eventConStyle }}
-			className="border-4 event-background event-border p-1 flex-col"
 		// onClick={() =>
 		// 	dispatch({ type: "DELETE_SELECTED_EVENT", payload: state.allEvents })
 		// }
 		>
-			<div className="flex-row height-100 font-12" style={{ flexWrap: "wrap" }}>
+			<div className="flex-row font-12 p-1" style={{ flexWrap: "wrap" }}>
 				<div
 					className="border-2 flex-center flex-center2 black-bg white-color mr-1 text-elip"
-					style={{ width: "37px", height: "16px" }}
+				// style={{ width: "37px", height: "16px" }}
 				>
 					{dayjs(event.startTime).format("hh:mm")}
 				</div>
-				<div style={{ height: "16px" }} className="light-color text-elip">
+				<div
+					// style={{ height: "16px" }}
+					className="light-color text-elip">
 					{dayjs(event.endTime).format("hh:mm ")}
 				</div>
 			</div>
+			<div className="font-13 bold-font text-elip pl-1">{event.name}</div>
 			<div
-				className="height-100 font-13 bold-font text-elip"
-				style={{ width: "90%" }}
-			>
-				{event.name}
-			</div>
-			<div
-				className="light-color height-100 font-12 text-elip"
-				style={{ width: "90%" }}
+				className="light-color font-12 pl-1"
+			// style={{ width: "90%", overflow: "hidden" }}
 			>
 				{event.title}hello
 			</div>

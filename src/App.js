@@ -84,13 +84,14 @@ function App() {
 	};
 
 	React.useEffect(() => {
-		setCurrentMonth(getMonth(currentMonthIdx));
+		setCurrentMonth(getMonthOriginal(currentMonthIdx));
 	}, [currentMonthIdx, setCurrentMonth]);
 
 	const handleInputChange = (event) => {
 		setType(event.target.value);
 	};
 
+	console.log("get month", getMonth());
 	return (
 		<div className="App">
 			<CalendarHeader
