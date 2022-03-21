@@ -8,7 +8,7 @@ import { getCount } from "../../util";
 import Event from "../shared/Events/Event";
 
 export default function Day({ day, rowIdx, events }) {
-	const { state, dispatch } = useCalendar();
+	const { state, dispatch, openAllEventsMonth, setOpenAllEventsMonth } = useCalendar();
 
 	function getCurrentDayClass() {
 		return day.format("DD-MM-YY") === moment().format("DD-MM-YY")
@@ -53,7 +53,7 @@ export default function Day({ day, rowIdx, events }) {
 			date: day
 		})
 	}
-	const [openAllEvents, setOpenAllEvents] = React.useState(false)
+
 	const currEvents = (events) => {
 		let arr = []
 		events.map((event) => {
@@ -63,6 +63,14 @@ export default function Day({ day, rowIdx, events }) {
 		})
 		return arr
 	}
+
+	var [open, setOpen] = React.useState(false)
+
+	React.useEffect(() => {
+		if (day.format("DD MM YYYY") !== openAllEventsMonth) setOpen(false)
+		console.log(open, openAllEventsMonth, day.format("DD MM YYYY"))
+	}, [openAllEventsMonth])
+
 	return (
 		<div
 			className={`border border-gray flex-column cursor-pointer`}
@@ -92,13 +100,13 @@ export default function Day({ day, rowIdx, events }) {
 							style={{ width: "38px", height: "21px", position: 'relative' }}
 							onClick={(event) => {
 								event.stopPropagation()
-								console.log(currEvents(state.allEvents))
-								setOpenAllEvents(!openAllEvents)
+								setOpenAllEventsMonth(day.format("DD MM YYYY"))
+								setOpen(!open)
 							}}
 						>
 							+{nEvents - 3}
 							<div
-								className={openAllEvents ? "view-all-events-open flex-center" : "view-all-events-close"}
+								className={open ? "view-all-events open-div flex-center" : "close-div"}
 							>
 								<div>
 									{

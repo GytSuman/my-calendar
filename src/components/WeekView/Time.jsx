@@ -6,10 +6,11 @@ import Event from "../shared/Events/Event";
 import { useCalendar } from "../../context/calendarContext";
 import dayjs from "dayjs";
 import { generateWeekView, getCountTimeslot } from "../../util";
+import moment from 'moment'
 
 function Time(props) {
 	const { day, time } = props;
-	const { state, dispatch } = useCalendar();
+	const { state, dispatch, openAllEventsWeek, setOpenAllEventsWeek } = useCalendar();
 
 	React.useEffect(() => { }, []);
 	const row = 12 / 7;
@@ -24,7 +25,6 @@ function Time(props) {
 		return arr
 	}
 
-	// console.log("time: ", time);
 	const selectedEventDay = () => {
 		return (
 			<>
@@ -51,40 +51,19 @@ function Time(props) {
 			</>
 		);
 	};
-	// const [arr, setArr] = React.useState({});
-	// React.useEffect(() => {
-	// 	state.allEvents.map((event) => {
-	// 		let currDate = dayjs(day.dateStamp).hour(time).format('DD/MM/YYYY HH:mm')
-	// 		let eventDate = event.dateStamp.format('DD/MM/YYYY HH:mm')
-	// 		if (currDate === eventDate) arr.push(currDate)
-	// 	})
-	// }, [state.allEvents])
 
-	// const [gridWrap, setGridWrap] = React.useState({});
-	// const [eventWidth, setEventWidth] = React.useState(95);
-	// React.useEffect(() => {
-	// 	if (getCountTimeslot(day, time, state) > 2) {
-	// 		// setGridWrap({
-	// 		// 	flexWrap: "wrap"
-	// 		// });
-	// 		// setGridWrap({
-	// 		// 	flexBasis: '1'
-	// 		// });
-	// 		setEventWidth(39);
-	// 	} else {
-	// 		// setGridWrap({
-	// 		// 	flexWrap: "nowrap"
-	// 		// });
-	// 		setEventWidth(95);
-	// 	}
-	// }, [day, state, state.allEvents, time]);
-	const [openAllEvents, setOpenAllEvents] = React.useState(false)
+	var [open, setOpen] = React.useState(false)
+
+	React.useEffect(() => {
+		if (moment(day.dateStamp).hour(time).format('DD/MM/YYYY HH:mm') !== openAllEventsWeek) setOpen(false)
+		console.log(open, openAllEventsWeek, moment(day.dateStamp).hour(time).format('DD/MM/YYYY HH:mm'))
+	}, [openAllEventsWeek])
+
 	return (
 		<>
 			<Grid
 				item
 				key={day.dateStamp}
-				// style={gridWrap}
 				xs={row}
 				sx={isTodaysDate(day.dateStamp) ? { ...lightHighlighter } : {}}
 				className="col slot1 flex-row"
@@ -100,22 +79,21 @@ function Time(props) {
 				{selectedEventDay()}
 				{getCountTimeslot(day, time, state) > 2 &&
 					<span
-						className='height-100 flex-center'
-						style={{ position: 'absolute', right: '0', height: '20px', width: '20px', borderRadius: '5px', boxShadow: 'lightgray 1px 1px 2px' }}
+						className='height-100 flex-center event-count-button'
 						onClick={(event) => {
 							event.stopPropagation()
-							console.log(currEvents(state.allEvents))
-							setOpenAllEvents(!openAllEvents)
+							setOpen(!open)
+							setOpenAllEventsWeek(moment(day.dateStamp).hour(time).format('DD/MM/YYYY HH:mm'))
 						}}
 					>
 						+{getCountTimeslot(day, time, state) - 2}
 						<div
-							className={openAllEvents ? "view-all-events-open flex-center" : "view-all-events-close"}
+							className={open ? "view-all-events open-div flex-center" : "close-div"}
 						>
 							<div>
 								{
 									state.allEvents &&
-									currEvents(state.allEvents).map((event) => (
+									currEvents(state.allEvents).slice(2, currEvents(state.allEvents).length).map((event) => (
 										<Event
 											type="voice"
 											event={event}

@@ -75,8 +75,8 @@ export const getCountTimeslot = (day, time, state) => {
 	let count = 0;
 	state?.allEvents?.map((eventObj) => {
 		if (
-			dayjs(eventObj?.startTime).format("hh:mm") ===
-				dayjs().hour(time).minute(0).format("hh:mm") &&
+			dayjs(eventObj?.startTime).format("HH:mm") ===
+				dayjs().hour(time).minute(0).format("HH:mm") &&
 			dayjs(eventObj?.startTime).format("DD MM YYYY") == day.day
 		)
 			count++;

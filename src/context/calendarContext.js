@@ -28,6 +28,8 @@ export default function CalendarContext({ children }) {
 	const [days, setDays] = React.useState(getDays());
 	const [startDate, setStartDate] = React.useState();
 	const [type, setType] = React.useState("week");
+	const [openAllEventsWeek, setOpenAllEventsWeek] = React.useState(null)
+	const [openAllEventsMonth, setOpenAllEventsMonth] = React.useState(null)
 	const [state, dispatch] = React.useReducer(CalendarReducer, initialState);
 
 	return (
@@ -45,6 +47,8 @@ export default function CalendarContext({ children }) {
 				setStartDate,
 				type,
 				setType,
+				openAllEventsWeek,
+				setOpenAllEventsWeek,openAllEventsMonth, setOpenAllEventsMonth,
 				state,
 				dispatch,
 			}}

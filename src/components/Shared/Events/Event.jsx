@@ -36,8 +36,6 @@ function Event({ type, event, eventWidth }) {
 	}, [event?.endTime, event?.startTime]);
 
 	const eventConStyle = {
-		// width: eventWidth + "%",
-		zIndex: '2',
 		padding: '0',
 		width: '100%',
 		height: eventHeight + "px",
@@ -53,7 +51,7 @@ function Event({ type, event, eventWidth }) {
 		// 	dispatch({ type: "DELETE_SELECTED_EVENT", payload: state.allEvents })
 		// }
 		>
-			<div className="flex-row font-12 p-1" style={{ flexWrap: "wrap" }}>
+			<div className="flex-row font-12 p-1 height-100" style={{ flexWrap: "wrap" }}>
 				<div
 					className="border-2 flex-center flex-center2 black-bg white-color mr-1 text-elip"
 				// style={{ width: "37px", height: "16px" }}
@@ -66,14 +64,16 @@ function Event({ type, event, eventWidth }) {
 					{dayjs(event.endTime).format("hh:mm ")}
 				</div>
 			</div>
-			<div className="font-13 bold-font text-elip pl-1">{event.name}</div>
-			<div
-				className="light-color font-12 pl-1"
-			// style={{ width: "90%", overflow: "hidden" }}
-			>
-				{event.title}hello
+			<div className="font-13 bold-font text-elip pl-1 height-100">{event.name}</div>
+			<div className='flex flex-between height-100'>
+				<div
+					className="light-color font-12 pl-1"
+				// style={{ width: "90%", overflow: "hidden" }}
+				>
+					{event.title}hello
+				</div>
+				{IconDisplay()}
 			</div>
-			{IconDisplay()}
 		</div>
 	);
 }
