@@ -14,6 +14,8 @@ export const CalendarReducer = (state, action) => {
 				...state,
 				showEventDialog: true,
 				dateStamp: dateStamp,
+				weekDateStamp: action.payload.weekDateStamp,
+				dayOfTheYear: action.payload.dayOfTheYear,
 				eventStart: +start,
 				eventEnd: +end,
 				startTime: dayjs(+start).format("MM/DD/YYYY h:mm A"),
@@ -45,11 +47,13 @@ export const CalendarReducer = (state, action) => {
 			return {};
 
 		case "OPEN_MONTH_GRID_EVENT_DIALOG":
-			console.log('selected date:', action.date)
+			console.log('selected date:', action.payload.weekDateStamp)
 			return {
 				...state,
 				showMonthGridEventDialog: true,
-				selectedDate: action.date
+				dateStamp: action.payload.dateStamp,
+				dayOfTheYear: action.payload.dayOfTheYear,
+				weekDateStamp: action.payload.weekDateStamp,
 			};
 
 		case "CLOSE_MONTH_GRID_EVENT_DIALOG":

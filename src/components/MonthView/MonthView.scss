@@ -30,4 +30,12 @@
     position: absolute;
 }
 
-.view-all-events-close {}
+.open-div {
+    display: flex;
+    animation: 0.3s ease-out 0s 1 open;
+}
+
+.close-div {
+    display: none;
+    animation: 0.3s ease-out 0s 1 slideInFromLeft;
+}

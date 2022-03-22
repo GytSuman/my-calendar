@@ -53,6 +53,7 @@ function DayTime({ time, dateStamp, dayObj }) {
 						type: "OPEN_EVENT_DIALOG",
 						payload: {
 							dateStamp: dayObj.dateStamp,
+							weekDateStamp: dayjs(dayObj.dateStamp).hour(time),
 							time: time,
 							id: dayObj.id,
 						},

@@ -18,8 +18,10 @@ function Time(props) {
 	const currEvents = (events) => {
 		let arr = []
 		events.map((event) => {
+			console.log(event)
 			let currDate = dayjs(day.dateStamp).hour(time).format('DD/MM/YYYY HH:mm')
-			let eventDate = dayjs(event.dateStamp).format('DD/MM/YYYY HH:mm')
+			let eventDate = dayjs(event?.weekDateStamp).format('DD/MM/YYYY HH:mm')
+			console.log(currDate, eventDate)
 			if (currDate === eventDate) arr.push(event)
 		})
 		return arr
@@ -32,10 +34,13 @@ function Time(props) {
 				{state.allEvents &&
 					state.allEvents.map((event) => (
 						<>
+							{console.log(event)}
 							{
-								dayjs(event.dateStamp).format('YYY MM DD') === dayjs(day.dateStamp).format('YYY MM DD') &&
+								event.dayOfTheYear === dayjs(day.dateStamp).format('DD MM YYYY') &&
+								//dayjs(event.dateStamp).format('YYY MM DD') === dayjs(day.dateStamp).format('YYY MM DD') &&
 								parseInt(dayjs(event.startTime).format("h")) ===
-								parseInt(time) && (
+								parseInt(time) &&
+								(
 									<>
 										{
 											<Event
@@ -55,8 +60,7 @@ function Time(props) {
 	var [open, setOpen] = React.useState(false)
 
 	React.useEffect(() => {
-		if (moment(day.dateStamp).hour(time).format('DD/MM/YYYY HH:mm') !== openAllEventsWeek) setOpen(false)
-		console.log(open, openAllEventsWeek, moment(day.dateStamp).hour(time).format('DD/MM/YYYY HH:mm'))
+		if (dayjs(day.dateStamp).hour(time).format('DD/MM/YYYY HH:mm') !== openAllEventsWeek) setOpen(false)
 	}, [openAllEventsWeek])
 
 	return (
@@ -69,10 +73,10 @@ function Time(props) {
 				className="col slot1 flex-row"
 				style={{ gap: '5px' }}
 				onClick={() => {
-					console.log("clicked at grid", dayjs(day.dateStamp).hour(time));
+					console.log("clicked at grid", dayjs(day.dateStamp));
 					dispatch({
 						type: "OPEN_EVENT_DIALOG",
-						payload: { dateStamp: dayjs(day.dateStamp).hour(time), time, id: day.id },
+						payload: { dateStamp: day.dateStamp, weekDateStamp: dayjs(day.dateStamp).hour(time), dayOfTheYear: dayjs(day.dateStamp).format('DD MM YYYY'), time, id: day.id },
 					});
 				}}
 			>
@@ -83,7 +87,8 @@ function Time(props) {
 						onClick={(event) => {
 							event.stopPropagation()
 							setOpen(!open)
-							setOpenAllEventsWeek(moment(day.dateStamp).hour(time).format('DD/MM/YYYY HH:mm'))
+							console.log(state.allEvents)
+							setOpenAllEventsWeek(dayjs(day.dateStamp).hour(time).format('DD/MM/YYYY HH:mm'))
 						}}
 					>
 						+{getCountTimeslot(day, time, state) - 2}

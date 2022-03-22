@@ -66,9 +66,8 @@ BootstrapDialogTitle.propTypes = {
 export default function CustomizedMonthGridDialogs() {
 	const { state, dispatch } = useCalendar();
 	const [name, setName] = React.useState("");
-	const [startTime, setStartTime] = React.useState(dayjs(state?.selectedDate).format('YYYY-MM-DD'));
-	const [endTime, setEndTime] = React.useState("");
-	const [type, setType] = React.useState("voice");
+	const [startTime, setstartTime] = React.useState("03/02/2022 07:00 AM");
+	const [endTime, setendTime] = React.useState("03/02/2022 09:00 AM");
 
 	console.log("Reducer :", dayjs(state?.selectedDate).format('YYYY-MM-DD'))
 	console.log("state :", startTime)
@@ -77,8 +76,14 @@ export default function CustomizedMonthGridDialogs() {
 		setName(event.target.value);
 	};
 
-	const handleTypeChange = (event) => {
-		setType(event.target.value);
+	const handlestartTimeChange = (event) => {
+		console.log(event.target.value);
+		setstartTime(event.target.value);
+	};
+
+	const handleendTimeChange = (event) => {
+		console.log(event.target.value);
+		setendTime(event.target.value);
 	};
 
 	const handleSubmitButton = () => {
@@ -90,16 +95,22 @@ export default function CustomizedMonthGridDialogs() {
 				startTime: startTime,
 				endTime: endTime,
 				dateStamp: state.dateStamp,
+				dayOfTheYear: state.dayOfTheYear,
 			},
 		});
+		setName("");
+		setstartTime("07:00");
+		setendTime("08:00");
 	};
+
+	console.log("show month grid event dialog", state);
 
 	return (
 		<div style={{ zIndex: 1000 }}>
 			<BootstrapDialog
 				onClose={() => dispatch({ type: "CLOSE_MONTH_GRID_EVENT_DIALOG" })}
 				aria-labelledby="customized-dialog-title"
-				open={state.showMonthGridEventDialog}
+				open={state?.showMonthGridEventDialog}
 			>
 				<BootstrapDialogTitle
 					id="customized-dialog-title"
@@ -116,83 +127,33 @@ export default function CustomizedMonthGridDialogs() {
 						value={name}
 					/>
 					<TextField
-						id="timeFrom"
+						id="startTime"
 						label="Event From"
-						type="Date"
+						type="time"
 						value={startTime}
 						InputLabelProps={{
 							shrink: true,
 						}}
-						onChange={(e) => console.log(e.target.value, setStartTime(e.target.value))}
-						sx={{ width: 150, m: 2 }}
-					/>
-					{/* <Grid container sx={{ m: 2 }}>
-						<LocalizationProvider dateAdapter={AdapterDateFns}>
-							<DateTimePicker
-								renderInput={(props) => <TextField {...props} />}
-								label="DateTimePicker"
-								value={startTime}
-								defaultValue={state?.selectedDate}
-								onChange={() => setStartTime(startTime)}
-								sx={{ m: 1 }}
-							/>
-							<DateTimePicker
-								renderInput={(props) => <TextField {...props} />}
-								label="DateTimePicker"
-								minDateTime={state?.selectedDate?.$d}
-								onChange={(e) => setEndTime(e)}
-								sx={{ m: 1 }}
-							/>
-						</LocalizationProvider>
-					</Grid> */}
-					{/* <TextField
-						id="timeFrom"
-						label="Event From"
-						type="time"
-						disabled
-						value={timeFrom}
-						InputLabelProps={{
-							shrink: true,
-						}}
 						inputProps={{
 							step: 300, // 5 min
 						}}
-						onChange={handleTimeFromChange}
+						onChange={handlestartTimeChange}
 						sx={{ width: 150, m: 2 }}
 					/>
 					<TextField
-						id="timeTo"
+						id="endTime"
 						label="Event To"
 						type="time"
-						value={timeTo}
+						value={endTime}
 						InputLabelProps={{
 							shrink: true,
 						}}
 						inputProps={{
 							step: 300, // 5 min
 						}}
-						onChange={handleTimeToChange}
+						onChange={handleendTimeChange}
 						sx={{ width: 150, m: 2 }}
 					/>
-					<FormControl>
-						<RadioGroup
-							id="type"
-							name="type"
-							value={type}
-							onChange={handleTypeChange}
-						>
-							<FormControlLabel
-								value="voice"
-								control={<Radio />}
-								label="voice"
-							/>
-							<FormControlLabel
-								value="video"
-								control={<Radio />}
-								label="video"
-							/>
-						</RadioGroup>
-					</FormControl> */}
 				</DialogContent>
 				<DialogActions>
 					<Button onClick={handleSubmitButton}>Save</Button>

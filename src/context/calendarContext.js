@@ -11,6 +11,7 @@ export const Calendar = React.createContext(null);
 export const initialState = {
 	selectedGridTime: null,
 	dateStamp: null,
+	dayOfTheYear:null,
 	showEventDialog: false,
 	showMonthGridEventDialog: false,
 	startDate: +dayjs(),
@@ -19,6 +20,7 @@ export const initialState = {
 	startTime: null,
 	endTime: null,
 	allEvents: [],
+	weekDateStamp : null,
 };
 
 export default function CalendarContext({ children }) {

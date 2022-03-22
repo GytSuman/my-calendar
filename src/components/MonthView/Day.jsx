@@ -16,7 +16,8 @@ export default function Day({ day, rowIdx, events }) {
 			: "";
 	}
 
-	const EventMonth = ({ eventObj }) => {
+	const Event = ({ eventObj }) => {
+		console.log(eventObj)
 		return (
 			<div
 				style={{ marginBottom: "2px" }}
@@ -26,9 +27,9 @@ export default function Day({ day, rowIdx, events }) {
 					className="border-2 flex-center flex-center2 black-bg white-color font-12"
 					style={{ width: "37px", height: "16px" }}
 				>
-					{dayjs(eventObj?.startTime).format("hh:mm")}
+					{dayjs(eventObj?.startTime).format('HH:mm')}
 				</div>
-				<div className="flex-grow text-elip pl-1">{eventObj?.name}</div>
+				<div className="flex-grow text-elip pl-1">{eventObj.name}</div>
 			</div>
 		);
 	};
@@ -44,32 +45,21 @@ export default function Day({ day, rowIdx, events }) {
 		setNEvents((x) => getCount(day.format("DD MM YYYY"), state));
 	}, [day, state, state.allEvents]);
 
-	// console.log("month grid day", day);
+	console.log("state all events", state?.allEvents);
 
-	const handleMonthGridEventDialog = (event) => {
-		event.stopPropagation()
-		dispatch({
-			type: "OPEN_MONTH_GRID_EVENT_DIALOG",
-			date: day
-		})
-	}
+	const [open, setOpen] = React.useState(false)
+
+	React.useEffect(() => {
+		if (day.dayOfTheYear !== openAllEventsMonth) setOpen(false)
+	}, [openAllEventsMonth])
 
 	const currEvents = (events) => {
 		let arr = []
 		events.map((event) => {
-			let currDate = day.format('DD/MM/YYYY')
-			let eventDate = dayjs(event.dateStamp).format('DD/MM/YYYY')
-			if (currDate === eventDate) arr.push(event)
+			if (event.dayOfTheYear === day.format("DD MM YYYY")) arr.push(event)
 		})
 		return arr
 	}
-
-	var [open, setOpen] = React.useState(false)
-
-	React.useEffect(() => {
-		if (day.format("DD MM YYYY") !== openAllEventsMonth) setOpen(false)
-		console.log(open, openAllEventsMonth, day.format("DD MM YYYY"))
-	}, [openAllEventsMonth])
 
 	return (
 		<div
@@ -77,8 +67,14 @@ export default function Day({ day, rowIdx, events }) {
 			style={{ minHeight: "150px" }}
 			onClick={() =>
 				dispatch({
-					type: "OPEN_EVENT_DIALOG",
-					payload: { dateStamp: day, time: "9:00 AM", id: day.id },
+					type: "OPEN_MONTH_GRID_EVENT_DIALOG",
+					payload: {
+						dateStamp: day.format("DD MM YYYY"),
+						weekDateStamp: day,
+						dayOfTheYear: day.format("DD MM YYYY"),
+						time: "9:00 AM",
+						id: day.id,
+					},
 				})
 			}
 		>
@@ -89,6 +85,7 @@ export default function Day({ day, rowIdx, events }) {
 					</p>
 				)}
 			</header>
+			{/* <CustomizedMonthGridDialogs /> */}
 			<div>
 				<div
 					className={`flex-row flex-space-between p-1 text-sm my-1 lightfont-color font-18 ${getCurrentDayClass()}`}
@@ -100,8 +97,9 @@ export default function Day({ day, rowIdx, events }) {
 							style={{ width: "38px", height: "21px", position: 'relative' }}
 							onClick={(event) => {
 								event.stopPropagation()
-								setOpenAllEventsMonth(day.format("DD MM YYYY"))
 								setOpen(!open)
+								console.log(open)
+								setOpenAllEventsMonth(day.dayOfTheYear)
 							}}
 						>
 							+{nEvents - 3}
@@ -111,10 +109,10 @@ export default function Day({ day, rowIdx, events }) {
 								<div>
 									{
 										state.allEvents &&
-										currEvents(state.allEvents).map((event) => (
+										currEvents(state.allEvents).slice(3, currEvents(state.allEvents).length).map((eventObj) => (
 											<Event
 												type="voice"
-												event={event}
+												eventObj={eventObj}
 											/>
 										)
 										)
@@ -127,25 +125,31 @@ export default function Day({ day, rowIdx, events }) {
 				<div
 					style={{ height: "100px", marginTop: "20px", overflowY: "hidden" }}
 				>
-					{state?.allEvents?.length !== 0 &&
-						state?.allEvents?.map((eventObj) => (
+					{state.allEvents.length !== 0 &&
+						state.allEvents.map((eventObj) => (
 							<>
-								{
-									dayjs(eventObj.dateStamp).format("DD MM YYYY") ===
-									day.format("DD MM YYYY") && (
+								<div key={eventObj.id}>
+									{/* {parseInt(dayjs(eventObj.dateStamp).format("DD MM YYYY")) ===
+									parseInt(day.format("DD MM YYYY")) && (
+										<Event type="voice" eventObj={eventObj} key={eventObj.id} />
+									)
+								} */}
+									{eventObj?.dayOfTheYear === day.format("DD MM YYYY") && (
 										<>
-											<EventMonth
-												key={eventObj.id}
+											<Event
 												type="voice"
 												eventObj={eventObj}
+												key={eventObj.id}
 											/>
 										</>
-									)
-								}
+									)}
+								</div>
 							</>
 						))}
 				</div>
 			</div>
-		</div >
+
+			{/* <CustomizedDialogs /> */}
+		</div>
 	);
 }
