@@ -8,11 +8,14 @@ export function getMonth(month = dayjs().month()) {
 	const firstDayOfTheMonth = dayjs(new Date(year, month, 1)).day();
 	let currentMonthCount = 0 - firstDayOfTheMonth;
 	const dayMatrix = new Array(5).fill([]).map(() => {
-		return new Array(7).fill(null).map((dayObj) => {
-			currentMonthCount++;
-			console.log(dayObj);
-			return dayjs(new Date(year, month, currentMonthCount));
-		});
+		return new Array(7)
+			.map(
+				(day, index) => index
+				// currentMonthCount++;
+				// console.log(dayObj);
+				// return dayjs(new Date(year, month, currentMonthCount));
+			)
+			.map((day) => console.log(day));
 	});
 	return dayMatrix;
 }
