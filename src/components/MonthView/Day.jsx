@@ -25,7 +25,7 @@ export default function Day({ day, rowIdx, events }) {
 					className="border-2 flex-center flex-center2 black-bg white-color font-12"
 					style={{ width: "37px", height: "16px" }}
 				>
-					{dayjs(eventObj.startTime).format("hh:mm")}
+					{eventObj.startTime}
 				</div>
 				<div className="flex-grow text-elip pl-1">{eventObj.name}</div>
 			</div>
@@ -43,7 +43,7 @@ export default function Day({ day, rowIdx, events }) {
 		setNEvents((x) => getCount(day.format("DD MM YYYY"), state));
 	}, [day, state, state.allEvents]);
 
-	console.log("month grid day", day);
+	console.log("state all events", state?.allEvents);
 
 	return (
 		<div
@@ -51,8 +51,12 @@ export default function Day({ day, rowIdx, events }) {
 			style={{ minHeight: "150px" }}
 			onClick={() =>
 				dispatch({
-					type: "OPEN_EVENT_DIALOG",
-					payload: { dateStamp: day, time: "9:00 AM", id: day.id },
+					type: "OPEN_MONTH_GRID_EVENT_DIALOG",
+					payload: {
+						dateStamp: day.format("DD MM YYYY"),
+						time: "9:00 AM",
+						id: day.id,
+					},
 				})
 			}
 		>
@@ -90,8 +94,7 @@ export default function Day({ day, rowIdx, events }) {
 										<Event type="voice" eventObj={eventObj} key={eventObj.id} />
 									)
 								} */}
-									{dayjs(eventObj.dateStamp).format("DD MM YYYY") ===
-										day.format("DD MM YYYY") && (
+									{eventObj?.dateStamp === day.format("DD MM YYYY") && (
 										<>
 											<Event
 												type="voice"

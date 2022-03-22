@@ -6,10 +6,11 @@ import dayjs from "dayjs";
 import { useCalendar } from "../../../context/CalendarContext";
 
 function Event({ type, event, eventWidth }) {
-	const [eventHeight, setEventHeight] = React.useState(68);
+	const [eventHeight, setEventHeight] = React.useState(80);
+	const [marginTop, setMarginTop] = React.useState(0);
 	const IconDisplay = () => {
 		if (type === "video") return <VideocamIcon className="event-icon" />;
-		else return <CallIcon className="event-icon" />;
+		else return <CallIcon className="event-icon" fontSize="16px" />;
 	};
 
 	const getHeight = (startTime, endTime) => {
@@ -26,6 +27,10 @@ function Event({ type, event, eventWidth }) {
 
 		const diffrence = minutesTwo - minutesOne;
 		setEventHeight((eventHeight / 60) * diffrence);
+		setMarginTop(parseInt(hoursAndMinutesArrayOne[1]));
+		console.log("minutes one", minutesOne);
+		console.log("minutes two", minutesTwo);
+		console.log("diffrence", diffrence);
 	};
 
 	React.useEffect(() => {
@@ -39,36 +44,36 @@ function Event({ type, event, eventWidth }) {
 		width: eventWidth + "%",
 		height: eventHeight + "px",
 		position: "relative",
+		marginTop: marginTop + "px",
 	};
 
+	console.log("event in month grid", event);
+
 	return (
-		<div
-			className="border-4 event-background event-border p-1 flex-col"
+		<section
+			className="event-background event-border2 border-2 flex-col"
 			style={{ ...eventConStyle }}
-			// onClick={() =>
-			// 	dispatch({ type: "DELETE_SELECTED_EVENT", payload: state.allEvents })
-			// }
 		>
-			<div className="flex-row font-12" style={{ flexWrap: "wrap" }}>
-				<div
-					className="border-2 flex-center flex-center2 black-bg white-color mr-1 text-elip"
-					style={{ width: "37px", height: "16px" }}
-				>
+			<div className="flex-row font-12">
+				<div className="flex-center flex-center2 black-bg white-color text-elip">
 					{dayjs(event.startTime).format("hh:mm")}
-				</div>
-				<div style={{ height: "16px" }} className="light-color text-elip">
+				</div>{" "}
+				&nbsp;
+				<div className="light-color text-elip">
 					{dayjs(event.endTime).format("hh:mm ")}
 				</div>
 			</div>
 			<div className="font-13 bold-font text-elip">{event.name}</div>
-			<div
-				className="light-color font-12"
-				style={{ width: "90%", overflow: "hidden" }}
-			>
-				{event.title}hello
+			<div>
+				<div
+					className="light-color font-12"
+					style={{ width: "90%", overflow: "hidden" }}
+				>
+					{event.title}hello
+				</div>
+				{IconDisplay()}
 			</div>
-			{IconDisplay()}
-		</div>
+		</section>
 	);
 }
 export default Event;

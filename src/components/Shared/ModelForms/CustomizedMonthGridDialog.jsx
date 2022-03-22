@@ -8,14 +8,9 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
-import {
-	TextField,
-	Radio,
-	RadioGroup,
-	FormControl,
-	FormControlLabel,
-} from "@mui/material";
+import { TextField } from "@mui/material";
 import { useCalendar } from "../../../context/CalendarContext";
+import { v4 as uuidv4 } from "uuid";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 	"& .MuiDialogContent-root": {
@@ -57,10 +52,8 @@ BootstrapDialogTitle.propTypes = {
 
 export default function CustomizedMonthGridDialogs() {
 	const [name, setName] = React.useState("");
-	const [title, setTitle] = React.useState("");
-	const [timeFrom, setTimeFrom] = React.useState("");
-	const [timeTo, setTimeTo] = React.useState("");
-	const [type, setType] = React.useState("voice");
+	const [startTime, setstartTime] = React.useState("07:00");
+	const [endTime, setendTime] = React.useState("09:00");
 
 	const { state, dispatch } = useCalendar();
 
@@ -68,38 +61,40 @@ export default function CustomizedMonthGridDialogs() {
 		setName(event.target.value);
 	};
 
-	const handleTitleChange = (event) => {
-		setTitle(event.target.value);
-	};
-
-	const handleTimeFromChange = (event) => {
+	const handlestartTimeChange = (event) => {
 		console.log(event.target.value);
-		setTimeFrom(event.target.value);
+		setstartTime(event.target.value);
 	};
 
-	const handleTimeToChange = (event) => {
+	const handleendTimeChange = (event) => {
 		console.log(event.target.value);
-		setTimeTo(event.target.value);
-	};
-
-	const handleTypeChange = (event) => {
-		setType(event.target.value);
+		setendTime(event.target.value);
 	};
 
 	const handleSubmitButton = () => {
-		if (type === "" || name === "" || title === "") console.log("err");
-		else {
-		}
+		dispatch({
+			type: "ADD_EVENTS",
+			payload: {
+				id: uuidv4(),
+				name,
+				startTime: startTime,
+				endTime: endTime,
+				dateStamp: state.dateStamp,
+			},
+		});
+		setName("");
+		setstartTime("07:00");
+		setendTime("0(:00");
 	};
 
-	console.log("show month grid event dialog", state.showMonthGridEventDialog);
+	console.log("show month grid event dialog", state);
 
 	return (
 		<div style={{ zIndex: 1000 }}>
 			<BootstrapDialog
 				onClose={() => dispatch({ type: "CLOSE_MONTH_GRID_EVENT_DIALOG" })}
 				aria-labelledby="customized-dialog-title"
-				open={state.showMonthGridEventDialog}
+				open={state?.showMonthGridEventDialog}
 			>
 				<BootstrapDialogTitle
 					id="customized-dialog-title"
@@ -116,60 +111,33 @@ export default function CustomizedMonthGridDialogs() {
 						value={name}
 					/>
 					<TextField
-						label="title"
-						fullWidth
-						size="small"
-						onChange={handleTitleChange}
-						value={title}
-					/>
-					<TextField
-						id="timeFrom"
+						id="startTime"
 						label="Event From"
 						type="time"
-						disabled
-						value={timeFrom}
+						value={startTime}
 						InputLabelProps={{
 							shrink: true,
 						}}
 						inputProps={{
 							step: 300, // 5 min
 						}}
-						onChange={handleTimeFromChange}
+						onChange={handlestartTimeChange}
 						sx={{ width: 150, m: 2 }}
 					/>
 					<TextField
-						id="timeTo"
+						id="endTime"
 						label="Event To"
 						type="time"
-						value={timeTo}
+						value={endTime}
 						InputLabelProps={{
 							shrink: true,
 						}}
 						inputProps={{
 							step: 300, // 5 min
 						}}
-						onChange={handleTimeToChange}
+						onChange={handleendTimeChange}
 						sx={{ width: 150, m: 2 }}
 					/>
-					<FormControl>
-						<RadioGroup
-							id="type"
-							name="type"
-							value={type}
-							onChange={handleTypeChange}
-						>
-							<FormControlLabel
-								value="voice"
-								control={<Radio />}
-								label="voice"
-							/>
-							<FormControlLabel
-								value="video"
-								control={<Radio />}
-								label="video"
-							/>
-						</RadioGroup>
-					</FormControl>
 				</DialogContent>
 				<DialogActions>
 					<Button onClick={handleSubmitButton}>Save</Button>

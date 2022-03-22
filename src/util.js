@@ -2,39 +2,30 @@ import dayjs from "dayjs";
 import moment from "moment";
 import { v4 as uuidv4 } from "uuid";
 
-export function getMonth(month = dayjs()) {
-	const startMonth = month.clone().startOf("month");
-	const monthDay = Array.from(Array(31))
-		.map((day, index) => index)
-		.map((day) =>
-			dayjs(startMonth)
-				.add(month, "month")
-				.set("date", 0)
-				.set("minutes", 0)
-				.set("seconds", 0)
-		)
-		.map((monthObj) => ({
-			id: uuidv4(),
-			date: monthObj.date(),
-			day: monthObj.format("DD MM YYYY"),
-			dateStamp: +monthObj,
-			monthName: monthObj.format("MMMM"),
-			time: monthObj.format("hh"),
-			weekDayName: monthObj.format("ddd"),
-		}));
-
-	return monthDay;
+export function getMonth(month = dayjs().month()) {
+	month = Math.floor(month);
+	const year = dayjs().year();
+	const firstDayOfTheMonth = dayjs(new Date(year, month, 1)).day();
+	let currentMonthCount = 0 - firstDayOfTheMonth;
+	const dayMatrix = new Array(5).fill([]).map(() => {
+		return new Array(7).fill(null).map((dayObj) => {
+			currentMonthCount++;
+			console.log(dayObj);
+			return dayjs(new Date(year, month, currentMonthCount));
+		});
+	});
+	return dayMatrix;
 }
 
-export const getMonthOriginal = (month = moment().month()) => {
+export const getMonthOriginal = (month = dayjs().month()) => {
 	month = Math.floor(month);
-	const year = moment().year();
-	const firstDayOfTheMonth = moment(new Date(year, month, 1)).day();
+	const year = dayjs().year();
+	const firstDayOfTheMonth = dayjs(new Date(year, month, 1)).day();
 	let currentMonthCount = 0 - firstDayOfTheMonth;
 	const dayMatrix = new Array(5).fill([]).map(() => {
 		return new Array(7).fill(null).map(() => {
 			currentMonthCount++;
-			return moment(new Date(year, month, currentMonthCount));
+			return dayjs(new Date(year, month, currentMonthCount));
 		});
 	});
 	return dayMatrix;

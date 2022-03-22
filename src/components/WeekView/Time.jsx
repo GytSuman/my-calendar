@@ -38,7 +38,7 @@ function Time(props) {
 	};
 
 	const [gridWrap, setGridWrap] = React.useState({});
-	const [eventWidth, setEventWidth] = React.useState(95);
+	const [eventWidth, setEventWidth] = React.useState(100);
 
 	React.useEffect(() => {
 		console.log("get time slot value", getCountTimeslot(day, time, state));
@@ -52,7 +52,7 @@ function Time(props) {
 			setGridWrap({
 				flexWrap: "nowrap",
 			});
-			setEventWidth(95);
+			setEventWidth(100);
 		}
 	}, [day, state, state.allEvents, time]);
 

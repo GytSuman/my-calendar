@@ -31,6 +31,7 @@ export const CalendarReducer = (state, action) => {
 				...state,
 				allEvents: [...state.allEvents, action.payload],
 				showEventDialog: false,
+				showMonthGridEventDialog: false,
 			};
 		case "CUSTOMISE_START_TIME":
 			const newStartTime = convertToTime(action.payload);
@@ -47,6 +48,7 @@ export const CalendarReducer = (state, action) => {
 			return {
 				...state,
 				showMonthGridEventDialog: true,
+				dateStamp: action.payload.dateStamp,
 			};
 
 		case "CLOSE_MONTH_GRID_EVENT_DIALOG":

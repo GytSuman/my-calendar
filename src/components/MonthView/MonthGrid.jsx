@@ -16,7 +16,7 @@ export default function MonthGrid({ currentMonth, events }) {
 						))}
 					</React.Fragment>
 				))}
-			<CustomizedDialogs />
+			<CustomizedMonthGridDialogs />
 		</div>
 	);
 }
