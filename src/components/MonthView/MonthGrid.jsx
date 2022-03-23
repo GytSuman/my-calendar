@@ -3,6 +3,7 @@ import CustomizedDialogs from "../shared/ModelForms/CustomizedDialog";
 import Day from "./Day";
 import "./MonthView.scss";
 import CustomizedMonthGridDialogs from "../shared/ModelForms/CustomizedMonthGridDialog";
+import DisplayEvent from "../shared/ModelForms/DisplayEvent";
 export default function MonthGrid({ currentMonth, events }) {
 	return (
 		<div className="flex-1 grid">
@@ -16,6 +17,7 @@ export default function MonthGrid({ currentMonth, events }) {
 					</React.Fragment>
 				))}
 			<CustomizedMonthGridDialogs />
+			<DisplayEvent />
 		</div>
 	);
 }

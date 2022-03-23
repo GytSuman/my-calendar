@@ -3,6 +3,7 @@ import React from "react";
 import { generateWeekViewCoordinates, isTodaysDate } from "../../weekUtils";
 import { slot, lightHighlighter } from "../style";
 import Event from "../shared/Events/Event";
+import EventSmall from "../shared/Events/EventSmall";
 import { useCalendar } from "../../context/calendarContext";
 import dayjs from "dayjs";
 import { generateWeekView, getCountTimeslot, getEvents, getMinutes, currTimeEvents } from "../../util";
@@ -70,7 +71,7 @@ function Time(props) {
 								{
 									state.allEvents &&
 									currTimeEvents(state.allEvents, day, time).slice(2, currTimeEvents(state.allEvents, day, time).length).map((event) => (
-										<Event
+										<EventSmall
 											type="voice"
 											event={event}
 										/>

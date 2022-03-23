@@ -86,10 +86,8 @@ export const getEvents = (states,day,time) => {
 export const currTimeEvents = (events,day,time) => {
 	let arr = []
 	events.map((event) => {
-		console.log(event)
 		let currDate = dayjs(day.dateStamp).hour(time).format('DD/MM/YYYY HH:mm')
 		let eventDate = dayjs(event?.weekDateStamp).format('DD/MM/YYYY HH:mm')
-		console.log(currDate, eventDate)
 		if (currDate === eventDate) arr.push(event)
 	})
 	return arr
@@ -98,7 +96,10 @@ export const currTimeEvents = (events,day,time) => {
 export const currDayEvents = (events,day) => {
 	let arr = []
 	events.map((event) => {
-		if (event.dayOfTheYear === day.format("DD MM YYYY")) arr.push(event)
+		let currDate = day.format("DD MM YYYY")
+		let eventDate = event.dayOfTheYear
+		console.log(currDate,eventDate)
+		if (currDate === eventDate){ console.log("event added",event);arr.push(event)}
 	})
 	return arr
 }

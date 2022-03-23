@@ -7,7 +7,7 @@ import TaskElement from "../shared/Tasks/TaskElement";
 
 import { times } from "../../weekUtils";
 import { hours } from "../../util";
-
+import DisplayEvent from "../shared/ModelForms/DisplayEvent";
 import "./DayView.scss";
 import CustomizedDialogs from "../shared/ModelForms/CustomizedDialog";
 
@@ -17,6 +17,7 @@ function DayGrid({ days }) {
 		<div className="width-100">
 			<DayHeader days={days} />
 			<CustomizedDialogs />
+			<DisplayEvent />
 			<Grid container direction="row">
 				<Grid
 					item

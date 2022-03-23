@@ -33,9 +33,6 @@ function Event({ type, event }) {
 		setDiffrenceState(diffrence)
 		setEventHeight((eventHeight / 60) * diffrence);
 		setMarginTop((eventHeight / 60) * parseInt(hoursAndMinutesArrayOne[1]));
-		console.log("minutes one", minutesOne);
-		console.log("minutes two", minutesTwo);
-		console.log("diffrence", diffrence);
 	};
 
 	React.useEffect(() => {

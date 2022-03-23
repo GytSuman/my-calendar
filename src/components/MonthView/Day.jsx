@@ -6,6 +6,7 @@ import dayjs from "dayjs";
 import CustomizedMonthGridDialogs from "../shared/ModelForms/CustomizedMonthGridDialog";
 import { getCount, currDayEvents } from "../../util";
 import Event from "../shared/Events/Event";
+import EventSmall from "../shared/Events/EventSmall";
 
 export default function Day({ day, rowIdx, events }) {
 	const { state, dispatch, openAllEventsMonth, setOpenAllEventsMonth } = useCalendar();
@@ -16,28 +17,28 @@ export default function Day({ day, rowIdx, events }) {
 			: "";
 	}
 
-	const Event = ({ eventObj }) => {
-		console.log(eventObj)
-		return (
-			<div
-				style={{ marginBottom: "2px" }}
-				className="event-height border-4 event-background2 event-border2 p-1 font-12 flex-row flex-center flex-space-between"
-			>
-				<div
-					className="border-2 flex-center flex-center2 black-bg white-color font-12"
-					style={{ width: "37px", height: "16px" }}
-				>
-					{dayjs(eventObj?.startTime).format('HH:mm')}
-				</div>
-				<div className="flex-grow text-elip pl-1">{eventObj.name}</div>
-			</div>
-		);
-	};
+	// const Event = ({ eventObj }) => {
+	// 	console.log(eventObj)
+	// 	return (
+	// 		<div
+	// 			style={{ marginBottom: "2px" }}
+	// 			className="event-height border-4 event-background2 event-border2 p-1 font-12 flex-row flex-center flex-space-between"
+	// 		>
+	// 			<div
+	// 				className="border-2 flex-center flex-center2 black-bg white-color font-12"
+	// 				style={{ width: "37px", height: "16px" }}
+	// 			>
+	// 				{dayjs(eventObj?.startTime).format('HH:mm')}
+	// 			</div>
+	// 			<div className="flex-grow text-elip pl-1">{eventObj.name}</div>
+	// 		</div>
+	// 	);
+	// };
 
-	const getHeight = () => {
-		if (rowIdx === 0) return false;
-		else return true;
-	};
+	// const getHeight = () => {
+	// 	if (rowIdx === 0) return false;
+	// 	else return true;
+	// };
 
 	const [nEvents, setNEvents] = React.useState(0);
 
@@ -78,7 +79,6 @@ export default function Day({ day, rowIdx, events }) {
 					</p>
 				)}
 			</header>
-			{/* <CustomizedMonthGridDialogs /> */}
 			<div>
 				<div
 					className={`flex-row flex-space-between p-1 text-sm my-1 lightfont-color font-18 ${getCurrentDayClass()}`}
@@ -103,9 +103,10 @@ export default function Day({ day, rowIdx, events }) {
 									{
 										state.allEvents &&
 										currDayEvents(state.allEvents, day).slice(3, currDayEvents(state.allEvents, day).length).map((eventObj) => (
-											<Event
+											<EventSmall
+												key={eventObj.id}
 												type="voice"
-												eventObj={eventObj}
+												event={eventObj}
 											/>
 										)
 										)
@@ -116,17 +117,23 @@ export default function Day({ day, rowIdx, events }) {
 					)}
 				</div>
 				<div
-					style={{ height: "100px", marginTop: "20px", overflowY: "hidden" }}
+					className="flex-col"
+					style={{ height: "100px", width: '95%', marginTop: "20px", gap: '5px' }}
 				>
-					{state.allEvents.length !== 0 &&
+					{
+						currDayEvents(state.allEvents, day).slice(0, 3).map((event) => (
+							<EventSmall
+								key={event.id}
+								type="voice"
+								event={event}
+							/>
+						))
+					}
+
+					{/* {state.allEvents.length !== 0 &&
 						state.allEvents.map((eventObj) => (
 							<>
 								<div key={eventObj.id}>
-									{/* {parseInt(dayjs(eventObj.dateStamp).format("DD MM YYYY")) ===
-									parseInt(day.format("DD MM YYYY")) && (
-										<Event type="voice" eventObj={eventObj} key={eventObj.id} />
-									)
-								} */}
 									{eventObj?.dayOfTheYear === day.format("DD MM YYYY") && (
 										<>
 											<Event
@@ -138,7 +145,7 @@ export default function Day({ day, rowIdx, events }) {
 									)}
 								</div>
 							</>
-						))}
+						))} */}
 				</div>
 			</div>
 

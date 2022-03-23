@@ -8,15 +8,12 @@ import CustomizedDialogs from "../shared/ModelForms/CustomizedDialogWeek";
 import "./DayView.scss";
 import { useCalendar } from "../../context/calendarContext";
 import dayjs from "dayjs";
+import { getEvents } from "../../util";
 
 function DayTime({ time, dateStamp, dayObj }) {
 	//model
 	const [open, setOpen] = React.useState(false);
 	const { state, dispatch } = useCalendar();
-	const openMonthEventDialog = () => {
-		setOpen(true);
-		console.log("clicked");
-	};
 
 	const onSetOpen = (value) => {
 		setOpen(value);
@@ -25,17 +22,13 @@ function DayTime({ time, dateStamp, dayObj }) {
 	const selectedEventDay = () => {
 		return (
 			<>
-				{state.allEvents.map((event) => (
-					<>
-						{
-							dayjs(event.dateStamp).format('YYY MM DD') === dayjs(dayObj.dateStamp).format('YYY MM DD') &&
-							parseInt(dayjs(event.startTime).format("h")) ===
-							parseInt(time) && (
-								<Event type="voice" eventWidth={95} event={event} key={event.id} />
-							)
-						}
-					</>
-				))}
+				{getEvents(state.allEvents, dateStamp, time).map((event) => (
+					<Event
+						key={event.id}
+						event={event}
+					/>
+				))
+				}
 			</>
 		);
 	};
