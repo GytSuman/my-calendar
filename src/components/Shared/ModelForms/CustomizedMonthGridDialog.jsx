@@ -69,9 +69,6 @@ export default function CustomizedMonthGridDialogs() {
 	const [startTime, setstartTime] = React.useState("07:00");
 	const [endTime, setendTime] = React.useState("08:00");
 
-	// console.log("Reducer :", dayjs(state?.selectedDate).format('YYYY-MM-DD'))
-	// console.log("state :", startTime)
-
 	const handleNameChange = (event) => {
 		setName(event.target.value);
 	};
@@ -81,19 +78,17 @@ export default function CustomizedMonthGridDialogs() {
 	};
 
 	const handleendTimeChange = (event) => {
-		console.log(event.target.value);
 		setendTime(event.target.value);
 	};
 
 	const handleSubmitButton = () => {
-		console.log(state)
 		dispatch({
 			type: "ADD_EVENTS",
 			payload: {
 				id: uuidv4(),
 				name,
-				startTime: state.weekDateStamp.hour(startTime.split(':')[0]).minute(startTime.split(':')[1]),
-				endTime: state.weekDateStamp.hour(endTime.split(':')[0]).minute(endTime.split(':')[1]),
+				startTime: state.weekDateStamp.hour(startTime.split(':')[0]).minute(startTime.split(':')[1]).format('MM/DD/YYYY hh:mm A'),
+				endTime: state.weekDateStamp.hour(endTime.split(':')[0]).minute(endTime.split(':')[1]).format('MM/DD/YYYY hh:mm A'),
 				dateStamp: state.dateStamp,
 				dayOfTheYear: state.dayOfTheYear,
 				weekDateStamp: dayjs(state.weekDateStamp).hour(startTime.split(':')[0]).minute(startTime.split(':')[1])
@@ -103,8 +98,6 @@ export default function CustomizedMonthGridDialogs() {
 		setstartTime("07:00");
 		setendTime("08:00");
 	};
-
-	// console.log("show month grid event dialog", state);
 
 	return (
 		<div style={{ zIndex: 1000 }}>

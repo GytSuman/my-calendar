@@ -82,3 +82,37 @@ export const getEvents = (states,day,time) => {
 	})
 	return arr
 }
+
+export const currTimeEvents = (events,day,time) => {
+	let arr = []
+	events.map((event) => {
+		console.log(event)
+		let currDate = dayjs(day.dateStamp).hour(time).format('DD/MM/YYYY HH:mm')
+		let eventDate = dayjs(event?.weekDateStamp).format('DD/MM/YYYY HH:mm')
+		console.log(currDate, eventDate)
+		if (currDate === eventDate) arr.push(event)
+	})
+	return arr
+}
+
+export const currDayEvents = (events,day) => {
+	let arr = []
+	events.map((event) => {
+		if (event.dayOfTheYear === day.format("DD MM YYYY")) arr.push(event)
+	})
+	return arr
+}
+
+
+export const getMinutes = (startTime, endTime) => {
+	const start = dayjs(startTime).format("hh:mm");
+	const end = dayjs(endTime).format("hh:mm");
+	const minutesOne =
+		parseInt(start.split(":")[0]) * 60 +
+		parseInt(start.split(":")[1]);
+	const minutesTwo =
+		parseInt(end.split(":")[0]) * 60 +
+		parseInt(end.split(":")[1]);
+
+	return minutesTwo - minutesOne;
+};

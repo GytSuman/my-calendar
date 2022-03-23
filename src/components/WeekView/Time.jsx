@@ -5,7 +5,7 @@ import { slot, lightHighlighter } from "../style";
 import Event from "../shared/Events/Event";
 import { useCalendar } from "../../context/calendarContext";
 import dayjs from "dayjs";
-import { generateWeekView, getCountTimeslot, getEvents } from "../../util";
+import { generateWeekView, getCountTimeslot, getEvents, getMinutes, currTimeEvents } from "../../util";
 import moment from 'moment'
 
 function Time(props) {
@@ -14,18 +14,6 @@ function Time(props) {
 
 	React.useEffect(() => { }, []);
 	const row = 12 / 7;
-
-	const currEvents = (events) => {
-		let arr = []
-		events.map((event) => {
-			console.log(event)
-			let currDate = dayjs(day.dateStamp).hour(time).format('DD/MM/YYYY HH:mm')
-			let eventDate = dayjs(event?.weekDateStamp).format('DD/MM/YYYY HH:mm')
-			console.log(currDate, eventDate)
-			if (currDate === eventDate) arr.push(event)
-		})
-		return arr
-	}
 
 	const selectedEventDay = () => {
 		return (
@@ -37,27 +25,6 @@ function Time(props) {
 					/>
 				))
 				}
-				{/* {state.allEvents &&
-					state.allEvents.map((event) => (
-						<>
-							{
-								event.dayOfTheYear === dayjs(day.dateStamp).format('DD MM YYYY') &&
-								//dayjs(event.dateStamp).format('YYY MM DD') === dayjs(day.dateStamp).format('YYY MM DD') &&
-								parseInt(dayjs(event.startTime).format("h")) ===
-								parseInt(time) &&
-								(
-									<>
-										{
-											<Event
-												type="voice"
-												event={event}
-												key={event.id}
-											/>
-										}
-									</>
-								)}
-						</>
-					))} */}
 			</div>
 		);
 	};
@@ -102,7 +69,7 @@ function Time(props) {
 							<div>
 								{
 									state.allEvents &&
-									currEvents(state.allEvents).slice(2, currEvents(state.allEvents).length).map((event) => (
+									currTimeEvents(state.allEvents, day, time).slice(2, currTimeEvents(state.allEvents, day, time).length).map((event) => (
 										<Event
 											type="voice"
 											event={event}

@@ -80,11 +80,11 @@ export default function DisplayEvent() {
                         Event
                     </BootstrapDialogTitle>
                     <DialogContent dividers>
-                        Hello
+                        {console.log(state?.event)}
+                        <p>Event Name : {state?.event?.name}</p>
+                        <p>Start time : {state?.event?.startTime}</p>
+                        <p>End time : {state?.event?.endTime}</p>
                     </DialogContent>
-                    <DialogActions>
-                        <Button>Save</Button>
-                    </DialogActions>
                 </BootstrapDialog>
             </div>
         </>

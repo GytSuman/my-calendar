@@ -67,6 +67,7 @@ export const CalendarReducer = (state, action) => {
 			return {
 				...state,
 				displayEvent: true,
+				event: action.payload
 			}
 
 		case "CLOSE_DISPLAY_EVENT":

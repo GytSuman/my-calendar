@@ -1,77 +1,87 @@
-.lh-1{
-    font-size:24px;
-    font-weight:500;
+.lh-1 {
+    font-size: 24px;
+    font-weight: 500;
     color: $fontColor;
 }
 
-.h-1{
-    font-size:22px;
-    font-weight:500;
-    color: $fontColor;
-}
-.h-2{
-    font-size:20px;
-    font-weight:500;
-    color: $fontColor;
-}
-.h-3{
-    font-size:18px;
-    font-weight:500;
-    color: $fontColor;
-}
-.h-4{
-    font-size:16px;
-    font-weight:500;
-    color: $fontColor;
-}
-.h-5{
-    font-size:14px;
-    font-weight:500;
-    color: $fontColor;
-}
-.h-6{
-    font-size:12px;
-    font-weight:500;
+.h-1 {
+    font-size: 22px;
+    font-weight: 500;
     color: $fontColor;
 }
 
-.para-1{
-    font-size:20px;
-    font-weight:400;
-    color: $fontColor;
-}
-.para-2{
-    font-size:18px;
-    font-weight:400;
-    color: $fontColor;
-}
-.para-3{
-    font-size:16px;
-    font-weight:400;
-    color: $fontColor;
-}
-.para-4{
-    font-size:14px;
-    font-weight:400;
-    color: $fontColor;
-}
-.para-5{
-    font-size:12px;
-    font-weight:400;
-    color: $fontColor;
-}
-.para-6{
-    font-size:10px;
-    font-weight:400;
+.h-2 {
+    font-size: 20px;
+    font-weight: 500;
     color: $fontColor;
 }
 
-.dark{
+.h-3 {
+    font-size: 18px;
+    font-weight: 500;
+    color: $fontColor;
+}
+
+.h-4 {
+    font-size: 16px;
+    font-weight: 500;
+    color: $fontColor;
+}
+
+.h-5 {
+    font-size: 14px;
+    font-weight: 500;
+    color: $fontColor;
+}
+
+.h-6 {
+    font-size: 12px;
+    font-weight: 500;
+    color: $fontColor;
+}
+
+.para-1 {
+    font-size: 20px;
+    font-weight: 400;
+    color: $fontColor;
+}
+
+.para-2 {
+    font-size: 18px;
+    font-weight: 400;
+    color: $fontColor;
+}
+
+.para-3 {
+    font-size: 16px;
+    font-weight: 400;
+    color: $fontColor;
+}
+
+.para-4 {
+    font-size: 14px;
+    font-weight: 400;
+    color: $fontColor;
+}
+
+.para-5 {
+    font-size: 12px;
+    font-weight: 400;
+    color: $fontColor;
+}
+
+.para-6 {
+    font-size: 10px;
+    font-weight: 400;
+    color: $fontColor;
+}
+
+.dark {
     color: $darkFontColor;
 }
 
-.light{
-    color:$lightFontColor;
+.light {
+    color: $lightFontColor;
 }
 
 /* Fonts */
@@ -105,6 +115,7 @@
 
 .text-elip {
     white-space: nowrap;
+    overflow: hidden;
     text-overflow: ellipsis !important;
 }
 

@@ -4,7 +4,7 @@ import "./MonthView.scss";
 import { useCalendar } from "../../context/calendarContext";
 import dayjs from "dayjs";
 import CustomizedMonthGridDialogs from "../shared/ModelForms/CustomizedMonthGridDialog";
-import { getCount } from "../../util";
+import { getCount, currDayEvents } from "../../util";
 import Event from "../shared/Events/Event";
 
 export default function Day({ day, rowIdx, events }) {
@@ -42,7 +42,7 @@ export default function Day({ day, rowIdx, events }) {
 	const [nEvents, setNEvents] = React.useState(0);
 
 	React.useEffect(() => {
-		setNEvents((x) => getCount(day.format("DD MM YYYY"), state));
+		setNEvents(getCount(day.format("DD MM YYYY"), state));
 	}, [day, state, state.allEvents]);
 
 	console.log("state all events", state?.allEvents);
@@ -53,13 +53,6 @@ export default function Day({ day, rowIdx, events }) {
 		if (day.dayOfTheYear !== openAllEventsMonth) setOpen(false)
 	}, [openAllEventsMonth])
 
-	const currEvents = (events) => {
-		let arr = []
-		events.map((event) => {
-			if (event.dayOfTheYear === day.format("DD MM YYYY")) arr.push(event)
-		})
-		return arr
-	}
 
 	return (
 		<div
@@ -109,7 +102,7 @@ export default function Day({ day, rowIdx, events }) {
 								<div>
 									{
 										state.allEvents &&
-										currEvents(state.allEvents).slice(3, currEvents(state.allEvents).length).map((eventObj) => (
+										currDayEvents(state.allEvents, day).slice(3, currDayEvents(state.allEvents, day).length).map((eventObj) => (
 											<Event
 												type="voice"
 												eventObj={eventObj}
