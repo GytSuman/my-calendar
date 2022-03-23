@@ -9,6 +9,7 @@ function Event({ type, event, eventWidth }) {
 	const [eventHeight, setEventHeight] = React.useState(80);
 	const [marginTop, setMarginTop] = React.useState(0);
 	const [diffrenceState, setDiffrenceState] = React.useState(0);
+	const { state, dispatch } = useCalendar()
 	const IconDisplay = () => {
 		if (type === "video") return <VideocamIcon className="event-icon" />;
 		else return <CallIcon className="event-icon" fontSize="16px" />;
@@ -51,15 +52,20 @@ function Event({ type, event, eventWidth }) {
 	};
 
 	console.log("event in month grid", event);
-
+	const handleClick = (e) => {
+		e.stopPropagation()
+		console.log('clicked', state?.displayEvent)
+		dispatch({ type: 'DISPLAY_EVENT', payload: event })
+	}
 	return (
 		<>
 			{
 				diffrenceState <= 30 ?
 					<>
-						< div
+						<div
 							className="border-4 event-background flex-between event-border m-1 flex-row"
 							style={{ ...eventConStyle }}
+							onClick={handleClick}
 						>
 							<div className="flex-row font-12" style={{ height: '16px' }}>
 								<div
@@ -81,6 +87,7 @@ function Event({ type, event, eventWidth }) {
 						< div
 							className="border-4 event-background event-border m-1 flex-col"
 							style={{ ...eventConStyle }}
+							onClick={handleClick}
 						>
 							<div className="flex-row font-12 p-1" style={{ flexWrap: "wrap" }}>
 								<div

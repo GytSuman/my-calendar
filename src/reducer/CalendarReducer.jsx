@@ -62,9 +62,17 @@ export const CalendarReducer = (state, action) => {
 				showMonthGridEventDialog: false,
 			};
 
-		case "OPEN_HIDDEN_EVENT":
+		case "DISPLAY_EVENT":
+			console.log(action.payload)
 			return {
+				...state,
+				displayEvent: true,
+			}
 
+		case "CLOSE_DISPLAY_EVENT":
+			return {
+				...state,
+				displayEvent: false
 			}
 		default:
 			return state;

@@ -14,6 +14,7 @@ export const initialState = {
 	dayOfTheYear:null,
 	showEventDialog: false,
 	showMonthGridEventDialog: false,
+	displayEvent:false,
 	startDate: +dayjs(),
 	eventStart: null,
 	eventEnd: null,

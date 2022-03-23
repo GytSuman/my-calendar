@@ -53,11 +53,8 @@
 }
 
 .event-icon {
-    // position: absolute;
     color: #f6707f;
     font-size: 20px !important;
-    // bottom: 2px;
-    // right: 4px;
 }
 
 .border-gray {
@@ -72,24 +69,11 @@
 
 .slot1 {
     height: 80px;
+    width: 90%;
     cursor: pointer;
     position: relative;
 }
 
-.slot1>span {
-    z-index: 3;
-    background-color: blue;
-    color: white;
-    border-radius: 2px;
-}
-
-.slot1>div {
-    display: none;
-}
-
-.slot1>div:nth-child(-n+2) {
-    display: flex;
-}
 
 .col {
     border: #e0e0e0 1px solid;

@@ -66,18 +66,17 @@ BootstrapDialogTitle.propTypes = {
 export default function CustomizedMonthGridDialogs() {
 	const { state, dispatch } = useCalendar();
 	const [name, setName] = React.useState("");
-	const [startTime, setstartTime] = React.useState("03/02/2022 07:00 AM");
-	const [endTime, setendTime] = React.useState("03/02/2022 09:00 AM");
+	const [startTime, setstartTime] = React.useState("07:00");
+	const [endTime, setendTime] = React.useState("08:00");
 
-	console.log("Reducer :", dayjs(state?.selectedDate).format('YYYY-MM-DD'))
-	console.log("state :", startTime)
+	// console.log("Reducer :", dayjs(state?.selectedDate).format('YYYY-MM-DD'))
+	// console.log("state :", startTime)
 
 	const handleNameChange = (event) => {
 		setName(event.target.value);
 	};
 
 	const handlestartTimeChange = (event) => {
-		console.log(event.target.value);
 		setstartTime(event.target.value);
 	};
 
@@ -87,15 +86,17 @@ export default function CustomizedMonthGridDialogs() {
 	};
 
 	const handleSubmitButton = () => {
+		console.log(state)
 		dispatch({
 			type: "ADD_EVENTS",
 			payload: {
 				id: uuidv4(),
 				name,
-				startTime: startTime,
-				endTime: endTime,
+				startTime: state.weekDateStamp.hour(startTime.split(':')[0]).minute(startTime.split(':')[1]),
+				endTime: state.weekDateStamp.hour(endTime.split(':')[0]).minute(endTime.split(':')[1]),
 				dateStamp: state.dateStamp,
 				dayOfTheYear: state.dayOfTheYear,
+				weekDateStamp: dayjs(state.weekDateStamp).hour(startTime.split(':')[0]).minute(startTime.split(':')[1])
 			},
 		});
 		setName("");
@@ -103,7 +104,7 @@ export default function CustomizedMonthGridDialogs() {
 		setendTime("08:00");
 	};
 
-	console.log("show month grid event dialog", state);
+	// console.log("show month grid event dialog", state);
 
 	return (
 		<div style={{ zIndex: 1000 }}>

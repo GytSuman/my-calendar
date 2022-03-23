@@ -10,7 +10,6 @@ export function getMonth(month = dayjs().month()) {
 	const dayMatrix = new Array(5).fill([]).map(() => {
 		return new Array(7).fill(null).map((dayObj) => {
 			currentMonthCount++;
-			console.log(dayObj);
 			return dayjs(new Date(year, month, currentMonthCount));
 		});
 	});
@@ -74,3 +73,12 @@ export const getCountTimeslot = (day, time, state) => {
 	});
 	return count;
 };
+
+export const getEvents = (states,day,time) => {
+	let arr = []
+	states?.map((state)=>{
+		if((state.dayOfTheYear === dayjs(day).format('DD MM YYYY'))
+			&& (parseInt(dayjs(state.startTime).format("H")) === parseInt(time))) arr.push(state)
+	})
+	return arr
+}

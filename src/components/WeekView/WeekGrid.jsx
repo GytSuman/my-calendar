@@ -7,6 +7,7 @@ import { times } from "../../weekUtils";
 // import CustomizedDialogs from "../CustomizedDialog";
 // import Event from "../Event";
 import CustomizedDialogs from "../shared/ModelForms/CustomizedDialog";
+import DisplayEvent from "../shared/ModelForms/DisplayEvent";
 // import TaskProgress from "../TaskProgress";
 import TaskProgress from "../shared/Tasks/TaskProgress";
 import TimeSlot from "./TimeSlot";
@@ -34,6 +35,7 @@ function WeekGrid({
 				currentMonthIdx={currentMonthIdx}
 			/>
 			<CustomizedDialogs />
+			<DisplayEvent />
 			<TaskProgress />
 			{times.map((time) => (
 				<>
