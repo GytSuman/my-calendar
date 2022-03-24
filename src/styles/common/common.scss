@@ -43,8 +43,13 @@
 }
 
 .event-border {
+    z-index: 10;
     border: 1px solid #00a3bf;
     border-left: 6px solid #00a3bf;
+}
+
+.event-border:hover {
+    z-index: 12;
 }
 
 .event-border2 {

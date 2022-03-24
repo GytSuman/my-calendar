@@ -88,6 +88,7 @@ export const currTimeEvents = (events,day,time) => {
 	events.map((event) => {
 		let currDate = dayjs(day.dateStamp).hour(time).format('DD/MM/YYYY HH:mm')
 		let eventDate = dayjs(event?.weekDateStamp).format('DD/MM/YYYY HH:mm')
+		console.log("currTimeEvents",currDate,eventDate)
 		if (currDate === eventDate) arr.push(event)
 	})
 	return arr

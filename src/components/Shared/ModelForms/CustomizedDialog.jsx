@@ -61,6 +61,7 @@ export default function CustomizedDialogs() {
 	const [endTime, setEndTime] = React.useState(state?.endTime);
 
 	const handleSaveButton = () => {
+		console.log('start end', startTime, endTime)
 		dispatch({
 			type: "ADD_EVENTS",
 			payload: {
@@ -78,11 +79,11 @@ export default function CustomizedDialogs() {
 	};
 
 	const handleStartTimeChange = (newValue) => {
-		setStartTime(newValue);
+		setStartTime(dayjs(newValue).format('MM/DD/YYYY h:mm A'));
 	};
 
 	const handleEndTimeChange = (newValue) => {
-		setEndTime(newValue);
+		setEndTime(dayjs(newValue).format('MM/DD/YYYY h:mm A'));
 	};
 	const handleNameChange = (event) => {
 		setName(event.target.value);

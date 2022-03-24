@@ -31,7 +31,7 @@ function Time(props) {
 	};
 
 	var [open, setOpen] = React.useState(false)
-
+	console.log(state?.allEvents)
 	React.useEffect(() => {
 		if (dayjs(day.dateStamp).hour(time).format('DD/MM/YYYY HH:mm') !== openAllEventsWeek) setOpen(false)
 	}, [openAllEventsWeek])
@@ -53,17 +53,16 @@ function Time(props) {
 				}}
 			>
 				{selectedEventDay()}
-				{getCountTimeslot(day, time, state) > 2 &&
+				{currTimeEvents(state.allEvents, day, time).length > 2 &&
 					<span
 						className='event-count-bubble height-100 flex-center event-count-button'
 						onClick={(event) => {
 							event.stopPropagation()
 							setOpen(!open)
-							console.log(state.allEvents)
 							setOpenAllEventsWeek(dayjs(day.dateStamp).hour(time).format('DD/MM/YYYY HH:mm'))
 						}}
 					>
-						+{getCountTimeslot(day, time, state) - 2}
+						+{currTimeEvents(state.allEvents, day, time).length - 2}
 						<div
 							className={open ? "view-all-events open-div flex-center" : "close-div"}
 						>
