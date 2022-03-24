@@ -3,13 +3,13 @@ import { Grid } from "@mui/material";
 import { getDays } from "../../dayUtils";
 import DayHeader from "./DayHeader";
 import DayTimeSlot from "./DayTimeSlot";
-import TaskElement from "../shared/Tasks/TaskElement";
+import TaskElement from "../Shared/Tasks/TaskElement";
 
 import { times } from "../../weekUtils";
 import { hours } from "../../util";
 
 import "./DayView.scss";
-import CustomizedDialogs from "../shared/ModelForms/CustomizedDialog";
+import CustomizedDialogs from "../Shared/ModelForms/CustomizedDialog";
 
 function DayGrid({ days }) {
 	const hoursArray = hours(times);

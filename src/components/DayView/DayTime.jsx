@@ -1,9 +1,9 @@
 import { Grid } from "@mui/material";
 import React from "react";
 import { col, slot2 } from "../style";
-import Event from "../shared/Events/Event";
-import EventSmall from "../shared/Events/EventSmall";
-import CustomizedDialogs from "../shared/ModelForms/CustomizedDialogWeek";
+import Event from "../Shared/Events/Event";
+import EventSmall from "../Shared/Events/EventSmall";
+import CustomizedDialogs from "../Shared/ModelForms/CustomizedDialogWeek";
 
 import "./DayView.scss";
 import { useCalendar } from "../../context/calendarContext";
@@ -27,13 +27,17 @@ function DayTime({ time, dateStamp, dayObj }) {
 			<>
 				{state.allEvents.map((event) => (
 					<>
-						{
-							dayjs(event.dateStamp).format('YYY MM DD') === dayjs(dayObj.dateStamp).format('YYY MM DD') &&
+						{dayjs(event.dateStamp).format("YYY MM DD") ===
+							dayjs(dayObj.dateStamp).format("YYY MM DD") &&
 							parseInt(dayjs(event.startTime).format("h")) ===
-							parseInt(time) && (
-								<Event type="voice" eventWidth={95} event={event} key={event.id} />
-							)
-						}
+								parseInt(time) && (
+								<Event
+									type="voice"
+									eventWidth={95}
+									event={event}
+									key={event.id}
+								/>
+							)}
 					</>
 				))}
 			</>
@@ -47,7 +51,7 @@ function DayTime({ time, dateStamp, dayObj }) {
 				xs={12}
 				key={dateStamp}
 				className="col slot flex-row"
-				style={{ gap: '5px' }}
+				style={{ gap: "5px" }}
 				onClick={() => {
 					dispatch({
 						type: "OPEN_EVENT_DIALOG",
@@ -63,11 +67,7 @@ function DayTime({ time, dateStamp, dayObj }) {
 				{selectedEventDay()}
 			</Grid>
 			{open && (
-				<CustomizedDialogs
-					onSetOpen={onSetOpen}
-					time={time}
-					open={open}
-				/>
+				<CustomizedDialogs onSetOpen={onSetOpen} time={time} open={open} />
 			)}
 		</Grid>
 	);

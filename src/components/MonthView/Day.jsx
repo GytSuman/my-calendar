@@ -3,12 +3,13 @@ import moment from "moment";
 import "./MonthView.scss";
 import { useCalendar } from "../../context/calendarContext";
 import dayjs from "dayjs";
-import CustomizedMonthGridDialogs from "../shared/ModelForms/CustomizedMonthGridDialog";
+import CustomizedMonthGridDialogs from "../Shared/ModelForms/CustomizedMonthGridDialog";
 import { getCount } from "../../util";
-import Event from "../shared/Events/Event";
+import Event from "../Shared/Events/Event";
 
 export default function Day({ day, rowIdx, events }) {
-	const { state, dispatch, openAllEventsMonth, setOpenAllEventsMonth } = useCalendar();
+	const { state, dispatch, openAllEventsMonth, setOpenAllEventsMonth } =
+		useCalendar();
 
 	function getCurrentDayClass() {
 		return day.format("DD-MM-YY") === moment().format("DD-MM-YY")
@@ -17,7 +18,7 @@ export default function Day({ day, rowIdx, events }) {
 	}
 
 	const Event = ({ eventObj }) => {
-		console.log(eventObj)
+		console.log(eventObj);
 		return (
 			<div
 				style={{ marginBottom: "2px" }}
@@ -27,7 +28,7 @@ export default function Day({ day, rowIdx, events }) {
 					className="border-2 flex-center flex-center2 black-bg white-color font-12"
 					style={{ width: "37px", height: "16px" }}
 				>
-					{dayjs(eventObj?.startTime).format('HH:mm')}
+					{dayjs(eventObj?.startTime).format("HH:mm")}
 				</div>
 				<div className="flex-grow text-elip pl-1">{eventObj.name}</div>
 			</div>
@@ -47,19 +48,19 @@ export default function Day({ day, rowIdx, events }) {
 
 	console.log("state all events", state?.allEvents);
 
-	const [open, setOpen] = React.useState(false)
+	const [open, setOpen] = React.useState(false);
 
 	React.useEffect(() => {
-		if (day.dayOfTheYear !== openAllEventsMonth) setOpen(false)
-	}, [openAllEventsMonth])
+		if (day.dayOfTheYear !== openAllEventsMonth) setOpen(false);
+	}, [openAllEventsMonth]);
 
 	const currEvents = (events) => {
-		let arr = []
+		let arr = [];
 		events.map((event) => {
-			if (event.dayOfTheYear === day.format("DD MM YYYY")) arr.push(event)
-		})
-		return arr
-	}
+			if (event.dayOfTheYear === day.format("DD MM YYYY")) arr.push(event);
+		});
+		return arr;
+	};
 
 	return (
 		<div
@@ -94,29 +95,27 @@ export default function Day({ day, rowIdx, events }) {
 					{nEvents > 3 && (
 						<div
 							className="themeblue-bg border-2 flex-center flex-center2 font-12 white-color"
-							style={{ width: "38px", height: "21px", position: 'relative' }}
+							style={{ width: "38px", height: "21px", position: "relative" }}
 							onClick={(event) => {
-								event.stopPropagation()
-								setOpen(!open)
-								console.log(open)
-								setOpenAllEventsMonth(day.dayOfTheYear)
+								event.stopPropagation();
+								setOpen(!open);
+								console.log(open);
+								setOpenAllEventsMonth(day.dayOfTheYear);
 							}}
 						>
 							+{nEvents - 3}
 							<div
-								className={open ? "view-all-events open-div flex-center" : "close-div"}
+								className={
+									open ? "view-all-events open-div flex-center" : "close-div"
+								}
 							>
 								<div>
-									{
-										state.allEvents &&
-										currEvents(state.allEvents).slice(3, currEvents(state.allEvents).length).map((eventObj) => (
-											<Event
-												type="voice"
-												eventObj={eventObj}
-											/>
-										)
-										)
-									}
+									{state.allEvents &&
+										currEvents(state.allEvents)
+											.slice(3, currEvents(state.allEvents).length)
+											.map((eventObj) => (
+												<Event type="voice" eventObj={eventObj} />
+											))}
 								</div>
 							</div>
 						</div>

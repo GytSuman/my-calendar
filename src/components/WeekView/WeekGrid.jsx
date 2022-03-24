@@ -1,18 +1,9 @@
-import dayjs from "dayjs";
-import moment from "moment";
 import React from "react";
-import { useCalendar } from "../../context/calendarContext";
-import { hours } from "../../util";
 import { times } from "../../weekUtils";
-// import CustomizedDialogs from "../CustomizedDialog";
-// import Event from "../Event";
-import CustomizedDialogs from "../shared/ModelForms/CustomizedDialog";
-// import TaskProgress from "../TaskProgress";
-import TaskProgress from "../shared/Tasks/TaskProgress";
+import CustomizedDialogs from "../Shared/ModelForms/CustomizedDialog";
+import TaskProgress from "../Shared/Tasks/TaskProgress";
 import TimeSlot from "./TimeSlot";
 import WeekHeader from "./WeekHeader";
-// import TimeSlot from "../TimeSlot";
-// import WeekHeader from "../WeekHeader";
 
 function WeekGrid({
 	weekdays,
@@ -21,11 +12,6 @@ function WeekGrid({
 	startDate,
 	currentMonthIdx,
 }) {
-	const { allEvents } = useCalendar();
-	const hoursArray = hours(times);
-
-	console.log(allEvents);
-
 	return (
 		<div style={{ maxWidth: "100%", width: "100%" }}>
 			<WeekHeader

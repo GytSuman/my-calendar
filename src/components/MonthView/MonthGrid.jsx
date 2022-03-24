@@ -1,8 +1,8 @@
 import React from "react";
-import CustomizedDialogs from "../shared/ModelForms/CustomizedDialog";
+import CustomizedDialogs from "../Shared/ModelForms/CustomizedDialog";
 import Day from "./Day";
 import "./MonthView.scss";
-import CustomizedMonthGridDialogs from "../shared/ModelForms/CustomizedMonthGridDialog";
+import CustomizedMonthGridDialogs from "../Shared/ModelForms/CustomizedMonthGridDialog";
 export default function MonthGrid({ currentMonth, events }) {
 	return (
 		<div className="flex-1 grid">

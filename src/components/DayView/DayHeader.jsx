@@ -2,7 +2,7 @@ import { Grid } from "@mui/material";
 import React from "react";
 import { col, height } from "../style";
 
-import Header from "../shared/Header/Header";
+import Header from "../Shared/Header/Header";
 
 import "./DayView.scss";
 
